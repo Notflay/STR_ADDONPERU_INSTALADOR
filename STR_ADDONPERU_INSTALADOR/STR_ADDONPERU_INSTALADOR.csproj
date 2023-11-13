@@ -121,5 +121,11 @@
       <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\CCHHE\" />
+    <Folder Include="Resources\Cobranzas\" />
+    <Folder Include="Resources\Localizacion\" />
+    <Folder Include="Resources\Sire\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
