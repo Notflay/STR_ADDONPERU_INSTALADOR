@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="SLConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SLEndpoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.EL\STR_ADDONPERU_INSTALADOR.EL.csproj">

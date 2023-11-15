@@ -87,5 +87,10 @@ namespace STR_ADDONPERU_INSTALADOR
         {
 
         }
+
+        private void FrmInit_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

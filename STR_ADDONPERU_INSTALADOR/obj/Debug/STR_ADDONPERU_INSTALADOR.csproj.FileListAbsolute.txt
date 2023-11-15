@@ -45,7 +45,14 @@ C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADO
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\System.Buffers.xml
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.csproj.SuggestedBindingRedirects.cache
-C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.exe.config
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.csproj.CopyComplete
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.FrmInit.resources
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.FrmMenu.resources
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\MaterialSkin.dll
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\Debug\STR_ADDONPERU_INSTALADOR.FrmInstalador.resources
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\hogar.png
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\icons8-circular-peru-48.png
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\icons8-cuota-50.png
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\icons8-libro-50.png
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\localizar.png
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\Debug\Icons\pagar.png
