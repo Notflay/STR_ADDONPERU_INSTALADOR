@@ -12,25 +12,36 @@ using System.Web.Configuration;
 using STR_ADDONPERU_INSTALADOR.EL;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using STR_ADDONPERU_INSTALADOR.EL.Responses;
 
 namespace STR_ADDONPERU_INSTALADOR.Services
 {
-    public class SLConnection
+    public static class SLConnection
     {
-        public SLConnection()
+
+        public static bool TryReauthenticate(int maxAttempts = 3)
         {
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                try
+                {
+                    // Intentar volver a autenticar
+                    if (fn_connection().IsSuccessful) // Asumiendo que este método realiza el inicio de sesión
+                        return true;
+                }
+                catch (Exception ex)
+                {
+                    // Manejar errores o registrar información de intento de inicio de sesión fallido
+                }
+            }
 
-
-
-
+            // Si todos los intentos fallan, devuelve false
+            return false;
         }
-
-        public bool connection()
+        public static IRestResponse fn_connection()
         {
-
             try
             {
-
                 string url = getBasePath();
 
                 string usuario = Global.usuario;
@@ -44,24 +55,27 @@ namespace STR_ADDONPERU_INSTALADOR.Services
                 request.AddCookie("B1SESSION", string.Empty);
                 request.AddCookie("ROUTEID", ".node0");
                 request.AddJsonBody(new { CompanyDB = nombre, UserName = usuario, Password = pass });
-                B1SLLoginResponse response = JsonSerializer.Deserialize<B1SLLoginResponse>(client.Execute(request).Content);
-                if (response.SessionId != null)
-                {
-                    Global.SessionId = response.SessionId;
-                    return true;
-                }
-                throw new UnauthorizedAccessException();
+                var response = client.Execute(request);
 
+                if (response.IsSuccessful)
+                {
+                    Global.SessionId = JsonSerializer.Deserialize<B1SLLoginResponse>(response.Content).SessionId;
+                    return response;
+                }
+                else
+                {
+                    return response;
+                }
             }
             catch (Exception ex)
             {
-
-                return false;
+                Global.WriteToFile(ex.ToString());
+                throw new Exception(ex.Message);
             }
 
         }
 
-        public string getBasePath()
+        public static string getBasePath()
         {
             return new UriBuilder()
             {
