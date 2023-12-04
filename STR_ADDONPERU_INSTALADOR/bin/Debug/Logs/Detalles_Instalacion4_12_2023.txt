@@ -1,0 +1,2 @@
+4/12/2023 02:42:25 - Localizacion - Error al validar tablas, mensaje de SAP: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
+4/12/2023 02:43:52 - Localizacion - Error al validar tablas, mensaje de SAP: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
