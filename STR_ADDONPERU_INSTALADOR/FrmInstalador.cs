@@ -16,6 +16,9 @@ namespace STR_ADDONPERU_INSTALADOR
     public partial class FrmInstalador : MaterialForm
     {
         private readonly MaterialSkin.MaterialSkinManager materialSkinManager;
+        private MaterialProgressBar progressBar;
+        private MaterialLabel lblInstalador;
+        private MaterialButton btnInstalador;
 
         public FrmInstalador()
         {
@@ -88,6 +91,21 @@ namespace STR_ADDONPERU_INSTALADOR
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton11_Click_1(object sender, EventArgs e)
         {
 
         }
