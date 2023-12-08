@@ -16,7 +16,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmInstalador());
+            Application.Run(new Login());
         }
     }
 }

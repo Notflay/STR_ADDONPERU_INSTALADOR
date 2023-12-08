@@ -178,7 +178,11 @@ namespace STR_ADDONPERU_INSTALADOR
                     {
                         string objectId = oudoNode.SelectSingleNode("Code")?.InnerText;
 
+<<<<<<< HEAD
                         if (SLEndpoint.validationObjectsMD(objectId))
+=======
+                        if (SLEndpoint.validationObject(objectId))
+>>>>>>> e2ad822136580153e604004bc990ee412211e4b6
                         {
                             validados++;
                         }
@@ -270,9 +274,12 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
+<<<<<<< HEAD
         //public CountTable crearTabla(CountTable countTable, string addon)
         //{
 
         //}
+=======
+>>>>>>> e2ad822136580153e604004bc990ee412211e4b6
     }
 }
