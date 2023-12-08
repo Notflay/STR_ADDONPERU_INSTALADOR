@@ -38,14 +38,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-=======
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -155,8 +152,6 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "IP del Servidor";
             // 
-<<<<<<< HEAD
-=======
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
@@ -180,17 +175,13 @@
             this.pictureBox2.TabIndex = 31;
             this.pictureBox2.TabStop = false;
             // 
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-<<<<<<< HEAD
-=======
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.materialLabel1);
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.materialButton11);
             this.Controls.Add(this.txtPassword);
@@ -204,10 +195,7 @@
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-<<<<<<< HEAD
-=======
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,10 +213,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-<<<<<<< HEAD
-=======
+
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.PictureBox pictureBox2;
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
     }
 }
