@@ -47,10 +47,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 {
                     // Oculta la ventana actual
                     this.Hide();
-<<<<<<< HEAD
-                    SLConnection.saveConnection();
-=======
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
+                    //SLConnection.saveConnection();
 
                     FrmInstalador frmInstalador = new FrmInstalador();
                     frmInstalador.ShowDialog();
