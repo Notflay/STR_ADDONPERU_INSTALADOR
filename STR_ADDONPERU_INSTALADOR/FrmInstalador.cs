@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -227,7 +228,7 @@ namespace STR_ADDONPERU_INSTALADOR
             int cntExistentes = 0;
             dynamic elementoMD;
 
-           
+
             try
             {
                 companyAux = application.Company.GetDICompany();
@@ -332,11 +333,50 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialButton9_Click(object sender, EventArgs e)
         {
+            abrirTxt();
+
+        }
+
+        public void abrirTxt()
+        {
             string path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";
 
-            string contenido= File.ReadAllText(path);
+            string contenido = File.ReadAllText(path);
 
-           
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = path;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Obtén la ruta completa del archivo
+                    string rutaArchivo = openFileDialog.FileName;
+
+                    // Abre el archivo con la aplicación predeterminada
+                    Process.Start("notepad.exe", rutaArchivo);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al abrir el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void materialButton4_Click(object sender, EventArgs e)
+        {
+            abrirTxt();
+
+        }
+
+        private void materialButton6_Click(object sender, EventArgs e)
+        {
+            abrirTxt();
+        }
+
+        private void materialButton8_Click(object sender, EventArgs e)
+        {
+            abrirTxt();
 
         }
     }

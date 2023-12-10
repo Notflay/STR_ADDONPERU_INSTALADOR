@@ -167,6 +167,7 @@
             this.materialButton8.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton8.UseAccentColor = false;
             this.materialButton8.UseVisualStyleBackColor = true;
+            this.materialButton8.Click += new System.EventHandler(this.materialButton8_Click);
             // 
             // lblLetras
             // 
@@ -344,6 +345,7 @@
             this.materialButton6.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton6.UseAccentColor = false;
             this.materialButton6.UseVisualStyleBackColor = true;
+            this.materialButton6.Click += new System.EventHandler(this.materialButton6_Click);
             // 
             // lblCajEar
             // 
@@ -523,6 +525,7 @@
             this.materialButton4.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton4.UseAccentColor = false;
             this.materialButton4.UseVisualStyleBackColor = true;
+            this.materialButton4.Click += new System.EventHandler(this.materialButton4_Click);
             // 
             // lblSire
             // 
