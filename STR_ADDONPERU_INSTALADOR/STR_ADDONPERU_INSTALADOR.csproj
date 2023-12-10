@@ -223,14 +223,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.EL\STR_ADDONPERU_INSTALADOR.EL.csproj">
-      <Project>{d855b429-62c3-4a32-a419-711b16797f9a}</Project>
-      <Name>STR_ADDONPERU_INSTALADOR.EL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Services\STR_ADDONPERU_INSTALADOR.Services.csproj">
-      <Project>{8985ac95-6929-47b9-b6d3-e034b0d18cba}</Project>
-      <Name>STR_ADDONPERU_INSTALADOR.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Util\STR_ADDONPERU_INSTALADOR.Util.csproj">
       <Project>{ba0d7916-a0c7-4867-a36a-b192ddd8af90}</Project>
       <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
