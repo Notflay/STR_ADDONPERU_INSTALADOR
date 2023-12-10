@@ -13,6 +13,7 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using SAPbobsCOM;
 using SAPbouiCOM;
+using STR_ADDONPERU_INSTALADOR.EL.Responses;
 
 
 namespace STR_ADDONPERU_INSTALADOR
@@ -23,6 +24,7 @@ namespace STR_ADDONPERU_INSTALADOR
         private MaterialProgressBar progressBar;
         private MaterialLabel lblInstalador;
         private MaterialButton btnInstalador;
+        private MaterialLabel lblDescription;
         private SAPbobsCOM.Company company;
         private SAPbouiCOM.Application application;
         int validados = 0;
@@ -242,16 +244,28 @@ namespace STR_ADDONPERU_INSTALADOR
                         {
                             elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                             string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                            lblDescription.Text = mensaje;
                             if (elementoMD.Add() != 0)
                             {
                                 companyAux.GetLastError(out int codigoErr, out string descripErr);
                                 if (codigoErr != -2035 && codigoErr != -5002)
                                 {
                                     cntErrores++;
+                                    validados--;
                                     throw new Exception($"{codigoErr} - {descripErr}");
                                 }
+                                else if (codigoErr == -2035)
+                                {
+                                    string msj = $"Ya existe en SAP elemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                    lblDescription.Text = msj;
+                                }
                             }
-                            validados += 1;
+                            else
+                            {
+                                string msj = $"Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                lblDescription.Text = msj;
+                            }
+                            validados++;
                             sbCargaConteo();
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
                             GC.Collect();
@@ -270,6 +284,11 @@ namespace STR_ADDONPERU_INSTALADOR
                 });
             }
             catch { throw; }
+            finally
+            {
+                lblDescription.Text = null;
+
+            }
         }
 
         public void sbConteObjetos(string addon)

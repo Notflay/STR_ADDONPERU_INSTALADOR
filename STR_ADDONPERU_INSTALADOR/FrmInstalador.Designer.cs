@@ -72,6 +72,10 @@
             this.materialMultiLineTextBox1 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            this.lblSrDesc = new MaterialSkin.Controls.MaterialLabel();
+            this.lblLocaDesc = new MaterialSkin.Controls.MaterialLabel();
+            this.lblCcEDesc = new MaterialSkin.Controls.MaterialLabel();
+            this.lblLetrasDesc = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage7.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -96,6 +100,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.lblLetrasDesc);
             this.tabPage7.Controls.Add(this.materialButton7);
             this.tabPage7.Controls.Add(this.materialButton8);
             this.tabPage7.Controls.Add(this.lblLetras);
@@ -119,7 +124,7 @@
             this.materialButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton7.HighEmphasis = false;
             this.materialButton7.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton7.Location = new System.Drawing.Point(320, 132);
+            this.materialButton7.Location = new System.Drawing.Point(321, 125);
             this.materialButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton7.Name = "materialButton7";
@@ -139,7 +144,7 @@
             this.materialButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton8.HighEmphasis = false;
             this.materialButton8.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton8.Location = new System.Drawing.Point(320, 84);
+            this.materialButton8.Location = new System.Drawing.Point(321, 77);
             this.materialButton8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton8.Name = "materialButton8";
@@ -157,7 +162,7 @@
             this.lblLetras.Depth = 0;
             this.lblLetras.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblLetras.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblLetras.Location = new System.Drawing.Point(328, 294);
+            this.lblLetras.Location = new System.Drawing.Point(329, 287);
             this.lblLetras.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblLetras.Name = "lblLetras";
             this.lblLetras.Size = new System.Drawing.Size(79, 14);
@@ -172,7 +177,7 @@
             this.materialButton15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton15.HighEmphasis = false;
             this.materialButton15.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton15.Location = new System.Drawing.Point(320, 36);
+            this.materialButton15.Location = new System.Drawing.Point(321, 29);
             this.materialButton15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton15.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton15.Name = "materialButton15";
@@ -191,7 +196,7 @@
             this.btnInstLetra.Depth = 0;
             this.btnInstLetra.HighEmphasis = true;
             this.btnInstLetra.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstLetra.Location = new System.Drawing.Point(509, 266);
+            this.btnInstLetra.Location = new System.Drawing.Point(510, 259);
             this.btnInstLetra.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstLetra.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstLetra.Name = "btnInstLetra";
@@ -206,7 +211,7 @@
             // pbLetras
             // 
             this.pbLetras.Depth = 0;
-            this.pbLetras.Location = new System.Drawing.Point(320, 311);
+            this.pbLetras.Location = new System.Drawing.Point(328, 310);
             this.pbLetras.MouseState = MaterialSkin.MouseState.HOVER;
             this.pbLetras.Name = "pbLetras";
             this.pbLetras.Size = new System.Drawing.Size(429, 5);
@@ -259,6 +264,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lblCcEDesc);
             this.tabPage6.Controls.Add(this.materialButton5);
             this.tabPage6.Controls.Add(this.materialButton6);
             this.tabPage6.Controls.Add(this.lblCajEar);
@@ -282,7 +288,7 @@
             this.materialButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton5.HighEmphasis = false;
             this.materialButton5.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton5.Location = new System.Drawing.Point(328, 131);
+            this.materialButton5.Location = new System.Drawing.Point(321, 125);
             this.materialButton5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton5.Name = "materialButton5";
@@ -302,7 +308,7 @@
             this.materialButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton6.HighEmphasis = false;
             this.materialButton6.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton6.Location = new System.Drawing.Point(328, 83);
+            this.materialButton6.Location = new System.Drawing.Point(321, 77);
             this.materialButton6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton6.Name = "materialButton6";
@@ -320,7 +326,7 @@
             this.lblCajEar.Depth = 0;
             this.lblCajEar.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblCajEar.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblCajEar.Location = new System.Drawing.Point(336, 293);
+            this.lblCajEar.Location = new System.Drawing.Point(329, 287);
             this.lblCajEar.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblCajEar.Name = "lblCajEar";
             this.lblCajEar.Size = new System.Drawing.Size(79, 14);
@@ -335,7 +341,7 @@
             this.materialButton13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton13.HighEmphasis = false;
             this.materialButton13.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton13.Location = new System.Drawing.Point(328, 35);
+            this.materialButton13.Location = new System.Drawing.Point(321, 29);
             this.materialButton13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton13.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton13.Name = "materialButton13";
@@ -354,7 +360,7 @@
             this.btnInstEar.Depth = 0;
             this.btnInstEar.HighEmphasis = true;
             this.btnInstEar.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstEar.Location = new System.Drawing.Point(517, 265);
+            this.btnInstEar.Location = new System.Drawing.Point(510, 259);
             this.btnInstEar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstEar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstEar.Name = "btnInstEar";
@@ -424,6 +430,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.lblSrDesc);
             this.tabPage4.Controls.Add(this.materialButton3);
             this.tabPage4.Controls.Add(this.materialButton4);
             this.tabPage4.Controls.Add(this.lblSire);
@@ -447,7 +454,7 @@
             this.materialButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton3.HighEmphasis = false;
             this.materialButton3.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton3.Location = new System.Drawing.Point(326, 130);
+            this.materialButton3.Location = new System.Drawing.Point(321, 125);
             this.materialButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton3.Name = "materialButton3";
@@ -467,7 +474,7 @@
             this.materialButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton4.HighEmphasis = false;
             this.materialButton4.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton4.Location = new System.Drawing.Point(326, 82);
+            this.materialButton4.Location = new System.Drawing.Point(321, 77);
             this.materialButton4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton4.Name = "materialButton4";
@@ -485,7 +492,7 @@
             this.lblSire.Depth = 0;
             this.lblSire.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.lblSire.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblSire.Location = new System.Drawing.Point(334, 292);
+            this.lblSire.Location = new System.Drawing.Point(329, 287);
             this.lblSire.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblSire.Name = "lblSire";
             this.lblSire.Size = new System.Drawing.Size(79, 14);
@@ -500,7 +507,7 @@
             this.materialButton11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.materialButton11.HighEmphasis = false;
             this.materialButton11.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.materialButton11.Location = new System.Drawing.Point(326, 34);
+            this.materialButton11.Location = new System.Drawing.Point(321, 29);
             this.materialButton11.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton11.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton11.Name = "materialButton11";
@@ -519,7 +526,7 @@
             this.btnInstSire.Depth = 0;
             this.btnInstSire.HighEmphasis = true;
             this.btnInstSire.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstSire.Location = new System.Drawing.Point(515, 264);
+            this.btnInstSire.Location = new System.Drawing.Point(510, 259);
             this.btnInstSire.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstSire.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstSire.Name = "btnInstSire";
@@ -535,7 +542,7 @@
             // pbSire
             // 
             this.pbSire.Depth = 0;
-            this.pbSire.Location = new System.Drawing.Point(326, 309);
+            this.pbSire.Location = new System.Drawing.Point(328, 310);
             this.pbSire.MouseState = MaterialSkin.MouseState.HOVER;
             this.pbSire.Name = "pbSire";
             this.pbSire.Size = new System.Drawing.Size(429, 5);
@@ -588,6 +595,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblLocaDesc);
             this.tabPage3.Controls.Add(this.materialButton10);
             this.tabPage3.Controls.Add(this.materialButton9);
             this.tabPage3.Controls.Add(this.lblLocalizacion);
@@ -701,7 +709,7 @@
             // pbLocalizacion
             // 
             this.pbLocalizacion.Depth = 0;
-            this.pbLocalizacion.Location = new System.Drawing.Point(321, 304);
+            this.pbLocalizacion.Location = new System.Drawing.Point(328, 310);
             this.pbLocalizacion.MouseState = MaterialSkin.MouseState.HOVER;
             this.pbLocalizacion.Name = "pbLocalizacion";
             this.pbLocalizacion.Size = new System.Drawing.Size(429, 5);
@@ -770,6 +778,54 @@
             this.materialTabControl1.Size = new System.Drawing.Size(794, 383);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
+            // 
+            // lblSrDesc
+            // 
+            this.lblSrDesc.AutoSize = true;
+            this.lblSrDesc.Depth = 0;
+            this.lblSrDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSrDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblSrDesc.Location = new System.Drawing.Point(329, 318);
+            this.lblSrDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSrDesc.Name = "lblSrDesc";
+            this.lblSrDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblSrDesc.TabIndex = 19;
+            // 
+            // lblLocaDesc
+            // 
+            this.lblLocaDesc.AutoSize = true;
+            this.lblLocaDesc.Depth = 0;
+            this.lblLocaDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblLocaDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblLocaDesc.Location = new System.Drawing.Point(329, 318);
+            this.lblLocaDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblLocaDesc.Name = "lblLocaDesc";
+            this.lblLocaDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblLocaDesc.TabIndex = 13;
+            // 
+            // lblCcEDesc
+            // 
+            this.lblCcEDesc.AutoSize = true;
+            this.lblCcEDesc.Depth = 0;
+            this.lblCcEDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblCcEDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblCcEDesc.Location = new System.Drawing.Point(329, 326);
+            this.lblCcEDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCcEDesc.Name = "lblCcEDesc";
+            this.lblCcEDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblCcEDesc.TabIndex = 19;
+            // 
+            // lblLetrasDesc
+            // 
+            this.lblLetrasDesc.AutoSize = true;
+            this.lblLetrasDesc.Depth = 0;
+            this.lblLetrasDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblLetrasDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblLetrasDesc.Location = new System.Drawing.Point(329, 326);
+            this.lblLetrasDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblLetrasDesc.Name = "lblLetrasDesc";
+            this.lblLetrasDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblLetrasDesc.TabIndex = 19;
             // 
             // FrmInstalador
             // 
@@ -848,5 +904,9 @@
         private MaterialSkin.Controls.MaterialButton materialButton11;
         private MaterialSkin.Controls.MaterialButton btnInstSire;
         private MaterialSkin.Controls.MaterialProgressBar pbSire;
+        private MaterialSkin.Controls.MaterialLabel lblSrDesc;
+        private MaterialSkin.Controls.MaterialLabel lblCcEDesc;
+        private MaterialSkin.Controls.MaterialLabel lblLocaDesc;
+        private MaterialSkin.Controls.MaterialLabel lblLetrasDesc;
     }
 }
