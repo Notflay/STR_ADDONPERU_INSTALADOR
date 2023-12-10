@@ -139,24 +139,28 @@ namespace STR_ADDONPERU_INSTALADOR
                 case 0:
                     progressBar = pbLocalizacion;
                     lblInstalador = lblLocalizacion;
+                    lblDescription = lblLocaDesc;
                     sbConteoCargaInit("Localizacion");
                     sbCargaConteo();
                     break;
                 case 1:
                     progressBar = pbSire;
                     lblInstalador = lblSire;
+                    lblDescription = lblSrDesc;
                     sbConteoCargaInit("SIRE");
                     sbCargaConteo();
                     break;
                 case 2:
                     progressBar = pbEar;
                     lblInstalador = lblCajEar;
+                    lblDescription = lblCcEDesc;
                     sbConteoCargaInit("CCHHE");
                     sbCargaConteo();
                     break;
                 case 3:
                     progressBar = pbLetras;
                     lblInstalador = lblLetras;
+                    lblDescription = lblLetrasDesc;
                     sbConteoCargaInit("Letras");
                     sbCargaConteo();
                     break;
