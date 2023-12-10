@@ -115,7 +115,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-
+            createElements("Localizacion");
 
 
 
@@ -224,7 +224,10 @@ namespace STR_ADDONPERU_INSTALADOR
             string pathFile = string.Empty;
             int cntElementos = 0;
             int cntErrores = 0;
+            int cntExistentes = 0;
             dynamic elementoMD;
+
+
 
             try
             {
@@ -262,6 +265,7 @@ namespace STR_ADDONPERU_INSTALADOR
                                 {
                                     string msj = $"Ya existe en SAP elemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                                     lblDescription.Text = msj;
+                                    cntExistentes++;
                                 }
                             }
                             else
@@ -290,8 +294,19 @@ namespace STR_ADDONPERU_INSTALADOR
             catch { throw; }
             finally
             {
-                lblDescription.Text = null;
+                if (validados == totales)
+                {
+                    if (validados - cntExistentes == 0)
+                        MessageBox.Show($"Se valido que ya existen todos los {validados} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show($"Se crearon {validados - cntExistentes} {(cntExistentes > 0 ? $"y se validaron {cntExistentes} ya existentes" : "")} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"No se llegaron a crear todos los complementos, se tuvo {cntErrores} errores, solo se llegaron a crear {validados - cntExistentes} complementos para el Addin. Revisar en Logs mas detalle", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
+                lblDescription.Text = "";
             }
         }
 
@@ -320,6 +335,16 @@ namespace STR_ADDONPERU_INSTALADOR
         private void btnInstSire_Click(object sender, EventArgs e)
         {
             createElements("SIRE");
+        }
+
+        private void btnInstEar_Click(object sender, EventArgs e)
+        {
+            createElements("CCHE");
+        }
+
+        private void btnInstLetra_Click(object sender, EventArgs e)
+        {
+            createElements("Letras");
         }
     }
 }

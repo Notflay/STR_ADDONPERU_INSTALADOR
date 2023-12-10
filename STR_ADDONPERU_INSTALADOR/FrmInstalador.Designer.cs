@@ -207,6 +207,7 @@
             this.btnInstLetra.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnInstLetra.UseAccentColor = false;
             this.btnInstLetra.UseVisualStyleBackColor = true;
+            this.btnInstLetra.Click += new System.EventHandler(this.btnInstLetra_Click);
             // 
             // pbLetras
             // 
@@ -371,6 +372,7 @@
             this.btnInstEar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnInstEar.UseAccentColor = false;
             this.btnInstEar.UseVisualStyleBackColor = true;
+            this.btnInstEar.Click += new System.EventHandler(this.btnInstEar_Click);
             // 
             // pbEar
             // 
