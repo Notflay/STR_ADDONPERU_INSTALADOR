@@ -24,7 +24,7 @@ namespace STR_ADDONPERU_INSTALADOR.Util
             {
                 Directory.CreateDirectory(path);
             }
-            string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\Service_Creation_Log_\\" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
+            string filepath = $"{AppDomain.CurrentDomain.BaseDirectory}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";
             if (!File.Exists(filepath))
             {
                 using (StreamWriter sw = File.CreateText(filepath))

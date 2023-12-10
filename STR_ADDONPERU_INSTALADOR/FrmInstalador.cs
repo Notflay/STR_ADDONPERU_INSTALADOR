@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Interop;
 using System.Xml;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using SAPbobsCOM;
 using SAPbouiCOM;
-using STR_ADDONPERU_INSTALADOR.EL.Responses;
-
+using STR_ADDONPERU_INSTALADOR.Util;
 
 namespace STR_ADDONPERU_INSTALADOR
 {
@@ -227,8 +227,7 @@ namespace STR_ADDONPERU_INSTALADOR
             int cntExistentes = 0;
             dynamic elementoMD;
 
-
-
+           
             try
             {
                 companyAux = application.Company.GetDICompany();
@@ -237,7 +236,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 GC.WaitForPendingFinalizers();
                 elements.ToList().ForEach(e =>
                 {
-                    var tipoElemento = (e.Equals("UT") ? " Tablas " : e.Equals("UT") ? "Objetos " : "campos");
+                    var tipoElemento = (e.Equals("UT") ? " Tabla " : e.Equals("UT") ? "Objeto " : "Campo");
                     Cursor.Current = Cursors.WaitCursor;
 
                     pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
@@ -252,6 +251,8 @@ namespace STR_ADDONPERU_INSTALADOR
                             elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                             string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                             lblDescription.Text = mensaje;
+                            string nameElemento = e == "UT" ? elementoMD.TableName : e == "UF" ? elementoMD.Name : elementoMD.Code;
+
                             if (elementoMD.Add() != 0)
                             {
                                 companyAux.GetLastError(out int codigoErr, out string descripErr);
@@ -259,18 +260,20 @@ namespace STR_ADDONPERU_INSTALADOR
                                 {
                                     cntErrores++;
                                     validados--;
-                                    throw new Exception($"{codigoErr} - {descripErr}");
+                                    Global.WriteToFile($"Error al instalar compemento de {addon} - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
                                 }
                                 else if (codigoErr == -2035)
                                 {
-                                    string msj = $"Ya existe en SAP elemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                    string msj = $"Ya existe en SAP componente {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                                     lblDescription.Text = msj;
                                     cntExistentes++;
+                                    Global.WriteToFile(msj);
                                 }
                             }
                             else
                             {
                                 string msj = $"Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                Global.WriteToFile(msj);
                                 lblDescription.Text = msj;
                             }
                             validados++;
@@ -281,6 +284,8 @@ namespace STR_ADDONPERU_INSTALADOR
                         catch (Exception ex)
                         {
                             //sboApplication.statusBarErrorMsg(ex.Message);
+                            Global.WriteToFile($"Error al instalar complementos " + ex.Message);
+
                         }
                         finally
                         {
@@ -310,28 +315,6 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        public void sbConteObjetos(string addon)
-        {
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(path);
-
-
-            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
-            foreach (XmlNode tableNameNode in tableNameNodes)
-            {
-                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
-                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
-                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
-                /*
-                for (int i = 0; i < userFieldsMD.Fields.C; i++)
-                {
-
-                }
-*/
-            }
-        }
-
         private void btnInstSire_Click(object sender, EventArgs e)
         {
             createElements("SIRE");
@@ -345,6 +328,16 @@ namespace STR_ADDONPERU_INSTALADOR
         private void btnInstLetra_Click(object sender, EventArgs e)
         {
             createElements("Letras");
+        }
+
+        private void materialButton9_Click(object sender, EventArgs e)
+        {
+            string path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";
+
+            string contenido= File.ReadAllText(path);
+
+           
+
         }
     }
 }

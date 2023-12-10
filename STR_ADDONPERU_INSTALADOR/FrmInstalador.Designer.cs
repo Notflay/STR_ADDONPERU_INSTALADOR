@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInstalador));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.lblLetrasDesc = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton7 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton8 = new MaterialSkin.Controls.MaterialButton();
             this.lblLetras = new MaterialSkin.Controls.MaterialLabel();
@@ -42,6 +43,7 @@
             this.materialMultiLineTextBox4 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.lblCcEDesc = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton5 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton6 = new MaterialSkin.Controls.MaterialButton();
             this.lblCajEar = new MaterialSkin.Controls.MaterialLabel();
@@ -52,6 +54,7 @@
             this.materialMultiLineTextBox3 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lblSrDesc = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton3 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
             this.lblSire = new MaterialSkin.Controls.MaterialLabel();
@@ -62,6 +65,7 @@
             this.materialMultiLineTextBox2 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblLocaDesc = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton10 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton9 = new MaterialSkin.Controls.MaterialButton();
             this.lblLocalizacion = new MaterialSkin.Controls.MaterialLabel();
@@ -72,10 +76,6 @@
             this.materialMultiLineTextBox1 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
-            this.lblSrDesc = new MaterialSkin.Controls.MaterialLabel();
-            this.lblLocaDesc = new MaterialSkin.Controls.MaterialLabel();
-            this.lblCcEDesc = new MaterialSkin.Controls.MaterialLabel();
-            this.lblLetrasDesc = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage7.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -115,6 +115,18 @@
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Letras";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // lblLetrasDesc
+            // 
+            this.lblLetrasDesc.AutoSize = true;
+            this.lblLetrasDesc.Depth = 0;
+            this.lblLetrasDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblLetrasDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblLetrasDesc.Location = new System.Drawing.Point(329, 326);
+            this.lblLetrasDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblLetrasDesc.Name = "lblLetrasDesc";
+            this.lblLetrasDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblLetrasDesc.TabIndex = 19;
             // 
             // materialButton7
             // 
@@ -280,6 +292,18 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Caja Chica y EAR";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // lblCcEDesc
+            // 
+            this.lblCcEDesc.AutoSize = true;
+            this.lblCcEDesc.Depth = 0;
+            this.lblCcEDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblCcEDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblCcEDesc.Location = new System.Drawing.Point(329, 326);
+            this.lblCcEDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCcEDesc.Name = "lblCcEDesc";
+            this.lblCcEDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblCcEDesc.TabIndex = 19;
             // 
             // materialButton5
             // 
@@ -448,6 +472,18 @@
             this.tabPage4.Text = "SIRE";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // lblSrDesc
+            // 
+            this.lblSrDesc.AutoSize = true;
+            this.lblSrDesc.Depth = 0;
+            this.lblSrDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblSrDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblSrDesc.Location = new System.Drawing.Point(329, 318);
+            this.lblSrDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSrDesc.Name = "lblSrDesc";
+            this.lblSrDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblSrDesc.TabIndex = 19;
+            // 
             // materialButton3
             // 
             this.materialButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -614,6 +650,18 @@
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
+            // lblLocaDesc
+            // 
+            this.lblLocaDesc.AutoSize = true;
+            this.lblLocaDesc.Depth = 0;
+            this.lblLocaDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblLocaDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.lblLocaDesc.Location = new System.Drawing.Point(329, 318);
+            this.lblLocaDesc.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblLocaDesc.Name = "lblLocaDesc";
+            this.lblLocaDesc.Size = new System.Drawing.Size(1, 0);
+            this.lblLocaDesc.TabIndex = 13;
+            // 
             // materialButton10
             // 
             this.materialButton10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -653,6 +701,7 @@
             this.materialButton9.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton9.UseAccentColor = false;
             this.materialButton9.UseVisualStyleBackColor = true;
+            this.materialButton9.Click += new System.EventHandler(this.materialButton9_Click);
             // 
             // lblLocalizacion
             // 
@@ -780,54 +829,6 @@
             this.materialTabControl1.Size = new System.Drawing.Size(794, 383);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
-            // 
-            // lblSrDesc
-            // 
-            this.lblSrDesc.AutoSize = true;
-            this.lblSrDesc.Depth = 0;
-            this.lblSrDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblSrDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblSrDesc.Location = new System.Drawing.Point(329, 318);
-            this.lblSrDesc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblSrDesc.Name = "lblSrDesc";
-            this.lblSrDesc.Size = new System.Drawing.Size(1, 0);
-            this.lblSrDesc.TabIndex = 19;
-            // 
-            // lblLocaDesc
-            // 
-            this.lblLocaDesc.AutoSize = true;
-            this.lblLocaDesc.Depth = 0;
-            this.lblLocaDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblLocaDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblLocaDesc.Location = new System.Drawing.Point(329, 318);
-            this.lblLocaDesc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblLocaDesc.Name = "lblLocaDesc";
-            this.lblLocaDesc.Size = new System.Drawing.Size(1, 0);
-            this.lblLocaDesc.TabIndex = 13;
-            // 
-            // lblCcEDesc
-            // 
-            this.lblCcEDesc.AutoSize = true;
-            this.lblCcEDesc.Depth = 0;
-            this.lblCcEDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblCcEDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblCcEDesc.Location = new System.Drawing.Point(329, 326);
-            this.lblCcEDesc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblCcEDesc.Name = "lblCcEDesc";
-            this.lblCcEDesc.Size = new System.Drawing.Size(1, 0);
-            this.lblCcEDesc.TabIndex = 19;
-            // 
-            // lblLetrasDesc
-            // 
-            this.lblLetrasDesc.AutoSize = true;
-            this.lblLetrasDesc.Depth = 0;
-            this.lblLetrasDesc.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblLetrasDesc.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.lblLetrasDesc.Location = new System.Drawing.Point(329, 326);
-            this.lblLetrasDesc.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblLetrasDesc.Name = "lblLetrasDesc";
-            this.lblLetrasDesc.Size = new System.Drawing.Size(1, 0);
-            this.lblLetrasDesc.TabIndex = 19;
             // 
             // FrmInstalador
             // 
