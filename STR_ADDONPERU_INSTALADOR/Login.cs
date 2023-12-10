@@ -49,8 +49,9 @@ namespace STR_ADDONPERU_INSTALADOR
                     this.Hide();
                     //SLConnection.saveConnection();
 
-                    FrmInstalador frmInstalador = new FrmInstalador();
-                    frmInstalador.ShowDialog();
+                    /* FrmInstalador frmInstalador = new FrmInstalador();
+                     frmInstalador.ShowDialog();
+                 */
                 }
             }
             else
@@ -72,6 +73,11 @@ namespace STR_ADDONPERU_INSTALADOR
         }
 
         private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
 
         }

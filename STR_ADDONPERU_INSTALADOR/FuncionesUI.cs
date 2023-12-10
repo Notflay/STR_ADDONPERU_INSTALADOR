@@ -1,4 +1,5 @@
 ﻿using MaterialSkin.Controls;
+using SAPbouiCOM;
 using STR_ADDONPERU_INSTALADOR.EL.Requests;
 using STR_ADDONPERU_INSTALADOR.EL.Responses;
 using STR_ADDONPERU_INSTALADOR.Services;
@@ -17,6 +18,9 @@ namespace STR_ADDONPERU_INSTALADOR
 {
     public class FuncionesUI
     {
+        public SAPbobsCOM.Company sboCompany = null;
+        public SAPbouiCOM.Application sboApplication = null;
+
         public List<B1SLUserTablesMD> b1SLUserTablesMDs = new List<B1SLUserTablesMD>();
         public List<B1SLUserFieldsMD> b1SLUserFieldsMDs = new List<B1SLUserFieldsMD>();
         public List<B1SLUserObjectsMD> b1SLUserObjectsMDs = new List<B1SLUserObjectsMD>();
@@ -27,7 +31,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 int validados = 0;
                 int faltantes = 0;
 
-                string path = $"{Application.StartupPath}\\Resources\\{addon}\\UT.vte";
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
 
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(path);
@@ -87,7 +91,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 int validados = 0;
                 int faltantes = 0;
 
-                string path = $"{Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
 
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(path);
@@ -150,7 +154,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 int validados = 0;
                 int faltantes = 0;
 
-                string path = $"{Application.StartupPath}\\Resources\\{addon}\\UO.vte";
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
 
                 XmlDocument xdoc = new XmlDocument();
                 xdoc.Load(path);
@@ -178,11 +182,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     {
                         string objectId = oudoNode.SelectSingleNode("Code")?.InnerText;
 
-<<<<<<< HEAD
-                        if (SLEndpoint.validationObjectsMD(objectId))
-=======
                         if (SLEndpoint.validationObject(objectId))
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
                         {
                             validados++;
                         }
@@ -274,12 +274,53 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-<<<<<<< HEAD
-        //public CountTable crearTabla(CountTable countTable, string addon)
-        //{
+        public bool conectionString()
+        {
+            try
+            {
+                SboGuiApi sboGuiApi = new SboGuiApi();
+                string sConectionString = "0030002C0030002C00530041005000420044005F00440061007400650076002C0050004C006F006D0056004900490056";
+                sboGuiApi.Connect(sConectionString);
 
-        //}
-=======
->>>>>>> e2ad822136580153e604004bc990ee412211e4b6
+                sboApplication = sboGuiApi.GetApplication(-1);
+                sboCompany = sboApplication.Company.GetDICompany();
+
+                if (sboCompany.Connected)
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void sbCreacionTablas(string addon)
+        {
+            int validados = 0;
+            int faltantes = 0;
+
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
+
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(path);
+
+
+            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserTablesMD/row");
+            foreach (XmlNode tableNameNode in tableNameNodes)
+            {
+                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
+            }
+
+        }
+        public void sbCreacionCampos(string addon)
+        {
+            
+        }
+
+        
+        public void sbCreacionObjetos(string addon)
+        {
+        }
     }
 }

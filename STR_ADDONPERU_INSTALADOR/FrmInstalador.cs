@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using SAPbobsCOM;
+using SAPbouiCOM;
 
 
 namespace STR_ADDONPERU_INSTALADOR
@@ -19,8 +22,12 @@ namespace STR_ADDONPERU_INSTALADOR
         private MaterialProgressBar progressBar;
         private MaterialLabel lblInstalador;
         private MaterialButton btnInstalador;
-
-        public FrmInstalador()
+        private SAPbobsCOM.Company company;
+        private SAPbouiCOM.Application application;
+        int validados = 0;
+        int faltantes = 0;
+        int totales = 0;
+        public FrmInstalador(SAPbobsCOM.Company company, SAPbouiCOM.Application application)
         {
             InitializeComponent();
             materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
@@ -28,6 +35,9 @@ namespace STR_ADDONPERU_INSTALADOR
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green500, MaterialSkin.Primary.Green700, MaterialSkin.Primary.LightGreen100, MaterialSkin.Accent.Green700, MaterialSkin.TextShade.WHITE);
+
+            this.company = company;
+            this.application = application;
         }
 
         private void FrmInstalador_Load(object sender, EventArgs e)
@@ -103,11 +113,133 @@ namespace STR_ADDONPERU_INSTALADOR
         private void materialButton1_Click(object sender, EventArgs e)
         {
 
+
+
+
         }
 
         private void materialButton11_Click_1(object sender, EventArgs e)
         {
 
         }
+
+        private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            validados = 0;
+            faltantes = 0;
+            totales = 0;
+
+            int position = materialTabControl1.SelectedIndex;
+            switch (position)
+            {
+                case 0:
+                    progressBar = pbLocalizacion;
+                    lblInstalador = lblLocalizacion;
+                    sbCargaConteo("Localizacion");
+                    break;
+                case 1:
+                    progressBar = pbSire;
+                    lblInstalador = lblSire;
+                    sbCargaConteo("SIRE");
+                    break;
+                case 2:
+                    progressBar = pbEar;
+                    lblInstalador = lblCajEar;
+                    sbCargaConteo("CCHHE");
+                    break;
+                case 3:
+                    progressBar = pbLetras;
+                    lblInstalador = lblLetras;
+                    sbCargaConteo("Letra");
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void sbCargaConteo(string addon)
+        {
+            sbConteoTablas(addon);
+            int porcentaje = promedioPorcentaje();
+            lblInstalador.Text = $"Descarga ({porcentaje}%)";
+            progressBar.Increment(porcentaje);
+        }
+
+        public int promedioPorcentaje()
+        {
+            int valor = validados / totales * 100;
+            return valor;
+        }
+
+        public void sbConteoTablas(string addon)
+        {
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            /* XmlDocument xdoc = new XmlDocument();
+             xdoc.Load(path);
+            */
+
+            int cantidad = company.GetXMLelementCount(path);
+
+            //XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
+
+            /*
+            foreach (XmlNode tableNameNode in tableNameNodes)
+            {
+                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
+                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
+                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
+
+                for (int i = 0; i < userFieldsMD.Fields.C; i++)
+                {
+
+                }
+            }*/
+        }
+
+        public void sbConteoColumnas(string addon)
+        {
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(path);
+
+
+            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
+            foreach (XmlNode tableNameNode in tableNameNodes)
+            {
+                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
+                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
+                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
+                /*
+                for (int i = 0; i < userFieldsMD.Fields.C; i++)
+                {
+
+                }*/
+            }
+        }
+
+
+
+        public void sbConteObjetos(string addon)
+        {
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(path);
+
+
+            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
+            foreach (XmlNode tableNameNode in tableNameNodes)
+            {
+                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
+                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
+                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
+                /*
+                for (int i = 0; i < userFieldsMD.Fields.C; i++)
+                {
+
+                }
+*/
+            }
+        }
+
     }
 }

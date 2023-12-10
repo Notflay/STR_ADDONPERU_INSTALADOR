@@ -14,9 +14,18 @@ namespace STR_ADDONPERU_INSTALADOR
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+
+            FuncionesUI funciones = new FuncionesUI();
+            if (funciones.conectionString())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FrmInstalador(funciones.sboCompany, funciones.sboApplication));
+            }
+            else
+                MessageBox.Show("No se establecio conexión con SAP. Recuerde que tiene que tener el programa abierto", "Error SAP", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            //Application.Run(new Login());
         }
     }
 }
