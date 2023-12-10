@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -136,44 +137,48 @@ namespace STR_ADDONPERU_INSTALADOR
                 case 0:
                     progressBar = pbLocalizacion;
                     lblInstalador = lblLocalizacion;
-                    sbCargaConteo("Localizacion");
+                    sbConteoCargaInit("Localizacion");
+                    sbCargaConteo();
                     break;
                 case 1:
                     progressBar = pbSire;
                     lblInstalador = lblSire;
-                    sbCargaConteo("SIRE");
+                    sbConteoCargaInit("SIRE");
+                    sbCargaConteo();
                     break;
                 case 2:
                     progressBar = pbEar;
                     lblInstalador = lblCajEar;
-                    sbCargaConteo("CCHHE");
+                    sbConteoCargaInit("CCHHE");
+                    sbCargaConteo();
                     break;
                 case 3:
                     progressBar = pbLetras;
                     lblInstalador = lblLetras;
-                    sbCargaConteo("Letra");
+                    sbConteoCargaInit("Letras");
+                    sbCargaConteo();
                     break;
                 default:
                     break;
             }
         }
-        public void sbCargaConteo(string addon)
+        public void sbCargaConteo()
         {
-            sbConteoCarga(addon);
             int porcentaje = promedioPorcentaje();
             lblInstalador.Text = $"Descarga ({porcentaje}%)";
+
             progressBar.Increment(porcentaje);
         }
 
         public int promedioPorcentaje()
         {
-            int valor = validados / totales * 100;
-            return valor;
+            double valor = ((double)validados / totales) * 100;
+            int valorFinal = (int)Math.Round(valor);
+            return valorFinal;
         }
 
-        public void sbConteoCarga(string addon)
+        public void sbConteoCargaInit(string addon)
         {
-         
 
             string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
             totales += company.GetXMLelementCount(path);
@@ -207,7 +212,65 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
+        private void createElements(string addon)
+        {
+            SAPbobsCOM.Company companyAux = null;
+            string pathFile = string.Empty;
+            int cntElementos = 0;
+            int cntErrores = 0;
+            dynamic elementoMD;
 
+            try
+            {
+                companyAux = application.Company.GetDICompany();
+                string[] elements = { "UT", "UF", "UO" };
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                elements.ToList().ForEach(e =>
+                {
+                    var tipoElemento = (e.Equals("UT") ? " Tablas " : e.Equals("UT") ? "Objetos " : "campos");
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
+
+
+                    if (!File.Exists(pathFile)) throw new FileNotFoundException();
+                    cntElementos = companyAux.GetXMLelementCount(pathFile);
+                    for (int i = 0; i < cntElementos; i++)
+                    {
+                        try
+                        {
+                            elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+                            string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                            if (elementoMD.Add() != 0)
+                            {
+                                companyAux.GetLastError(out int codigoErr, out string descripErr);
+                                if (codigoErr != -2035 && codigoErr != -5002)
+                                {
+                                    cntErrores++;
+                                    throw new Exception($"{codigoErr} - {descripErr}");
+                                }
+                            }
+                            validados += 1;
+                            sbCargaConteo();
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
+                            GC.Collect();
+                        }
+                        catch (Exception ex)
+                        {
+                            //sboApplication.statusBarErrorMsg(ex.Message);
+                        }
+                        finally
+                        {
+                            elementoMD = null;
+                        }
+                    }
+                    //if (cntErrores == 0) sboApplication.statusBarSuccessMsg($"{tipoElemento} de usuario creados correctamente");
+                    Cursor.Current = Cursors.Default;
+                });
+            }
+            catch { throw; }
+        }
 
         public void sbConteObjetos(string addon)
         {
@@ -231,5 +294,9 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
+        private void btnInstSire_Click(object sender, EventArgs e)
+        {
+            createElements("SIRE");
+        }
     }
 }

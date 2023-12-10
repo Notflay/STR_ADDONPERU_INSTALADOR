@@ -530,6 +530,7 @@
             this.btnInstSire.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnInstSire.UseAccentColor = false;
             this.btnInstSire.UseVisualStyleBackColor = true;
+            this.btnInstSire.Click += new System.EventHandler(this.btnInstSire_Click);
             // 
             // pbSire
             // 
