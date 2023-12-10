@@ -159,7 +159,7 @@ namespace STR_ADDONPERU_INSTALADOR
         }
         public void sbCargaConteo(string addon)
         {
-            sbConteoTablas(addon);
+            sbConteoCarga(addon);
             int porcentaje = promedioPorcentaje();
             lblInstalador.Text = $"Descarga ({porcentaje}%)";
             progressBar.Increment(porcentaje);
@@ -171,29 +171,19 @@ namespace STR_ADDONPERU_INSTALADOR
             return valor;
         }
 
-        public void sbConteoTablas(string addon)
+        public void sbConteoCarga(string addon)
         {
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
-            /* XmlDocument xdoc = new XmlDocument();
-             xdoc.Load(path);
-            */
+         
 
-            int cantidad = company.GetXMLelementCount(path);
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
+            totales += company.GetXMLelementCount(path);
 
-            //XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
+            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            totales += company.GetXMLelementCount(path);
 
-            /*
-            foreach (XmlNode tableNameNode in tableNameNodes)
-            {
-                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
-                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
-                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
+            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
+            totales += company.GetXMLelementCount(path);
 
-                for (int i = 0; i < userFieldsMD.Fields.C; i++)
-                {
-
-                }
-            }*/
         }
 
         public void sbConteoColumnas(string addon)
