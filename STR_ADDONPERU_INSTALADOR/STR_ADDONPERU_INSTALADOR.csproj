@@ -217,8 +217,527 @@
     <Content Include="Resources\%24this.Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_ActualizarDatosPorReaperturaCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_CantidadNumerosdeCajaChica.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Create_OPCH_XML.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_GenerarCodigo_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_INT_AgruparLineasCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_AgruparLineasEAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_DocumentosaReconciliar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_InfoTotalesPorCargaDocumentosCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_InfoTotalesPorCargaDocumentosEAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_ListarSolicitudesEntregaRendir.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_NumerosEntregaaRendirActivos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_PagosRealizadosPorNumero_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_SaldoNumerosEntregaaRendir.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_NumerosCajaChicaActivos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_PagosRealizadosPorNumerodeCaja.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_SaldoNumerosCajaChica.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Valida_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Verificar_Documento_Existente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_ActualizarDatosPorReaperturaCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_CantidadNumerosdeCajaChica.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_GenerarCodigo_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_INT_AgruparLineasCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_AgruparLineasEAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_Create_OPCH_XML.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_DocumentosaReconciliar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorCargaDocumentosCCH.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorCargaDocumentosEAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_ListarSolicitudesEntregaRendir.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_NumerosEntregaaRendirActivos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_PagosRealizadosPorNumero_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_SaldoNumerosEntregaaRendir.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_NumerosCajaChicaActivos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_RendicionMovimientos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_SaldoNumerosCajaChica.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_Valida_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_Verificar_Documento_Existente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\sp_Num2Let.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_LT_ESTADO_CUENTAS_CORRIENTES_SOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_LT_EST_CUENTAS_CORRIENTES_SOCIO_PROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_ListarLetrasSinAsiento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_ActEstadoLetra.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_InicializarConfiguracion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_InsercionConfCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_LetrasPendientesCP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_ReporteEmision_PR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_ReporteEmision_SR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_ActualizarAsientoGenerado.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_CargarCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_CargarSerie.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_DatosLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_DetalleLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_EmisionLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_EmisionLetras_CP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_FormatoLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_GESTION_DE_LETRAS_CLIENTES.SQL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_HistorialLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_InsertarTabla.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_MaestroLetra.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_MostrarLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_ObtenerLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_LT_ESTADO_CUENTAS_CORRIENTES_SOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_LT_EST_CUENTAS_CORRIENTES_SOCIO_PROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_ListarLetrasSinAsiento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_ActEstadoLetra.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_InicializarConfiguracion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_InsercionConfCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_LetrasPendientesCP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_ReporteEmision_PR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_ReporteEmision_SR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_ActualizarAsientoGenerado.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_CargarCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_CargarSerie.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_DatosLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_DetalleLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_EmisionLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_EmisionLetras_CP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_FormatoLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_GESTION_DE_LETRAS_CLIENTES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_HistorialLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_InsertarTabla.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_MaestroLetra.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_MostrarLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_ObtenerLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_DETRACCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_DESTINOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_DETRACCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_APROBACIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_PROVEEDORES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GENERAR_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_DetraccionesPagadas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_DetraccionesXPagar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_FacturasSinAsiento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_FechaAnulacion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_InfoAsientoDestino.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_InfoAsientoDestinoAlternativo.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtCodigoDetrac.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtCodigoFormato.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtConfigLocaliz.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtCorrSunatTxtTipSer.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtDetailData.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtFacturasPendientesAD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtHeaderData.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtLineaId.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtMoneda.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtNombreCuenta.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtNumDias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtNumeroDocumento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtNumSerie.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtNumSiguiente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtPagosEfectuados.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtRutaArchivoTxt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtSerieSunat.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtSerieSunatAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtTipoDefXForm.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtTipoXForm.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtTipoXFormAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtTransferencias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_RegistroPagoDetrac.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_UpdEstadoAnulado.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ValidaAnulSUNAT.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ValidarRegistroSAP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_Valida_AppStrat.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_VerNumAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\ST_LOC_GET_PENDIENTES_ASIENTO_PROV.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_DETRACCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DESTINOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DETRACCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_APROBACIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_PROVEEDORES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GENERAR_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ActualizaPagoDetraccion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_BPP_LocalizacionSTRAT.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_DetraccionesPagadas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_DetraccionesXPagar.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_FacturasSinAsiento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_FechaAnulacion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_InfoAsientoDestino.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_InfoAsientoDestinoAlternativo.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtCodigoDetrac.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtCodigoFormato.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtConfigLocaliz.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtCorrSunatTxtTipSer.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtFacturasPendientesAD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtLineaId.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtMoneda.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtNombreCuenta.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtNumDias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtNumeroDocumento.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtNumSerie.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtNumSiguiente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtPagosEfectuados.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtSerieSunat.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtSerieSunatAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTipoDefXForm.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTipoXForm.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTipoXFormAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTransferencias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_RegistroPagoDetrac.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_UpdEstadoAnulado.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ValidaAnulSUNAT.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ValidarRegistroSAP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_VerNumAnul.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ramologo.ico" />
     <Content Include="Resources\ramologo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroComprasND_Sire.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroCompras_Sire.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroVentas_Sire.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_RegistroComprasND_Sire.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_RegistroCompras_Sire.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_RegistroVentas_Sire.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -248,5 +767,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

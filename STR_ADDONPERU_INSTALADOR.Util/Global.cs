@@ -40,5 +40,13 @@ namespace STR_ADDONPERU_INSTALADOR.Util
                 }
             }
         }
+
+        public enum PeruAddon
+        {
+            Localizacion = 1,
+            Sire = 2,
+            CCHHE = 3,
+            Letras = 4
+        }
     }
 }

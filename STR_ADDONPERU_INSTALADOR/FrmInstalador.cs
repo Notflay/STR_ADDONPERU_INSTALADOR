@@ -16,6 +16,7 @@ using MaterialSkin.Controls;
 using SAPbobsCOM;
 using SAPbouiCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace STR_ADDONPERU_INSTALADOR
 {
@@ -31,6 +32,7 @@ namespace STR_ADDONPERU_INSTALADOR
         int validados = 0;
         int faltantes = 0;
         int totales = 0;
+        int totalElementos = 0;
         public FrmInstalador(SAPbobsCOM.Company company, SAPbouiCOM.Application application)
         {
             InitializeComponent();
@@ -116,9 +118,9 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
+
+            materialTabControl1.SelectedIndex = 0;
             createElements("Localizacion");
-
-
 
         }
 
@@ -129,6 +131,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
 
             validados = 0;
             faltantes = 0;
@@ -141,6 +144,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     progressBar = pbLocalizacion;
                     lblInstalador = lblLocalizacion;
                     lblDescription = lblLocaDesc;
+                    btnInstalador = btnInstLoca;
                     sbConteoCargaInit("Localizacion");
                     sbCargaConteo();
                     break;
@@ -148,18 +152,21 @@ namespace STR_ADDONPERU_INSTALADOR
                     progressBar = pbSire;
                     lblInstalador = lblSire;
                     lblDescription = lblSrDesc;
+                    btnInstalador = btnInstSire;
                     sbConteoCargaInit("SIRE");
                     sbCargaConteo();
                     break;
                 case 2:
                     progressBar = pbEar;
                     lblInstalador = lblCajEar;
+                    btnInstalador = btnInstEar;
                     lblDescription = lblCcEDesc;
                     sbConteoCargaInit("CCHHE");
                     sbCargaConteo();
                     break;
                 case 3:
                     progressBar = pbLetras;
+                    btnInstalador = btnInstLetra;
                     lblInstalador = lblLetras;
                     lblDescription = lblLetrasDesc;
                     sbConteoCargaInit("Letras");
@@ -186,6 +193,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public void sbConteoCargaInit(string addon)
         {
+            string[] lo_ArrFiles = null;
 
             string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
             totales += company.GetXMLelementCount(path);
@@ -195,6 +203,21 @@ namespace STR_ADDONPERU_INSTALADOR
 
             path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
             totales += company.GetXMLelementCount(path);
+
+            totalElementos = totales;
+
+            string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{addon}";
+
+            if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+            {
+                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\HANA\", "*.sql");
+            }
+            else
+            {
+                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\SQL\", "*.sql");
+            }
+
+            totales += lo_ArrFiles.Count();
 
         }
 
@@ -216,6 +239,27 @@ namespace STR_ADDONPERU_INSTALADOR
                 {
 
                 }*/
+            }
+        }
+
+        public void instalaComplementos(string addon)
+        {
+            createElements(addon);
+
+            if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                fn_createProcedures(addon);
+
+                if (addon == "Letras" | addon == "CCHHE")
+                    if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        fn_inicializacion(addon);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                    }
             }
         }
 
@@ -261,11 +305,11 @@ namespace STR_ADDONPERU_INSTALADOR
                                 {
                                     cntErrores++;
                                     validados--;
-                                    Global.WriteToFile($"Error al instalar compemento de {addon} - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
+                                    Global.WriteToFile($"{addon}: ERROR al instalar complemento - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
                                 }
                                 else if (codigoErr == -2035)
                                 {
-                                    string msj = $"Ya existe en SAP componente {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                    string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                                     lblDescription.Text = msj;
                                     cntExistentes++;
                                     Global.WriteToFile(msj);
@@ -273,7 +317,7 @@ namespace STR_ADDONPERU_INSTALADOR
                             }
                             else
                             {
-                                string msj = $"Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                string msj = $"{addon}: Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                                 Global.WriteToFile(msj);
                                 lblDescription.Text = msj;
                             }
@@ -285,7 +329,7 @@ namespace STR_ADDONPERU_INSTALADOR
                         catch (Exception ex)
                         {
                             //sboApplication.statusBarErrorMsg(ex.Message);
-                            Global.WriteToFile($"Error al instalar complementos " + ex.Message);
+                            Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
 
                         }
                         finally
@@ -300,7 +344,7 @@ namespace STR_ADDONPERU_INSTALADOR
             catch { throw; }
             finally
             {
-                if (validados == totales)
+                if (validados == totalElementos)
                 {
                     if (validados - cntExistentes == 0)
                         MessageBox.Show($"Se valido que ya existen todos los {validados} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -316,18 +360,195 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
+        public void fn_createProcedures(string ps_addn)
+        {
+            try
+            {
+                SAPbobsCOM.Recordset lo_RecSet = null;
+                SAPbobsCOM.Recordset lo_RevSetAux = null;
+                string[] lo_ArrFiles = null;
+                string ls_Qry = string.Empty;
+                string ls_Tipo = string.Empty;
+                string ls_TipoSQL = string.Empty;
+                string ls_NmbFile = string.Empty;
+                System.IO.StreamReader lo_StrmRdr = null;
+                string ls_StrFile = string.Empty;
+                string[] lo_ArrTpoScrpt = null;
+
+                lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+                lo_RevSetAux = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+                string carpeta = ps_addn;
+                string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{carpeta}";
+
+                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                {
+                    lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\HANA\", "*.sql");
+                }
+                else
+                {
+                    lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\SQL\", "*.sql");
+                }
+
+                for (int i = 0; i < lo_ArrFiles.GetUpperBound(0) + 1; i++)
+                {
+
+                    lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
+                    ls_StrFile = lo_StrmRdr.ReadToEnd();
+                    lo_ArrTpoScrpt = ls_StrFile.Substring(0, 50).Split(new char[] { ' ' });
+                    ls_NmbFile = System.IO.Path.GetFileName(lo_ArrFiles[i]);
+                    ls_NmbFile = ls_NmbFile.Substring(0, ls_NmbFile.Length - 4);
+
+                    if (lo_ArrTpoScrpt[1].Trim() == "PROCEDURE")
+                    {
+                        ls_Tipo = "el procedimiento ";
+                        ls_TipoSQL = "= 'P'";
+                    }
+                    else if (lo_ArrTpoScrpt[1].Trim() == "VIEW")
+                    {
+                        ls_Tipo = "la vista ";
+                        ls_TipoSQL = "= 'V'";
+                    }
+                    else if (lo_ArrTpoScrpt[1].Trim() == "FUNCTION")
+                    {
+                        ls_Tipo = "la funcion ";
+                        ls_TipoSQL = "in (N'FN', N'IF', N'TF', N'FS', N'FT')";
+                    }
+                    if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                    {
+                        ls_Qry = @"SELECT COUNT('A') FROM ""SYS"".""OBJECTS"" WHERE ""OBJECT_NAME"" ='" + ls_NmbFile.Trim().ToUpper() + @"' AND ""SCHEMA_NAME"" = '" + company.CompanyDB + "'";
+                    }
+                    else
+                    {
+                        ls_Qry = @"SELECT COUNT(*) FROM sys.all_objects WHERE type " + ls_TipoSQL + " and name = '" + ls_NmbFile.Trim().ToUpper() + "'";
+                    }
+
+                    lo_RecSet.DoQuery(ls_Qry);
+                    if (!lo_RecSet.EoF)
+                    {
+                        if (Convert.ToInt32(lo_RecSet.Fields.Item(0).Value) != 0)
+                        {
+                            try
+                            {
+                                ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
+                                lo_RecSet.DoQuery(ls_Qry);
+                                lo_RecSet.DoQuery(ls_StrFile);
+                                string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                lblDescription.Text = mensaje;
+                                Global.WriteToFile(mensaje);
+                                validados++;
+                            }
+                            catch (Exception ex)
+                            {
+                                validados--;
+                                string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                lblDescription.Text = mensaje;
+                                Global.WriteToFile(mensaje);
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                lo_RecSet.DoQuery(ls_StrFile);
+                                validados++;
+                                string mensaje = $"Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                lblDescription.Text = mensaje;
+                                Global.WriteToFile(mensaje);
+                            }
+                            catch (Exception ex)
+                            {
+                                validados--;
+                                string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                lblDescription.Text = mensaje;
+                                Global.WriteToFile(mensaje);
+                            }
+                        }
+                    }
+                    sbCargaConteo();
+                }
+
+            }
+            catch (Exception e)
+            {
+                string mensaje = $"{ps_addn}: ERROR al crear Scripts - {e.Message}";
+                Global.WriteToFile(mensaje);
+                lblDescription.Text = mensaje;
+            }
+            finally
+            {
+                lblDescription.Text = "";
+                btnInstalador.Enabled = false;
+            }
+        }
+
+        public void fn_inicializacion(string addon)
+        {
+
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+            if (addon == "Letras")
+            {
+                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                {
+                    recordset.DoQuery("CALL STR_SP_LTR_InicializarConfiguracion");
+
+                    recordset.DoQuery("CALL STR_SP_LTR_InsercionConfCuentas");
+                }
+                else
+                {
+                    recordset.DoQuery("EXEC STR_SP_LTR_InicializarConfiguracion");
+
+                    recordset.DoQuery("EXEC STR_SP_LTR_InsercionConfCuentas");
+                }
+            }
+            if (addon == "CCHHE")
+            {
+
+                SAPbobsCOM.Recordset lo_RecSet = null;
+                string ls_Qry = string.Empty;
+                SAPbobsCOM.UserTablesMD lo_UsrTblMD = null;
+                SAPbobsCOM.UserTable lo_UsrTbl = null;
+
+                lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+                lo_UsrTblMD = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserTables);
+                if (lo_UsrTblMD.GetByKey("STR_CCHEAR_SYS"))
+                {
+                    lo_UsrTbl = company.UserTables.Item("STR_CCHEAR_SYS");
+                    ls_Qry = @"SELECT ""U_CE_ID"" FROM ""@STR_CCHEAR_SYS""";
+                    lo_RecSet.DoQuery(ls_Qry);
+                    if (lo_RecSet.EoF)
+                    {
+                        lo_UsrTbl.Code = "001";
+                        lo_UsrTbl.Name = "001";
+                        lo_UsrTbl.UserFields.Fields.Item("U_CE_ID").Value = "1";
+                        lo_UsrTbl.Add();
+
+                    }
+
+                }
+
+            }
+            MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
+
+        }
         private void btnInstSire_Click(object sender, EventArgs e)
         {
+            materialTabControl1.SelectedIndex = 1;
             createElements("SIRE");
         }
 
         private void btnInstEar_Click(object sender, EventArgs e)
         {
+            materialTabControl1.SelectedIndex = 2;
             createElements("CCHE");
         }
 
         private void btnInstLetra_Click(object sender, EventArgs e)
         {
+            materialTabControl1.SelectedIndex = 3;
+
             createElements("Letras");
         }
 
@@ -339,27 +560,15 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public void abrirTxt()
         {
-            string path = $"{AppDomain.CurrentDomain.BaseDirectory}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";
+            string filepath = $"{System.Windows.Forms.Application.StartupPath}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";
 
-            string contenido = File.ReadAllText(path);
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = path;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    // Obtén la ruta completa del archivo
-                    string rutaArchivo = openFileDialog.FileName;
-
-                    // Abre el archivo con la aplicación predeterminada
-                    Process.Start("notepad.exe", rutaArchivo);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al abrir el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Process.Start("notepad.exe", filepath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al abrir el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
