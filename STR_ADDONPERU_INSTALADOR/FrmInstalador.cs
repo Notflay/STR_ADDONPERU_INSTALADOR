@@ -120,7 +120,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
 
             materialTabControl1.SelectedIndex = 0;
-            createElements("Localizacion");
+            instalaComplementos("Localizacion");
 
         }
 
@@ -536,20 +536,20 @@ namespace STR_ADDONPERU_INSTALADOR
         private void btnInstSire_Click(object sender, EventArgs e)
         {
             materialTabControl1.SelectedIndex = 1;
-            createElements("SIRE");
+            instalaComplementos("SIRE");
         }
 
         private void btnInstEar_Click(object sender, EventArgs e)
         {
             materialTabControl1.SelectedIndex = 2;
-            createElements("CCHE");
+            instalaComplementos("CCHE");
         }
 
         private void btnInstLetra_Click(object sender, EventArgs e)
         {
             materialTabControl1.SelectedIndex = 3;
 
-            createElements("Letras");
+            instalaComplementos("Letras");
         }
 
         private void materialButton9_Click(object sender, EventArgs e)
