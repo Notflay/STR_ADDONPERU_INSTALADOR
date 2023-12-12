@@ -270,6 +270,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 fn_createProcedures(addon);
 
                 if (addon == "Letras" | addon == "CCHHE")
+                {
                     if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
                         fn_inicializacion(addon);
@@ -279,6 +280,12 @@ namespace STR_ADDONPERU_INSTALADOR
                         MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                }
             }
         }
 
@@ -496,6 +503,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 string mensaje = $"{ps_addn}: ERROR al crear Scripts - {e.Message}";
                 Global.WriteToFile(mensaje);
                 lblDescription.Text = mensaje;
+                MessageBox.Show(mensaje, "Scripts", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
