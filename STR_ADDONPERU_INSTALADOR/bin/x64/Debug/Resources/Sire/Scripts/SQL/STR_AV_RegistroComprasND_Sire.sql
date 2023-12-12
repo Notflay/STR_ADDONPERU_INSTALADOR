@@ -1,4 +1,4 @@
-CREATE PROC [dbo].[STR_AV_RegistroComprasND_Sire]
+CREATE PROCEDURE STR_AV_RegistroComprasND_Sire
 			
 (
 	@FI		DATETIME = '20200101', 

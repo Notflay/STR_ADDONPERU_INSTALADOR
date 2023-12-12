@@ -1,4 +1,4 @@
-CREATE PROC [dbo].[STR_AV_RegistroVentas_Sire]
+CREATE PROC STR_AV_RegistroVentas_Sire
 (
 	@FI DATETIME ='20220701',
 	@FF	DATETIME ='20220708'
