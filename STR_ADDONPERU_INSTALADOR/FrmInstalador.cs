@@ -41,22 +41,22 @@ namespace STR_ADDONPERU_INSTALADOR
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green500, MaterialSkin.Primary.Green700, MaterialSkin.Primary.LightGreen100, MaterialSkin.Accent.Green700, MaterialSkin.TextShade.WHITE);
-          
+
             this.company = company;
             lblNameDB.Text = "Conectado a " + company.CompanyDB;
-            lblnameEar.Text = "Conectado a "+ company.CompanyDB;
-            lblnameLetr.Text = "Conectado a " +  company.CompanyDB;
+            lblnameEar.Text = "Conectado a " + company.CompanyDB;
+            lblnameLetr.Text = "Conectado a " + company.CompanyDB;
             lblnomSir.Text = "Conectado a " + company.CompanyDB;
         }
 
         private void InicializarLabelComun()
         {
-           
+
         }
 
         private void FrmInstalador_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
@@ -148,7 +148,8 @@ namespace STR_ADDONPERU_INSTALADOR
             setControlTab();
         }
 
-        public void setControlTab() {
+        public void setControlTab()
+        {
             int position = materialTabControl1.SelectedIndex;
             switch (position)
             {
@@ -214,14 +215,15 @@ namespace STR_ADDONPERU_INSTALADOR
 
             string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
             totales += company.GetXMLelementCount(path);
+            totalElementos += company.GetXMLelementCount(path);
 
             path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
             totales += company.GetXMLelementCount(path);
+            totalElementos += company.GetXMLelementCount(path);
 
             path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
             totales += company.GetXMLelementCount(path);
-
-            totalElementos = totales;
+            totalElementos += company.GetXMLelementCount(path);
 
             string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{addon}";
 
@@ -287,7 +289,7 @@ namespace STR_ADDONPERU_INSTALADOR
             int cntElementos = 0;
             int cntErrores = 0;
             int cntExistentes = 0;
-          
+
 
 
             try
