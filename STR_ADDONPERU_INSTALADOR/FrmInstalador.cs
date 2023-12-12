@@ -28,27 +28,35 @@ namespace STR_ADDONPERU_INSTALADOR
         private MaterialButton btnInstalador;
         private MaterialLabel lblDescription;
         private SAPbobsCOM.Company company;
-        private SAPbouiCOM.Application application;
         int validados = 0;
         int faltantes = 0;
         int totales = 0;
         int totalElementos = 0;
-        public FrmInstalador(SAPbobsCOM.Company company, SAPbouiCOM.Application application)
+        public FrmInstalador(SAPbobsCOM.Company company)
         {
             InitializeComponent();
+            InicializarLabelComun();
             materialSkinManager = MaterialSkin.MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green500, MaterialSkin.Primary.Green700, MaterialSkin.Primary.LightGreen100, MaterialSkin.Accent.Green700, MaterialSkin.TextShade.WHITE);
-
+          
             this.company = company;
-            this.application = application;
+            lblNameDB.Text = "Conectado a " + company.CompanyDB;
+            lblnameEar.Text = "Conectado a "+ company.CompanyDB;
+            lblnameLetr.Text = "Conectado a " +  company.CompanyDB;
+            lblnomSir.Text = "Conectado a " + company.CompanyDB;
+        }
+
+        private void InicializarLabelComun()
+        {
+           
         }
 
         private void FrmInstalador_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
@@ -118,7 +126,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-
+            setControlTab();
             materialTabControl1.SelectedIndex = 0;
             instalaComplementos("Localizacion");
 
@@ -137,6 +145,10 @@ namespace STR_ADDONPERU_INSTALADOR
             faltantes = 0;
             totales = 0;
 
+            setControlTab();
+        }
+
+        public void setControlTab() {
             int position = materialTabControl1.SelectedIndex;
             switch (position)
             {
@@ -181,13 +193,18 @@ namespace STR_ADDONPERU_INSTALADOR
             int porcentaje = promedioPorcentaje();
             lblInstalador.Text = $"Descarga ({porcentaje}%)";
 
-            progressBar.Increment(porcentaje);
+            // Establecer el valor absoluto en lugar de incrementar
+            progressBar.Value = porcentaje;
         }
 
         public int promedioPorcentaje()
         {
             double valor = ((double)validados / totales) * 100;
             int valorFinal = (int)Math.Round(valor);
+
+            // Asegúrate de que el valor esté dentro del rango de la barra de progreso
+            valorFinal = Math.Min(Math.Max(valorFinal, progressBar.Minimum), progressBar.Maximum);
+
             return valorFinal;
         }
 
@@ -270,12 +287,12 @@ namespace STR_ADDONPERU_INSTALADOR
             int cntElementos = 0;
             int cntErrores = 0;
             int cntExistentes = 0;
-            dynamic elementoMD;
+          
 
 
             try
             {
-                companyAux = application.Company.GetDICompany();
+                companyAux = this.company;
                 string[] elements = { "UT", "UF", "UO" };
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
@@ -291,6 +308,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     cntElementos = companyAux.GetXMLelementCount(pathFile);
                     for (int i = 0; i < cntElementos; i++)
                     {
+                        dynamic elementoMD = null;
                         try
                         {
                             elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
@@ -334,7 +352,9 @@ namespace STR_ADDONPERU_INSTALADOR
                         }
                         finally
                         {
+
                             elementoMD = null;
+
                         }
                     }
                     //if (cntErrores == 0) sboApplication.statusBarSuccessMsg($"{tipoElemento} de usuario creados correctamente");
@@ -535,20 +555,22 @@ namespace STR_ADDONPERU_INSTALADOR
         }
         private void btnInstSire_Click(object sender, EventArgs e)
         {
+            setControlTab();
             materialTabControl1.SelectedIndex = 1;
             instalaComplementos("SIRE");
         }
 
         private void btnInstEar_Click(object sender, EventArgs e)
         {
+            setControlTab();
             materialTabControl1.SelectedIndex = 2;
             instalaComplementos("CCHE");
         }
 
         private void btnInstLetra_Click(object sender, EventArgs e)
         {
+            setControlTab();
             materialTabControl1.SelectedIndex = 3;
-
             instalaComplementos("Letras");
         }
 
@@ -587,6 +609,19 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             abrirTxt();
 
+        }
+
+        private void FrmInstalador_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Iterar sobre todos los formularios abiertos en la aplicación
+            foreach (System.Windows.Forms.Form formulario in System.Windows.Forms.Application.OpenForms)
+            {
+                // Cerrar cada formulario (excepto el formulario principal, si es necesario)
+                if (formulario != this) // Puedes ajustar esta condición según tus necesidades
+                {
+                    formulario.Close();
+                }
+            }
         }
     }
 }

@@ -1,0 +1,9 @@
+10/12/2023 19:20:53 - Ya existe en SAP componente  Tabla   STR_CF_SIRE
+10/12/2023 19:20:55 - Ya existe en SAP componente Campo STR_Clave de la tabla:  @STR_CF_SIRE
+10/12/2023 19:20:56 - Ya existe en SAP componente Campo STR_Valor de la tabla:  @STR_CF_SIRE
+10/12/2023 19:34:39 - Ya existe en SAP componente  Tabla   STR_CF_SIRE
+10/12/2023 19:34:40 - Ya existe en SAP componente Campo STR_Clave de la tabla:  @STR_CF_SIRE
+10/12/2023 19:34:41 - Ya existe en SAP componente Campo STR_Valor de la tabla:  @STR_CF_SIRE
+10/12/2023 19:34:51 - Ya existe en SAP componente  Tabla   STR_CF_SIRE
+10/12/2023 19:34:53 - Ya existe en SAP componente Campo STR_Clave de la tabla:  @STR_CF_SIRE
+10/12/2023 19:34:54 - Ya existe en SAP componente Campo STR_Valor de la tabla:  @STR_CF_SIRE

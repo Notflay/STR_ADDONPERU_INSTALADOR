@@ -38,6 +38,9 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 return false;
             }
+            finally {
+                sboApplication = null;
+            }
         }
 
         public void sbCreacionTablas(string addon)

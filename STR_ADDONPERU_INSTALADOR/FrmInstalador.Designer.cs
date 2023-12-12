@@ -76,6 +76,11 @@
             this.materialMultiLineTextBox1 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            this.lblNameDB = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.lblnomSir = new MaterialSkin.Controls.MaterialLabel();
+            this.lblnameEar = new MaterialSkin.Controls.MaterialLabel();
+            this.lblnameLetr = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage7.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -100,6 +105,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.lblnameLetr);
             this.tabPage7.Controls.Add(this.lblLetrasDesc);
             this.tabPage7.Controls.Add(this.materialButton7);
             this.tabPage7.Controls.Add(this.materialButton8);
@@ -278,6 +284,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.lblnameEar);
             this.tabPage6.Controls.Add(this.lblCcEDesc);
             this.tabPage6.Controls.Add(this.materialButton5);
             this.tabPage6.Controls.Add(this.materialButton6);
@@ -458,6 +465,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.lblnomSir);
+            this.tabPage4.Controls.Add(this.materialLabel2);
             this.tabPage4.Controls.Add(this.lblSrDesc);
             this.tabPage4.Controls.Add(this.materialButton3);
             this.tabPage4.Controls.Add(this.materialButton4);
@@ -636,6 +645,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblNameDB);
             this.tabPage3.Controls.Add(this.lblLocaDesc);
             this.tabPage3.Controls.Add(this.materialButton10);
             this.tabPage3.Controls.Add(this.materialButton9);
@@ -833,6 +843,66 @@
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
+            // lblNameDB
+            // 
+            this.lblNameDB.AutoSize = true;
+            this.lblNameDB.Depth = 0;
+            this.lblNameDB.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblNameDB.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblNameDB.Location = new System.Drawing.Point(626, 10);
+            this.lblNameDB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblNameDB.Name = "lblNameDB";
+            this.lblNameDB.Size = new System.Drawing.Size(1, 0);
+            this.lblNameDB.TabIndex = 14;
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.materialLabel2.Location = new System.Drawing.Point(572, 29);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(1, 0);
+            this.materialLabel2.TabIndex = 20;
+            // 
+            // lblnomSir
+            // 
+            this.lblnomSir.AutoSize = true;
+            this.lblnomSir.Depth = 0;
+            this.lblnomSir.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblnomSir.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblnomSir.Location = new System.Drawing.Point(626, 10);
+            this.lblnomSir.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblnomSir.Name = "lblnomSir";
+            this.lblnomSir.Size = new System.Drawing.Size(1, 0);
+            this.lblnomSir.TabIndex = 21;
+            // 
+            // lblnameEar
+            // 
+            this.lblnameEar.AutoSize = true;
+            this.lblnameEar.Depth = 0;
+            this.lblnameEar.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblnameEar.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblnameEar.Location = new System.Drawing.Point(626, 10);
+            this.lblnameEar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblnameEar.Name = "lblnameEar";
+            this.lblnameEar.Size = new System.Drawing.Size(1, 0);
+            this.lblnameEar.TabIndex = 22;
+            // 
+            // lblnameLetr
+            // 
+            this.lblnameLetr.AutoSize = true;
+            this.lblnameLetr.Depth = 0;
+            this.lblnameLetr.Font = new System.Drawing.Font("Roboto", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblnameLetr.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline;
+            this.lblnameLetr.Location = new System.Drawing.Point(626, 10);
+            this.lblnameLetr.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblnameLetr.Name = "lblnameLetr";
+            this.lblnameLetr.Size = new System.Drawing.Size(1, 0);
+            this.lblnameLetr.TabIndex = 23;
+            // 
             // FrmInstalador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -844,6 +914,7 @@
             this.Name = "FrmInstalador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Addon Perú Cliente";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInstalador_FormClosing);
             this.Load += new System.EventHandler(this.FrmInstalador_Load);
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
@@ -914,5 +985,10 @@
         private MaterialSkin.Controls.MaterialLabel lblCcEDesc;
         private MaterialSkin.Controls.MaterialLabel lblLocaDesc;
         private MaterialSkin.Controls.MaterialLabel lblLetrasDesc;
+        private MaterialSkin.Controls.MaterialLabel lblNameDB;
+        private MaterialSkin.Controls.MaterialLabel lblnameLetr;
+        private MaterialSkin.Controls.MaterialLabel lblnameEar;
+        private MaterialSkin.Controls.MaterialLabel lblnomSir;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
     }
 }

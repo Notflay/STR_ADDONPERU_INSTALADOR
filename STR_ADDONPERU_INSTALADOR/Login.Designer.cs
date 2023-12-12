@@ -30,10 +30,10 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialButton11 = new MaterialSkin.Controls.MaterialButton();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtServidor = new System.Windows.Forms.TextBox();
+            this.edtPassDB = new System.Windows.Forms.TextBox();
+            this.edtPassS = new System.Windows.Forms.TextBox();
+            this.edtNombreDB = new System.Windows.Forms.TextBox();
+            this.edtServidor = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,7 +41,11 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.edtUsuarioDB = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.edtUsuarioS = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxTipoDB = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -49,12 +53,13 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.pictureBox1.Location = new System.Drawing.Point(367, 108);
+            this.pictureBox1.Location = new System.Drawing.Point(367, 101);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(113, 81);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // materialButton11
             // 
@@ -76,44 +81,44 @@
             this.materialButton11.UseVisualStyleBackColor = true;
             this.materialButton11.Click += new System.EventHandler(this.materialButton11_Click);
             // 
-            // txtPassword
+            // edtPassDB
             // 
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(336, 291);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(169, 21);
-            this.txtPassword.TabIndex = 26;
+            this.edtPassDB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtPassDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtPassDB.Location = new System.Drawing.Point(336, 291);
+            this.edtPassDB.Name = "edtPassDB";
+            this.edtPassDB.Size = new System.Drawing.Size(169, 21);
+            this.edtPassDB.TabIndex = 26;
             // 
-            // txtUsuario
+            // edtPassS
             // 
-            this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsuario.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(336, 330);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(169, 21);
-            this.txtUsuario.TabIndex = 24;
-            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
+            this.edtPassS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtPassS.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtPassS.Location = new System.Drawing.Point(336, 372);
+            this.edtPassS.Name = "edtPassS";
+            this.edtPassS.Size = new System.Drawing.Size(169, 21);
+            this.edtPassS.TabIndex = 24;
+            this.edtPassS.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
-            // txtNombre
+            // edtNombreDB
             // 
-            this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombre.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(336, 231);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(169, 21);
-            this.txtNombre.TabIndex = 22;
+            this.edtNombreDB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtNombreDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtNombreDB.Location = new System.Drawing.Point(336, 231);
+            this.edtNombreDB.Name = "edtNombreDB";
+            this.edtNombreDB.Size = new System.Drawing.Size(169, 21);
+            this.edtNombreDB.TabIndex = 22;
             // 
-            // txtServidor
+            // edtServidor
             // 
-            this.txtServidor.BackColor = System.Drawing.SystemColors.Window;
-            this.txtServidor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtServidor.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServidor.Location = new System.Drawing.Point(336, 201);
-            this.txtServidor.Name = "txtServidor";
-            this.txtServidor.Size = new System.Drawing.Size(169, 21);
-            this.txtServidor.TabIndex = 20;
-            this.txtServidor.Tag = "";
+            this.edtServidor.BackColor = System.Drawing.SystemColors.Window;
+            this.edtServidor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtServidor.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtServidor.Location = new System.Drawing.Point(336, 201);
+            this.edtServidor.Name = "edtServidor";
+            this.edtServidor.Size = new System.Drawing.Size(169, 21);
+            this.edtServidor.TabIndex = 20;
+            this.edtServidor.Tag = "";
             // 
             // label4
             // 
@@ -121,19 +126,20 @@
             this.label4.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(209, 291);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 18);
+            this.label4.Size = new System.Drawing.Size(100, 18);
             this.label4.TabIndex = 27;
-            this.label4.Text = "Contraseña SAP";
+            this.label4.Text = "Contraseña DB";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(209, 333);
+            this.label3.Location = new System.Drawing.Point(209, 348);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 18);
             this.label3.TabIndex = 25;
             this.label3.Text = "Usuario SAP";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -149,7 +155,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(209, 204);
+            this.label1.Location = new System.Drawing.Point(209, 201);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 18);
             this.label1.TabIndex = 21;
@@ -184,34 +190,83 @@
             this.label5.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(209, 262);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 18);
+            this.label5.Size = new System.Drawing.Size(77, 18);
             this.label5.TabIndex = 32;
-            this.label5.Text = "Nombre de la Base";
+            this.label5.Text = "Usuario DB";
             // 
-            // textBox1
+            // edtUsuarioDB
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(336, 259);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 21);
-            this.textBox1.TabIndex = 33;
+            this.edtUsuarioDB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtUsuarioDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtUsuarioDB.Location = new System.Drawing.Point(336, 259);
+            this.edtUsuarioDB.Name = "edtUsuarioDB";
+            this.edtUsuarioDB.Size = new System.Drawing.Size(169, 21);
+            this.edtUsuarioDB.TabIndex = 33;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(209, 375);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 18);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "Contraseña SAP";
+            // 
+            // edtUsuarioS
+            // 
+            this.edtUsuarioS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.edtUsuarioS.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edtUsuarioS.Location = new System.Drawing.Point(336, 345);
+            this.edtUsuarioS.Name = "edtUsuarioS";
+            this.edtUsuarioS.Size = new System.Drawing.Size(169, 21);
+            this.edtUsuarioS.TabIndex = 35;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(209, 321);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 18);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Tipo DB";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // cbxTipoDB
+            // 
+            this.cbxTipoDB.FormattingEnabled = true;
+            this.cbxTipoDB.Items.AddRange(new object[] {
+            "HANADB",
+            "MSSQL2008",
+            "MSSQL2012",
+            "MSSQL2014",
+            "MSSQL2016",
+            "MSSQL2017"});
+            this.cbxTipoDB.Location = new System.Drawing.Point(336, 319);
+            this.cbxTipoDB.Name = "cbxTipoDB";
+            this.cbxTipoDB.Size = new System.Drawing.Size(169, 21);
+            this.cbxTipoDB.TabIndex = 37;
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cbxTipoDB);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.edtUsuarioS);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.edtUsuarioDB);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.materialButton11);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsuario);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtServidor);
+            this.Controls.Add(this.edtPassDB);
+            this.Controls.Add(this.edtPassS);
+            this.Controls.Add(this.edtNombreDB);
+            this.Controls.Add(this.edtServidor);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -229,10 +284,10 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private MaterialSkin.Controls.MaterialButton materialButton11;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtServidor;
+        private System.Windows.Forms.TextBox edtPassDB;
+        private System.Windows.Forms.TextBox edtPassS;
+        private System.Windows.Forms.TextBox edtNombreDB;
+        private System.Windows.Forms.TextBox edtServidor;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -241,6 +296,10 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox edtUsuarioDB;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox edtUsuarioS;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbxTipoDB;
     }
 }
