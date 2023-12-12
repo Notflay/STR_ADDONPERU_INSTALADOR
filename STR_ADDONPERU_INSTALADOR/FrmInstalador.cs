@@ -145,7 +145,7 @@ namespace STR_ADDONPERU_INSTALADOR
             faltantes = 0;
             totales = 0;
 
-            setControlTab();
+            //setControlTab();
         }
 
         public void setControlTab()
