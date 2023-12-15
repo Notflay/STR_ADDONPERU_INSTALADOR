@@ -269,7 +269,7 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 fn_createProcedures(addon);
 
-                if (addon == "Letras" | addon == "CCHHE")
+                if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
                 {
                     if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
@@ -532,7 +532,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     recordset.DoQuery("EXEC STR_SP_LTR_InsercionConfCuentas");
                 }
             }
-            if (addon == "CCHHE")
+            else if (addon == "CCHHE")
             {
 
                 SAPbobsCOM.Recordset lo_RecSet = null;
@@ -558,6 +558,12 @@ namespace STR_ADDONPERU_INSTALADOR
 
                 }
 
+            }
+            else if (addon == "SIRE") {
+                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                    recordset.DoQuery("CALL STR_SIRE_InicializarConfiguracion");                
+                else
+                    recordset.DoQuery("EXEC STR_SIRE_InicializarConfiguracion");
             }
             MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
