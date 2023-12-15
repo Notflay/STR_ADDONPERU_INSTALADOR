@@ -209,9 +209,7 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\b
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Permissions.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Principal.Windows.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.ValueTuple.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Text.Encodings.Web.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\STR_ADDONPERU_INSTALADOR.Util.pdb
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\RestSharp.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Buffers.xml
