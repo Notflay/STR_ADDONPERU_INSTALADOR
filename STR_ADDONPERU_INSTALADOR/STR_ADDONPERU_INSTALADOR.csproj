@@ -722,7 +722,9 @@
     <Content Include="Resources\ramologo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_Inicializa_Configuracion.sql" />
+    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_Inicializa_Configuracion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroComprasND_Sire.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -732,7 +734,9 @@
     <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroVentas_Sire.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_Inicializa_Configuracion.sql" />
+    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_Inicializa_Configuracion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sire\Scripts\SQL\STR_AV_RegistroComprasND_Sire.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

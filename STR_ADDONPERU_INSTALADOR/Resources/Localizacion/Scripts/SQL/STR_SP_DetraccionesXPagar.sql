@@ -1,12 +1,4 @@
-USE [SBO_INPPARES_PROD]
-GO
-/****** Object:  StoredProcedure [dbo].[STR_SP_DetraccionesXPagar]    Script Date: 13/07/2023 15:13:58 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE [dbo].[STR_SP_DetraccionesXPagar]
+CREATE PROCEDURE STR_SP_DetraccionesXPagar
 (
 	@ProvD nvarchar(50),
 	@ProvH nvarchar(50),

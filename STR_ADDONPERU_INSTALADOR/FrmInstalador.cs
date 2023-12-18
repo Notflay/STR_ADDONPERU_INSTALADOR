@@ -296,9 +296,9 @@ namespace STR_ADDONPERU_INSTALADOR
             int cntElementos = 0;
             int cntErrores = 0;
             int cntExistentes = 0;
-
-
-
+            /*
+            UserObjectsMD userObjectsMD = null;
+            userObjectsMD.*/
             try
             {
                 companyAux = this.company;
