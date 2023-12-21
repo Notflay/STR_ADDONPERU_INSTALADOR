@@ -144,7 +144,7 @@ namespace STR_ADDONPERU_INSTALADOR
             validados = 0;
             faltantes = 0;
             totales = 0;
-
+            totalElementos = 0;
             //setControlTab();
         }
 
@@ -481,7 +481,7 @@ namespace STR_ADDONPERU_INSTALADOR
                             {
                                 lo_RecSet.DoQuery(ls_StrFile);
                                 validados++;
-                                string mensaje = $"Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
                                 lblDescription.Text = mensaje;
                                 Global.WriteToFile(mensaje);
                             }
@@ -580,7 +580,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             setControlTab();
             materialTabControl1.SelectedIndex = 2;
-            instalaComplementos("CCHE");
+            instalaComplementos("CCHHE");
         }
 
         private void btnInstLetra_Click(object sender, EventArgs e)

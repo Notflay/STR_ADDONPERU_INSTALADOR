@@ -36,8 +36,8 @@ BEGIN
         OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode
     LEFT JOIN 
         (SELECT DISTINCT T1.U_BPP_NUMSAP 
-         FROM BPP_PAGM_DET1 T1
-         INNER JOIN BPP_PAGM_CAB T2 ON T1.DocEntry = T2.DocEntry 
+         FROM [@BPP_PAGM_DET1] T1
+         INNER JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
          WHERE T2.U_BPP_ESTADO IN ('Cancelado', 'Creado', 'Procesado')
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
     WHERE 
