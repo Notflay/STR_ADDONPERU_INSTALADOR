@@ -621,6 +621,9 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_PARAMETROS_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_PROVEEDORES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
