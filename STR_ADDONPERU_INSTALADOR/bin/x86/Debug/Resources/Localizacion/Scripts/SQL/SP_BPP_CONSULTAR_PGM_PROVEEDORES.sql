@@ -26,19 +26,19 @@ BEGIN
         T4.LicTradNum AS RUC,
         T5.AcctName AS NombreBanco,
         T5.Account AS CuentaBanco,
-        'SOL' AS MonedaBanco,
+        T5.U_BPP_MONEDA AS MonedaBanco,
         T3.ObjType
     FROM 
         OPCH T3 
     INNER JOIN 
         OCRD T4 ON T3.CardCode = T4.CardCode
     LEFT JOIN 
-        OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode
+        OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
     LEFT JOIN 
         (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
          INNER JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
-         WHERE T2.U_BPP_ESTADO IN ('Cancelado', 'Creado', 'Procesado')
+         WHERE T2.U_BPP_ESTADO IN ('Cancelado', 'Procesado')
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
     WHERE 
         T3.TaxDate >= CASE WHEN @FECHAINI = '' THEN T3.TaxDate ELSE @FECHAINI END 

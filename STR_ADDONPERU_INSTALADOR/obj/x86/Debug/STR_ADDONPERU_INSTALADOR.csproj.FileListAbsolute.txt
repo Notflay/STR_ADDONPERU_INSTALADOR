@@ -235,6 +235,8 @@ C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADO
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.csproj.CopyComplete
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.pdb
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Sire\Scripts\HANA\STR_AV_Inicializa_Configuracion.sql
+C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Sire\Scripts\SQL\STR_AV_Inicializa_Configuracion.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Icons\hogar.png
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Icons\icons8-circular-peru-48.png
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Icons\icons8-cuota-50.png
@@ -333,6 +335,7 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\b
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_FACTURAS.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_PROVEEDORES.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_GENERAR_ASIENTO.sql
+C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_PARAMETROS_PGM.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_DetraccionesPagadas.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_DetraccionesXPagar.sql
@@ -344,9 +347,7 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\b
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtCodigoFormato.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtConfigLocaliz.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtCorrSunatTxtTipSer.sql
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtDetailData.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtFacturasPendientesAD.sql
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtHeaderData.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtLineaId.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtMoneda.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ObtNombreCuenta.sql
@@ -375,6 +376,7 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\b
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DETRACCIONES.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_APROBACIONES.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql
+C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_PARAMETROS_PGM.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_PROVEEDORES.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_GENERAR_ASIENTO.sql
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\STR_SP_ActualizaPagoDetraccion.sql
@@ -440,23 +442,15 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\b
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\RestSharp.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\STR_ADDONPERU_INSTALADOR.Util.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Buffers.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Configuration.ConfigurationManager.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Memory.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Numerics.Vectors.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.AccessControl.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Permissions.dll
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Principal.Windows.dll
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\STR_ADDONPERU_INSTALADOR.Util.pdb
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\RestSharp.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Buffers.xml
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Configuration.ConfigurationManager.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Memory.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Numerics.Vectors.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.AccessControl.xml
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Permissions.xml
-C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\System.Security.Principal.Windows.xml
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.csproj.AssemblyReference.cache
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.csproj.SuggestedBindingRedirects.cache
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\Interop.SAPbobsCOM.dll
@@ -470,5 +464,3 @@ C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\o
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.csproj.CopyComplete
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\DURBAY\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.pdb
-C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Sire\Scripts\HANA\STR_AV_Inicializa_Configuracion.sql
-C:\Users\Sebastian\source\repos\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Sire\Scripts\SQL\STR_AV_Inicializa_Configuracion.sql

@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>STR_ADDONPERU_INSTALADOR</RootNamespace>
     <AssemblyName>STR_ADDONPERU_INSTALADOR</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,7 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net48\MaterialSkin.dll</HintPath>
+      <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
@@ -495,6 +496,9 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GENERAR_ASIENTO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_PARAMETROS_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -528,13 +532,7 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtCorrSunatTxtTipSer.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtDetailData.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtFacturasPendientesAD.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtHeaderData.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtLineaId.sql">
@@ -756,12 +754,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Util\STR_ADDONPERU_INSTALADOR.Util.csproj">
-      <Project>{ba0d7916-a0c7-4867-a36a-b192ddd8af90}</Project>
-      <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="SAPbobsCOM">
       <Guid>{FC8030BE-F5D2-4B8E-8F92-44228FE30090}</Guid>
       <VersionMajor>9</VersionMajor>
@@ -781,6 +773,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Util\STR_ADDONPERU_INSTALADOR.Util.csproj">
+      <Project>{ba0d7916-a0c7-4867-a36a-b192ddd8af90}</Project>
+      <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
