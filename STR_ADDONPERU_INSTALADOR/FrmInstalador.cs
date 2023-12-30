@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Interop;
-using System.Xml;
-using MaterialSkin;
 using MaterialSkin.Controls;
 using SAPbobsCOM;
-using SAPbouiCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
-using System.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Security.Cryptography.X509Certificates;
 
 namespace STR_ADDONPERU_INSTALADOR
 {

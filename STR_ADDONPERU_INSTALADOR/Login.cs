@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
-using RestSharp.Serialization.Json;
 using SAPbobsCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
 
@@ -17,7 +9,6 @@ namespace STR_ADDONPERU_INSTALADOR
     public partial class Login : MaterialForm
     {
         private SAPbobsCOM.Company company = null;
-        private SAPbouiCOM.Application application = null;  
         private readonly MaterialSkin.MaterialSkinManager materialSkinManager;
         public Login()
         {
@@ -83,7 +74,8 @@ namespace STR_ADDONPERU_INSTALADOR
             }
 
         }
-        public BoDataServerTypes getTypeDB(string tipoDB) {
+        public BoDataServerTypes getTypeDB(string tipoDB)
+        {
 
             try
             {

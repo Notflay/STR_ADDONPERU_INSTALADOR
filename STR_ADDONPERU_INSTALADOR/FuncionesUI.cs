@@ -1,13 +1,5 @@
-﻿using MaterialSkin.Controls;
-using SAPbouiCOM;
-using STR_ADDONPERU_INSTALADOR.Util;
+﻿using SAPbouiCOM;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace STR_ADDONPERU_INSTALADOR
@@ -37,7 +29,8 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 return false;
             }
-            finally {
+            finally
+            {
                 sboApplication = null;
             }
         }
