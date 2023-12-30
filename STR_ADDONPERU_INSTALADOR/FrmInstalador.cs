@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ using MaterialSkin.Controls;
 using SAPbobsCOM;
 using SAPbouiCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
+using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace STR_ADDONPERU_INSTALADOR
@@ -28,6 +30,8 @@ namespace STR_ADDONPERU_INSTALADOR
         private MaterialButton btnInstalador;
         private MaterialLabel lblDescription;
         private SAPbobsCOM.Company company;
+        private SAPbobsCOM.Company companyRS;
+        private string addon;
         int validados = 0;
         int faltantes = 0;
         int totales = 0;
@@ -43,6 +47,7 @@ namespace STR_ADDONPERU_INSTALADOR
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green500, MaterialSkin.Primary.Green700, MaterialSkin.Primary.LightGreen100, MaterialSkin.Accent.Green700, MaterialSkin.TextShade.WHITE);
 
             this.company = company;
+            companyRS = company;
             lblNameDB.Text = "Conectado a " + company.CompanyDB;
             lblnameEar.Text = "Conectado a " + company.CompanyDB;
             lblnameLetr.Text = "Conectado a " + company.CompanyDB;
@@ -139,7 +144,6 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
 
             validados = 0;
             faltantes = 0;
@@ -242,73 +246,43 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public bool tableExis(string tabla)
         {
+            SAPbobsCOM.Recordset rs = companyRS.GetBusinessObject(BoObjectTypes.BoRecordset);
             try
-            {
-
-                SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-                rs.DoQuery($"SELECT TOP 1 * FROM \"{tabla}\"");
+            { 
+                rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
 
                 rs = null;
                 return true;
             }
             catch (Exception)
             {
+                rs = null;
                 return false;
             }
-
-            /*
-            int conteo = 0;
-
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(path);
-
-
-            XmlNodeList tableNodes = xdoc.SelectNodes("//UserTablesMD/row");
-            foreach (XmlNode tableNode in tableNodes)
-            {
-                try
-                {
-                    UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
-                    string tableName = tableNode.SelectSingleNode("TableName")?.InnerText;
-                    //string name = tableNode.SelectSingleNode("Name")?.InnerText;
-
-                    SAPbobsCOM.Recordset recorset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-                    recorset.DoQuery($"SELECT TOP 1 * FROM {tableName}");
-                    if (recorset.Fields.Item(0).Value > 0)
-                    {
-
-                    }
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-            }
-            */
         }
 
         public bool columnExis(string campo, string tabla)
         {
+            SAPbobsCOM.Recordset rs = companyRS.GetBusinessObject(BoObjectTypes.BoRecordset);
+
             try
             {
 
-                SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-                rs.DoQuery($"SELECT TOP 1 \"{campo}\" FROM \"{tabla}\"");
+                rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
 
                 rs = null;
                 return true;
             }
             catch (Exception)
             {
+                rs = null;
                 return false;
             }
         }
 
         public void instalaComplementos(string addon)
         {
-            createElements(addon);
+            CreateElements(addon);
 
             if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
@@ -334,113 +308,190 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void createElements(string addon)
+        private void CreateElements(string addon)
         {
+            this.addon = addon;
             SAPbobsCOM.Company companyAux = null;
+            SAPbobsCOM.Company companyAux2 = null;
             string pathFile = string.Empty;
-            int cntElementos = 0;
             int cntErrores = 0;
             int cntExistentes = 0;
-            /*
-            UserObjectsMD userObjectsMD = null;
-            userObjectsMD.*/
+
             try
             {
                 companyAux = this.company;
                 string[] elements = { "UT", "UF", "UO" };
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                elements.ToList().ForEach(e =>
+
+                foreach (var elementType in elements)
                 {
-                    var tipoElemento = (e.Equals("UT") ? " Tabla " : e.Equals("UT") ? "Objeto " : "Campo");
                     Cursor.Current = Cursors.WaitCursor;
+                    pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{elementType}.vte";
 
-                    pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
+                    if (!File.Exists(pathFile))
+                        throw new FileNotFoundException();
 
-
-                    if (!File.Exists(pathFile)) throw new FileNotFoundException();
-                    cntElementos = companyAux.GetXMLelementCount(pathFile);
-                    for (int i = 0; i < cntElementos; i++)
-                    {
-                        dynamic elementoMD = null;
-                        try
-                        {
-                            elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                            string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                            lblDescription.Text = mensaje;
-                            string nameElemento = e == "UT" ? elementoMD.TableName : e == "UF" ? elementoMD.Name : elementoMD.Code;
-
-                            bool exist;
-
-                            exist = e == "UT" ? tableExis(elementoMD.TableName) : e == "UF" ? columnExis(elementoMD.Name, elementoMD.TableName) : false;
-
-                            if (!exist)
-                            {
-                                if (elementoMD.Add() != 0)
-                                {
-                                    companyAux.GetLastError(out int codigoErr, out string descripErr);
-                                    if (codigoErr != -2035 && codigoErr != -5002)
-                                    {
-                                        cntErrores++;
-                                        validados--;
-                                        Global.WriteToFile($"{addon}: ERROR al instalar complemento - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
-                                    }
-                                    else if (codigoErr == -2035)
-                                    {
-                                        string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                                        lblDescription.Text = msj;
-                                        cntExistentes++;
-                                        Global.WriteToFile(msj);
-                                    }
-                                }
-                                validados++;
-                                sbCargaConteo();
-                            }
-                            else
-                            {
-                                string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                                lblDescription.Text = msj;
-                                cntExistentes++;
-                                Global.WriteToFile(msj);
-                                validados++;
-                                sbCargaConteo();
-                            }
-                            System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
-                            GC.Collect();
-                        }
-                        catch (Exception ex)
-                        {
-                            //sboApplication.statusBarErrorMsg(ex.Message);
-                            Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
-
-                        }
-                        finally
-                        {
-
-                            elementoMD = null;
-
-                        }
-                    }
-                    //if (cntErrores == 0) sboApplication.statusBarSuccessMsg($"{tipoElemento} de usuario creados correctamente");
-                    Cursor.Current = Cursors.Default;
-                });
+                    ProcessElementsOfType(elementType, pathFile, ref cntErrores, ref cntExistentes);
+                }
             }
-            catch { throw; }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones general
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             finally
             {
-                if (validados == totalElementos)
-                {
-                    if (validados - cntExistentes == 0)
-                        MessageBox.Show($"Se valido que ya existen todos los {validados} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show($"Se crearon {validados - cntExistentes} {(cntExistentes > 0 ? $"y se validaron {cntExistentes} ya existentes" : "")} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show($"No se llegaron a crear todos los complementos, se tuvo {cntErrores} errores, solo se llegaron a crear {validados - cntExistentes} complementos para el Addin. Revisar en Logs mas detalle", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
+                DisplayFinalMessage(cntErrores, cntExistentes);
                 lblDescription.Text = "";
+            }
+        }
+
+                        private void ProcessElementsOfType(string elementType, string pathFile, ref int cntErrores, ref int cntExistentes)
+                        {
+                            SAPbobsCOM.Company companyAux = this.company;
+
+                            int cntElementos = companyAux.GetXMLelementCount(pathFile);
+
+                            for (int i = 0; i < cntElementos; i++)
+                            {
+                                dynamic elementMD = null;
+
+                                try
+                                {
+                                    elementMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+                                    string message = $"Creando {GetElementTypeDescription(elementType)} {(elementType.Equals("UT") || elementType.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
+                                    lblDescription.Text = message;
+
+                                    string nameElement = elementType == "UT" ? elementMD.TableName : elementType == "UF" ? elementMD.Name : elementMD.Code;
+
+                                    bool exists = elementType == "UT" ? tableExis(elementMD.TableName) : elementType == "UF" ? columnExis(elementMD.Name, elementMD.TableName) : false;
+
+                                    if (!exists)
+                                    {
+                                        ProcessNewElement(elementType, elementMD, pathFile, ref cntErrores, ref cntExistentes, i);
+                                    }
+                                    else
+                                    {
+                                        HandleExistingElement(elementType, elementMD, null, ref cntExistentes);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    // Manejo de excepciones específico para este proceso
+                                    Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
+                                }
+                                finally
+                                {
+                                    CleanUpObjects(ref elementMD);
+                                }
+                            }
+                        }
+        private void HandleExistingElement(string elementType, dynamic elementMD, dynamic elementMD2, ref int cntExistentes)
+        {
+            string message = $"{addon}: Ya existe en SAP complemento {GetElementTypeDescription(elementType)} {GetNameElement(elementType, elementMD, elementMD2)}";
+            lblDescription.Text = message;
+            cntExistentes++;
+            Global.WriteToFile(message);
+            validados++;
+            sbCargaConteo();
+        }
+
+        private void ProcessNewElement(string elementType, dynamic elementMD, string pathFile, ref int cntErrores, ref int cntExistentes, int num)
+        {
+            SAPbobsCOM.Company companyAux2 = this.company;
+            dynamic elementMD2 = companyAux2.GetBusinessObjectFromXML(pathFile, num);
+
+            //CleanUpObjects(ref elementMD2);
+            Thread.Sleep(2000);
+            if (elementMD2.Add() != 0)
+            {
+                HandleAddError(elementType, elementMD, elementMD2, ref cntErrores, ref cntExistentes);
+            }
+            else
+            {
+                HandleAddSuccess(elementType, elementMD2);
+            }
+
+            CleanUpObjects(ref elementMD2);
+        }
+        private void CleanUpObjects(ref dynamic obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                obj = null;
+            }
+        }
+        private void HandleAddError(string elementType, dynamic elementMD, dynamic elementMD2, ref int cntErrores, ref int cntExistentes)
+        {
+            SAPbobsCOM.Company companyAux = this.company;
+            companyAux.GetLastError(out int errorCode, out string errorDescription);
+
+            if (errorCode != -2035 && errorCode != -5002)
+            {
+                cntErrores++;
+                validados--;
+                Global.WriteToFile($"{addon}: ERROR al instalar complemento - {GetElementTypeDescription(elementType)} {GetNameElement(elementType, elementMD, elementMD2)} - {errorCode} - {errorDescription}");
+            }
+            else
+            {
+                string message = $"{addon}: Ya existe en SAP complemento {GetElementTypeDescription(elementType)} {GetNameElement(elementType, elementMD, elementMD2)}";
+                lblDescription.Text = message;
+                cntExistentes++;
+                Global.WriteToFile(message);
+            }
+        }
+
+        private void HandleAddSuccess(string elementType, dynamic elementMD)
+        {
+            string message = $"{addon}: Se creó en SAP complemento {GetElementTypeDescription(elementType)} {GetNameElement(elementType, elementMD)}";
+            lblDescription.Text = message;
+            Global.WriteToFile(message);
+            validados++;
+            sbCargaConteo();
+        }
+
+        private string GetElementTypeDescription(string elementType)
+        {
+            return elementType.Equals("UT") ? "Tabla" : elementType.Equals("UF") ? "Campo" : "Objeto";
+        }
+
+        private string GetNameElement(string elementType, dynamic elementMD, dynamic elementMD2 = null)
+        {
+            if (elementType == "UT")
+            {
+                return elementMD2 != null ? elementMD2.TableName : elementMD.TableName;
+            }
+            else if (elementType == "UF")
+            {
+                return elementMD2 != null ? elementMD2.Name : elementMD.Name;
+            }
+            else
+            {
+                return elementMD2 != null ? elementMD2.Code : elementMD.Code;
+            }
+        }
+
+        
+        private void DisplayFinalMessage(int cntErrores, int cntExistentes)
+        {
+            if (validados == totalElementos)
+            {
+                if (validados - cntExistentes == 0)
+                    MessageBox.Show($"Se validó que ya existen todos los {validados} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show($"Se crearon {validados - cntExistentes} {(cntExistentes > 0 ? $"y se validaron {cntExistentes} ya existentes" : "")} complementos para el Addin", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"No se llegaron a crear todos los complementos, se tuvo {cntErrores} errores, solo se llegaron a crear {validados - cntExistentes} complementos para el Addin. Revisar en Logs mas detalle", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

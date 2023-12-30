@@ -41,7 +41,7 @@ AS
 	V22 INTEGER;
 	
 BEGIN
-	
+	DELETE FROM "@ST_LT_CONF";
 	/****************************************************** 
 	se cargan las variable con los valores correspondientes
 	*******************************************************/

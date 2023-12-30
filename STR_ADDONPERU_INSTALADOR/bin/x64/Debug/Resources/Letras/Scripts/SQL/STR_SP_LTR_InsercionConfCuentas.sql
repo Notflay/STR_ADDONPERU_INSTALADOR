@@ -1,5 +1,6 @@
 CREATE PROCEDURE STR_SP_LTR_InsercionConfCuentas
 AS
+DELETE FROM  [@ST_LT_CONF]
 if not exists (select 'e' from [@ST_LT_CONF] where Code='00000001')
 begin
 insert into [@ST_LT_CONF] values ('00000001',	'00000001',	'Porte', NULL, NULL, NULL)
