@@ -240,24 +240,69 @@ namespace STR_ADDONPERU_INSTALADOR
 
         }
 
-        public void sbConteoColumnas(string addon)
+        public bool tableExis(string tabla)
         {
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            try
+            {
+
+                SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+                rs.DoQuery($"SELECT TOP 1 * FROM \"{tabla}\"");
+
+                rs = null;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            /*
+            int conteo = 0;
+
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(path);
 
 
-            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserFieldsMD/row");
-            foreach (XmlNode tableNameNode in tableNameNodes)
+            XmlNodeList tableNodes = xdoc.SelectNodes("//UserTablesMD/row");
+            foreach (XmlNode tableNode in tableNodes)
             {
-                UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
-                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
-                string name = tableNameNode.SelectSingleNode("Name")?.InnerText;
-                /*
-                for (int i = 0; i < userFieldsMD.Fields.C; i++)
+                try
+                {
+                    UserFieldsMD userFieldsMD = (UserFieldsMD)company.GetBusinessObject(BoObjectTypes.oUserFields);
+                    string tableName = tableNode.SelectSingleNode("TableName")?.InnerText;
+                    //string name = tableNode.SelectSingleNode("Name")?.InnerText;
+
+                    SAPbobsCOM.Recordset recorset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+                    recorset.DoQuery($"SELECT TOP 1 * FROM {tableName}");
+                    if (recorset.Fields.Item(0).Value > 0)
+                    {
+
+                    }
+                }
+                catch (Exception)
                 {
 
-                }*/
+                    throw;
+                }
+            }
+            */
+        }
+
+        public bool columnExis(string campo, string tabla)
+        {
+            try
+            {
+
+                SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+                rs.DoQuery($"SELECT TOP 1 \"{campo}\" FROM \"{tabla}\"");
+
+                rs = null;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -325,31 +370,41 @@ namespace STR_ADDONPERU_INSTALADOR
                             lblDescription.Text = mensaje;
                             string nameElemento = e == "UT" ? elementoMD.TableName : e == "UF" ? elementoMD.Name : elementoMD.Code;
 
-                            if (elementoMD.Add() != 0)
+                            bool exist;
+
+                            exist = e == "UT" ? tableExis(elementoMD.TableName) : e == "UF" ? columnExis(elementoMD.Name, elementoMD.TableName) : false;
+
+                            if (!exist)
                             {
-                                companyAux.GetLastError(out int codigoErr, out string descripErr);
-                                if (codigoErr != -2035 && codigoErr != -5002)
+                                if (elementoMD.Add() != 0)
                                 {
-                                    cntErrores++;
-                                    validados--;
-                                    Global.WriteToFile($"{addon}: ERROR al instalar complemento - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
+                                    companyAux.GetLastError(out int codigoErr, out string descripErr);
+                                    if (codigoErr != -2035 && codigoErr != -5002)
+                                    {
+                                        cntErrores++;
+                                        validados--;
+                                        Global.WriteToFile($"{addon}: ERROR al instalar complemento - {tipoElemento} {nameElemento} - {codigoErr} - {descripErr}");
+                                    }
+                                    else if (codigoErr == -2035)
+                                    {
+                                        string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                                        lblDescription.Text = msj;
+                                        cntExistentes++;
+                                        Global.WriteToFile(msj);
+                                    }
                                 }
-                                else if (codigoErr == -2035)
-                                {
-                                    string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                                    lblDescription.Text = msj;
-                                    cntExistentes++;
-                                    Global.WriteToFile(msj);
-                                }
+                                validados++;
+                                sbCargaConteo();
                             }
                             else
                             {
-                                string msj = $"{addon}: Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                                Global.WriteToFile(msj);
+                                string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(e.Equals("UT") | e.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                                 lblDescription.Text = msj;
+                                cntExistentes++;
+                                Global.WriteToFile(msj);
+                                validados++;
+                                sbCargaConteo();
                             }
-                            validados++;
-                            sbCargaConteo();
                             System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
                             GC.Collect();
                         }
@@ -559,9 +614,10 @@ namespace STR_ADDONPERU_INSTALADOR
                 }
 
             }
-            else if (addon == "SIRE") {
+            else if (addon == "SIRE")
+            {
                 if (company.DbServerType == BoDataServerTypes.dst_HANADB)
-                    recordset.DoQuery("CALL STR_SIRE_InicializarConfiguracion");                
+                    recordset.DoQuery("CALL STR_SIRE_InicializarConfiguracion");
                 else
                     recordset.DoQuery("EXEC STR_SIRE_InicializarConfiguracion");
             }
