@@ -19,6 +19,7 @@ using SAPbouiCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Security.Cryptography.X509Certificates;
 
 namespace STR_ADDONPERU_INSTALADOR
 {
@@ -248,7 +249,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             SAPbobsCOM.Recordset rs = companyRS.GetBusinessObject(BoObjectTypes.BoRecordset);
             try
-            { 
+            {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
 
                 rs = null;
@@ -347,46 +348,77 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-                        private void ProcessElementsOfType(string elementType, string pathFile, ref int cntErrores, ref int cntExistentes)
-                        {
-                            SAPbobsCOM.Company companyAux = this.company;
+        private void ValidExisElements(string elementType, string pathFile, ref List<int> ints, ref int cntExistentes)
+        {
+            SAPbobsCOM.Company companyAux = company;
+            try
+            {
 
-                            int cntElementos = companyAux.GetXMLelementCount(pathFile);
+                int cntElementos = companyAux.GetXMLelementCount(pathFile);
+                for (int i = 0; i < cntElementos; i++)
+                {
+                    dynamic elemntMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
 
-                            for (int i = 0; i < cntElementos; i++)
-                            {
-                                dynamic elementMD = null;
+                    bool exists = elementType == "UT" ? tableExis(elemntMD.TableName) : elementType == "UF" ? columnExis(elemntMD.TableName, elemntMD.TableName) : false;
 
-                                try
-                                {
-                                    elementMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                                    string message = $"Creando {GetElementTypeDescription(elementType)} {(elementType.Equals("UT") || elementType.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
-                                    lblDescription.Text = message;
+                    if (!exists)
+                        ints.Add(i);
+                    else
+                    {
+                        string message = $"{addon}: Ya existe en SAP complemento {GetElementTypeDescription(elementType)}";
+                        lblDescription.Text = message;
+                        cntExistentes++;
+                        Global.WriteToFile(message);
+                        validados++;
+                        sbCargaConteo();
+                        CleanUpObjects(elemntMD);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
 
-                                    string nameElement = elementType == "UT" ? elementMD.TableName : elementType == "UF" ? elementMD.Name : elementMD.Code;
+                Global.WriteToFile(e.Message);
+            }
+            finally
+            {
 
-                                    bool exists = elementType == "UT" ? tableExis(elementMD.TableName) : elementType == "UF" ? columnExis(elementMD.Name, elementMD.TableName) : false;
+                companyAux = null;
+            }
+        }
 
-                                    if (!exists)
-                                    {
-                                        ProcessNewElement(elementType, elementMD, pathFile, ref cntErrores, ref cntExistentes, i);
-                                    }
-                                    else
-                                    {
-                                        HandleExistingElement(elementType, elementMD, null, ref cntExistentes);
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    // Manejo de excepciones específico para este proceso
-                                    Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
-                                }
-                                finally
-                                {
-                                    CleanUpObjects(ref elementMD);
-                                }
-                            }
-                        }
+        private void ProcessElementsOfType(string elementType, string pathFile, ref int cntErrores, ref int cntExistentes)
+        {
+            List<int> invalidados = new List<int>();
+            SAPbobsCOM.Company companyAux = this.company;
+
+            ValidExisElements(elementType, pathFile, ref invalidados, ref cntExistentes);
+
+            for (int i = 0; i < invalidados.Count; i++)
+            {
+                dynamic elementMD = null;
+
+                try
+                {
+                    elementMD = companyAux.GetBusinessObjectFromXML(pathFile, invalidados[i]);
+                    string message = $"Creando {GetElementTypeDescription(elementType)} {(elementType.Equals("UT") || elementType.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
+                    lblDescription.Text = message;
+
+                    string nameElement = elementType == "UT" ? elementMD.TableName : elementType == "UF" ? elementMD.Name : elementMD.Code;
+                    ProcessNewElement(elementType, elementMD, pathFile, ref cntErrores, ref cntExistentes, i);
+
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones específico para este proceso
+                    Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
+                }
+                finally
+                {
+                    CleanUpObjects(ref elementMD);
+                }
+            }
+        }
         private void HandleExistingElement(string elementType, dynamic elementMD, dynamic elementMD2, ref int cntExistentes)
         {
             string message = $"{addon}: Ya existe en SAP complemento {GetElementTypeDescription(elementType)} {GetNameElement(elementType, elementMD, elementMD2)}";
@@ -399,21 +431,32 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void ProcessNewElement(string elementType, dynamic elementMD, string pathFile, ref int cntErrores, ref int cntExistentes, int num)
         {
-            SAPbobsCOM.Company companyAux2 = this.company;
-            dynamic elementMD2 = companyAux2.GetBusinessObjectFromXML(pathFile, num);
-
-            //CleanUpObjects(ref elementMD2);
-            Thread.Sleep(2000);
-            if (elementMD2.Add() != 0)
+            try
             {
-                HandleAddError(elementType, elementMD, elementMD2, ref cntErrores, ref cntExistentes);
-            }
-            else
-            {
-                HandleAddSuccess(elementType, elementMD2);
-            }
+                dynamic elementMD2 = null;
+                SAPbobsCOM.Company companyAux2 = this.company;
+                elementMD2 = companyAux2.GetBusinessObjectFromXML(pathFile, num);
 
-            CleanUpObjects(ref elementMD2);
+                //CleanUpObjects(ref elementMD2);
+                //Thread.Sleep(2000);
+                if (elementMD2.Add() != 0)
+                {
+                    HandleAddError(elementType, elementMD, elementMD2, ref cntErrores, ref cntExistentes);
+                }
+                else
+                {
+                    HandleAddSuccess(elementType, elementMD2);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                // CleanUpObjects(ref elementMD2);
+            }
         }
         private void CleanUpObjects(ref dynamic obj)
         {
@@ -479,7 +522,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        
+
         private void DisplayFinalMessage(int cntErrores, int cntExistentes)
         {
             if (validados == totalElementos)
