@@ -359,13 +359,13 @@ namespace STR_ADDONPERU_INSTALADOR
                 {
                     dynamic elemntMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
 
-                    bool exists = elementType == "UT" ? tableExis(elemntMD.TableName) : elementType == "UF" ? columnExis(elemntMD.TableName, elemntMD.TableName) : false;
+                    bool exists = elementType == "UT" ? tableExis(elemntMD.TableName) : elementType == "UF" ? columnExis(elemntMD.Name, elemntMD.TableName) : false;
 
                     if (!exists)
                         ints.Add(i);
                     else
                     {
-                        string message = $"{addon}: Ya existe en SAP complemento {GetElementTypeDescription(elementType)}";
+                        string message = $"{addon}: Elemento en SAP complemento {(elementType == "UF" ? elemntMD.Name + "de la tabla " + elemntMD.TableName : elemntMD.TableName)} ya existente";
                         lblDescription.Text = message;
                         cntExistentes++;
                         Global.WriteToFile(message);
