@@ -326,7 +326,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
                     InsertElementosProcess(pathFile, e, ref elemtsProcesar);
 
-                    ProcessElementsOfType(pathFile, e, ref cntElementos, ref cntErrores, ref cntExistentes);
+                    ProcessElementsOfType(pathFile, e, ref cntElementos, ref cntErrores, ref cntExistentes, elemtsProcesar);
                 });
             }
             catch { throw; }
@@ -372,19 +372,19 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void ProcessElementsOfType(string pathFile, string element, ref int cntElementos, ref int cntErrores, ref int cntExistentes)
+        private void ProcessElementsOfType(string pathFile, string element, ref int cntElementos, ref int cntErrores, ref int cntExistentes, List<int> elemtsProcesar)
         {
             SAPbobsCOM.Company companyAux = null;
             companyAux = this.company;
 
-            cntElementos = company.GetXMLelementCount(pathFile);
-            for (int i = 0; i < cntElementos; i++)
+            // cntElementos = company.GetXMLelementCount(pathFile);
+            for (int i = 0; i < elemtsProcesar.Count; i++)
             {
                 dynamic elementoMD = null;
                 try
                 {
                     string tipoElemento = GetElementTypeDescription(element);
-                    elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+                    elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
                     string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                     lblDescription.Text = mensaje;
 
