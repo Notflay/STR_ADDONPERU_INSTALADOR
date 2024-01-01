@@ -325,6 +325,9 @@ namespace STR_ADDONPERU_INSTALADOR
 
                     InsertElementosProcess(pathFile, e, ref elemtsProcesar);
 
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+
                     ProcessElementsOfType(pathFile, e, ref cntErrores, ref cntExistentes, ref elemtsProcesar);
                 });
             }
