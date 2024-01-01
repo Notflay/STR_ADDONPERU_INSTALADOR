@@ -747,8 +747,9 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             string SLDServer = company.SLDServer;
             string protocol = "https";
+            string controll = "ExtensionManager";
 
-            string link = $"{protocol}://{SLDServer}";
+            string link = $"{protocol}://{SLDServer}/{controll}";
 
             Process.Start(link);
         }
