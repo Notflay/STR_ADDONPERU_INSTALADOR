@@ -339,7 +339,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 dynamic elementoMD = null;
                 try
                 {
-                    var tipoElemento = GetElementTypeDescription(element);
+                    string tipoElemento = GetElementTypeDescription(element);
                     elementoMD = company.GetBusinessObjectFromXML(pathFile, i);
                     string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                     lblDescription.Text = mensaje;
@@ -379,7 +379,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void ProcessNewElement(ref dynamic elementoMD, string element, string tipoElemento, ref int cntErrores, ref int cntExistentes)
+        private void ProcessNewElement(dynamic elementoMD, string element, string tipoElemento, ref int cntErrores, ref int cntExistentes)
         {
 
             if (elementoMD.Add() == 0)
