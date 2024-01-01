@@ -203,43 +203,14 @@ namespace STR_ADDONPERU_INSTALADOR
             return valorFinal;
         }
 
-        public void sbConteoCargaInit(string addon)
-        {
-            string[] lo_ArrFiles = null;
-
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
-            totales += company.GetXMLelementCount(path);
-            totalElementos += company.GetXMLelementCount(path);
-
-            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
-            totales += company.GetXMLelementCount(path);
-            totalElementos += company.GetXMLelementCount(path);
-
-            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
-            totales += company.GetXMLelementCount(path);
-            totalElementos += company.GetXMLelementCount(path);
-
-            string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{addon}";
-
-            if (company.DbServerType == BoDataServerTypes.dst_HANADB)
-            {
-                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\HANA\", "*.sql");
-            }
-            else
-            {
-                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\SQL\", "*.sql");
-            }
-
-            totales += lo_ArrFiles.Count();
-
-        }
-
-        public bool tableExis(string tabla)
+        public bool tableExis(string tabla, string element, dynamic elementMD)
         {
             SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
             try
             {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
+                string tipoElement = GetElementTypeDescription(element);
+                HandleAddSuccess(element, tipoElement, elementMD);
                 return true;
             }
             catch (Exception)
@@ -253,7 +224,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        public bool columnExis(string campo, string tabla)
+        public bool columnExis(string campo, string tabla, string element, dynamic elementMD)
         {
             SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
 
@@ -261,6 +232,8 @@ namespace STR_ADDONPERU_INSTALADOR
             {
 
                 rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
+                string tipoElement = GetElementTypeDescription(element);
+                HandleAddSuccess(element, tipoElement, elementMD);
                 return true;
             }
             catch (Exception)
@@ -323,7 +296,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
                     if (!File.Exists(pathFile)) throw new FileNotFoundException();
 
-                    InsertElementosProcess(pathFile, e, ref elemtsProcesar);
+                    InsertElementosProcess(pathFile, e, ref elemtsProcesar, e);
 
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
@@ -339,7 +312,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar)
+        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar, string element)
         {
             SAPbobsCOM.Company companyAux = null;
             companyAux = this.company;
@@ -351,9 +324,9 @@ namespace STR_ADDONPERU_INSTALADOR
                     dynamic elemtoMD = null;
                     try
                     {
-
                         elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                        bool exis = e == "UT" ? tableExis(elemtoMD.TableName) : e == "UF" ? columnExis(elemtoMD.Name, elemtoMD.TableName) : false;
+                        bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD) : e == "UF" ?
+                            columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD) : false;
                         if (!exis) elemtsProcesar.Add(i);
 
                     }
@@ -371,6 +344,35 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 companyAux = null;
             }
+        }
+        public void sbConteoCargaInit(string addon)
+        {
+            string[] lo_ArrFiles = null;
+
+            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
+            totales += company.GetXMLelementCount(path);
+            totalElementos += company.GetXMLelementCount(path);
+
+            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UF.vte";
+            totales += company.GetXMLelementCount(path);
+            totalElementos += company.GetXMLelementCount(path);
+
+            path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UO.vte";
+            totales += company.GetXMLelementCount(path);
+            totalElementos += company.GetXMLelementCount(path);
+
+            string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{addon}";
+
+            if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+            {
+                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\HANA\", "*.sql");
+            }
+            else
+            {
+                lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Scripts\SQL\", "*.sql");
+            }
+
+            totales += lo_ArrFiles.Count();
         }
 
         private void ProcessElementsOfType(string pathFile, string element, ref int cntErrores, ref int cntExistentes, ref List<int> elemtsProcesar)
