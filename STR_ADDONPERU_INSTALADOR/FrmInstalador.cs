@@ -305,7 +305,7 @@ namespace STR_ADDONPERU_INSTALADOR
         private void CreateElementsNew(string addon)
         {
             string pathFile = string.Empty;
-            int cntElementos = 0;
+
             int cntErrores = 0;
             int cntExistentes = 0;
             List<int> elemtsProcesar = new List<int>();
@@ -325,7 +325,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
                     InsertElementosProcess(pathFile, e, ref elemtsProcesar);
 
-                    ProcessElementsOfType(pathFile, e, ref cntElementos, ref cntErrores, ref cntExistentes, ref elemtsProcesar);
+                    ProcessElementsOfType(pathFile, e, ref cntErrores, ref cntExistentes, ref elemtsProcesar);
                 });
             }
             catch { throw; }
@@ -370,14 +370,15 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void ProcessElementsOfType(string pathFile, string element, ref int cntElementos, ref int cntErrores, ref int cntExistentes, ref List<int> elemtsProcesar)
+        private void ProcessElementsOfType(string pathFile, string element, ref int cntErrores, ref int cntExistentes, ref List<int> elemtsProcesar)
         {
             SAPbobsCOM.Company companyAux = null;
+            int cntElementos = 0;
             companyAux = this.company;
 
             try
             {
-                // cntElementos = company.GetXMLelementCount(pathFile);
+                cntElementos = company.GetXMLelementCount(pathFile);
                 for (int i = 0; i < cntElementos; i++)
                 //for (int i = 0; i < elemtsProcesar.Count; i++)
                 {
