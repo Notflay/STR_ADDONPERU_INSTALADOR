@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using MaterialSkin.Controls;
@@ -23,6 +25,7 @@ namespace STR_ADDONPERU_INSTALADOR
         private SAPbobsCOM.Company company;
         private SAPbobsCOM.Company companyRS;
         private string addon;
+        private bool isRunning = false;
         int validados = 0;
         int faltantes = 0;
         int totales = 0;
@@ -121,10 +124,62 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            setControlTab();
-            materialTabControl1.SelectedIndex = 0;
-            instalaComplementos("Localizacion");
+            ValidaBtn(0, "Localizacion");
 
+        }
+        private void btnInstSire_Click(object sender, EventArgs e)
+        {
+            ValidaBtn(1, "SIRE");
+        }
+
+        private void btnInstEar_Click(object sender, EventArgs e)
+        {
+            ValidaBtn(2, "CCHHE");
+        }
+
+        private void btnInstLetra_Click(object sender, EventArgs e)
+        {
+            ValidaBtn(3, "Letras");
+        }
+
+        private void ValidaBtn(int posiAdd, string addon)
+        {
+            if (isRunning)
+                StopLoading();
+            else
+            {
+                setControlTab();
+                materialTabControl1.SelectedIndex = posiAdd;
+                StartLoading(addon);
+            }
+        }
+
+        private void StopLoading()
+        {
+            isRunning = false;
+            // Puedes realizar acciones adicionales de limpieza si es necesario
+
+            // Restablece la apariencia del botón
+            btnInstalador.Text = "Instalar Complementos";
+        }
+
+        private void StartLoading(string addon)
+        {
+            isRunning = true;
+            btnInstalador.Text = "Detener instalación";
+
+            // Usa un hilo separado para realizar la carga y mantener la interfaz de usuario receptiva
+            Task.Run(() =>
+            {
+                instalaComplementos(addon);
+
+                // La carga ha terminado, restablece la bandera
+                isRunning = false;
+                btnInstalador.Invoke((MethodInvoker)delegate
+                {
+                    btnInstalador.Text = "Instalar Complementos";
+                });
+            });
         }
 
         private void materialButton11_Click_1(object sender, EventArgs e)
@@ -248,18 +303,26 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public void instalaComplementos(string addon)
         {
-            this.addon = addon;
-            CreateElementsNew(addon);
-
-            if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            try
             {
-                fn_createProcedures(addon);
+                this.addon = addon;
+                CreateElementsNew(addon);
 
-                if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
+                if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    fn_createProcedures(addon);
+
+                    if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
                     {
-                        fn_inicializacion(addon);
+                        if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        {
+                            fn_inicializacion(addon);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                        }
                     }
                     else
                     {
@@ -269,9 +332,20 @@ namespace STR_ADDONPERU_INSTALADOR
                 }
                 else
                 {
-                    MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                    MessageBox.Show("Se terminó con la creación de los campos y tablas", "Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                validados = 0;
+                faltantes = 0;
+                totales = 0;
+                totalElementos = 0;
             }
         }
 
@@ -291,17 +365,19 @@ namespace STR_ADDONPERU_INSTALADOR
                 GC.WaitForPendingFinalizers();
                 elements.ToList().ForEach(e =>
                 {
+                    if (isRunning)
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
+                        if (!File.Exists(pathFile)) throw new FileNotFoundException();
 
-                    Cursor.Current = Cursors.WaitCursor;
-                    pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
-                    if (!File.Exists(pathFile)) throw new FileNotFoundException();
+                        InsertElementosProcess(pathFile, e, ref elemtsProcesar, e);
 
-                    InsertElementosProcess(pathFile, e, ref elemtsProcesar, e);
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
 
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-
-                    ProcessElementsOfType(pathFile, e, ref cntErrores, ref cntExistentes, ref elemtsProcesar);
+                        ProcessElementsOfType(pathFile, e, ref cntErrores, ref cntExistentes, ref elemtsProcesar);
+                    }
                 });
             }
             catch { throw; }
@@ -321,22 +397,25 @@ namespace STR_ADDONPERU_INSTALADOR
                 int cntElementos = companyAux.GetXMLelementCount(pathFile);
                 for (int i = 0; i < cntElementos; i++)
                 {
-                    dynamic elemtoMD = null;
-                    try
+                    if (isRunning)
                     {
-                        elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                        bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD) : e == "UF" ?
-                            columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD) : false;
-                        if (!exis) elemtsProcesar.Add(i);
+                        dynamic elemtoMD = null;
+                        try
+                        {
+                            elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+                            bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD) : e == "UF" ?
+                                columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD) : false;
+                            if (!exis) elemtsProcesar.Add(i);
 
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    finally
-                    {
-                        elemtoMD = null;
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                        finally
+                        {
+                            elemtoMD = null;
+                        }
                     }
                 }
             }
@@ -514,75 +593,78 @@ namespace STR_ADDONPERU_INSTALADOR
                 for (int i = 0; i < lo_ArrFiles.GetUpperBound(0) + 1; i++)
                 {
 
-                    lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
-                    ls_StrFile = lo_StrmRdr.ReadToEnd();
-                    lo_ArrTpoScrpt = ls_StrFile.Substring(0, 50).Split(new char[] { ' ' });
-                    ls_NmbFile = System.IO.Path.GetFileName(lo_ArrFiles[i]);
-                    ls_NmbFile = ls_NmbFile.Substring(0, ls_NmbFile.Length - 4);
+                    if (isRunning)
+                    {
+                        lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
+                        ls_StrFile = lo_StrmRdr.ReadToEnd();
+                        lo_ArrTpoScrpt = ls_StrFile.Substring(0, 50).Split(new char[] { ' ' });
+                        ls_NmbFile = System.IO.Path.GetFileName(lo_ArrFiles[i]);
+                        ls_NmbFile = ls_NmbFile.Substring(0, ls_NmbFile.Length - 4);
 
-                    if (lo_ArrTpoScrpt[1].Trim() == "PROCEDURE")
-                    {
-                        ls_Tipo = "el procedimiento ";
-                        ls_TipoSQL = "= 'P'";
-                    }
-                    else if (lo_ArrTpoScrpt[1].Trim() == "VIEW")
-                    {
-                        ls_Tipo = "la vista ";
-                        ls_TipoSQL = "= 'V'";
-                    }
-                    else if (lo_ArrTpoScrpt[1].Trim() == "FUNCTION")
-                    {
-                        ls_Tipo = "la funcion ";
-                        ls_TipoSQL = "in (N'FN', N'IF', N'TF', N'FS', N'FT')";
-                    }
-                    if (company.DbServerType == BoDataServerTypes.dst_HANADB)
-                    {
-                        ls_Qry = @"SELECT COUNT('A') FROM ""SYS"".""OBJECTS"" WHERE ""OBJECT_NAME"" ='" + ls_NmbFile.Trim().ToUpper() + @"' AND ""SCHEMA_NAME"" = '" + company.CompanyDB + "'";
-                    }
-                    else
-                    {
-                        ls_Qry = @"SELECT COUNT(*) FROM sys.all_objects WHERE type " + ls_TipoSQL + " and name = '" + ls_NmbFile.Trim().ToUpper() + "'";
-                    }
-
-                    lo_RecSet.DoQuery(ls_Qry);
-                    if (!lo_RecSet.EoF)
-                    {
-                        if (Convert.ToInt32(lo_RecSet.Fields.Item(0).Value) != 0)
+                        if (lo_ArrTpoScrpt[1].Trim() == "PROCEDURE")
                         {
-                            try
-                            {
-                                ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
-                                lo_RecSet.DoQuery(ls_Qry);
-                                lo_RecSet.DoQuery(ls_StrFile);
-                                string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
-                                lblDescription.Text = mensaje;
-                                Global.WriteToFile(mensaje);
-                                validados++;
-                            }
-                            catch (Exception ex)
-                            {
-                                validados--;
-                                string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
-                                lblDescription.Text = mensaje;
-                                Global.WriteToFile(mensaje);
-                            }
+                            ls_Tipo = "el procedimiento ";
+                            ls_TipoSQL = "= 'P'";
+                        }
+                        else if (lo_ArrTpoScrpt[1].Trim() == "VIEW")
+                        {
+                            ls_Tipo = "la vista ";
+                            ls_TipoSQL = "= 'V'";
+                        }
+                        else if (lo_ArrTpoScrpt[1].Trim() == "FUNCTION")
+                        {
+                            ls_Tipo = "la funcion ";
+                            ls_TipoSQL = "in (N'FN', N'IF', N'TF', N'FS', N'FT')";
+                        }
+                        if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                        {
+                            ls_Qry = @"SELECT COUNT('A') FROM ""SYS"".""OBJECTS"" WHERE ""OBJECT_NAME"" ='" + ls_NmbFile.Trim().ToUpper() + @"' AND ""SCHEMA_NAME"" = '" + company.CompanyDB + "'";
                         }
                         else
                         {
-                            try
+                            ls_Qry = @"SELECT COUNT(*) FROM sys.all_objects WHERE type " + ls_TipoSQL + " and name = '" + ls_NmbFile.Trim().ToUpper() + "'";
+                        }
+
+                        lo_RecSet.DoQuery(ls_Qry);
+                        if (!lo_RecSet.EoF)
+                        {
+                            if (Convert.ToInt32(lo_RecSet.Fields.Item(0).Value) != 0)
                             {
-                                lo_RecSet.DoQuery(ls_StrFile);
-                                validados++;
-                                string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
-                                lblDescription.Text = mensaje;
-                                Global.WriteToFile(mensaje);
+                                try
+                                {
+                                    ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
+                                    lo_RecSet.DoQuery(ls_Qry);
+                                    lo_RecSet.DoQuery(ls_StrFile);
+                                    string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                    lblDescription.Text = mensaje;
+                                    Global.WriteToFile(mensaje);
+                                    validados++;
+                                }
+                                catch (Exception ex)
+                                {
+                                    validados--;
+                                    string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                    lblDescription.Text = mensaje;
+                                    Global.WriteToFile(mensaje);
+                                }
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                validados--;
-                                string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
-                                lblDescription.Text = mensaje;
-                                Global.WriteToFile(mensaje);
+                                try
+                                {
+                                    lo_RecSet.DoQuery(ls_StrFile);
+                                    validados++;
+                                    string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                    lblDescription.Text = mensaje;
+                                    Global.WriteToFile(mensaje);
+                                }
+                                catch (Exception ex)
+                                {
+                                    validados--;
+                                    string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                    lblDescription.Text = mensaje;
+                                    Global.WriteToFile(mensaje);
+                                }
                             }
                         }
                     }
@@ -600,7 +682,7 @@ namespace STR_ADDONPERU_INSTALADOR
             finally
             {
                 lblDescription.Text = "";
-                btnInstalador.Enabled = false;
+                //btnInstalador.Enabled = false;
             }
         }
 
@@ -661,26 +743,6 @@ namespace STR_ADDONPERU_INSTALADOR
             MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
 
-        }
-        private void btnInstSire_Click(object sender, EventArgs e)
-        {
-            setControlTab();
-            materialTabControl1.SelectedIndex = 1;
-            instalaComplementos("SIRE");
-        }
-
-        private void btnInstEar_Click(object sender, EventArgs e)
-        {
-            setControlTab();
-            materialTabControl1.SelectedIndex = 2;
-            instalaComplementos("CCHHE");
-        }
-
-        private void btnInstLetra_Click(object sender, EventArgs e)
-        {
-            setControlTab();
-            materialTabControl1.SelectedIndex = 3;
-            instalaComplementos("Letras");
         }
 
         private void materialButton9_Click(object sender, EventArgs e)
