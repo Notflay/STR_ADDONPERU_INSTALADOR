@@ -375,7 +375,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 {
                     if (isRunning)
                     {
-                        Cursor.Current = Cursors.WaitCursor;
+                        //Cursor.Current = Cursors.WaitCursor;
                         pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
                         if (!File.Exists(pathFile)) throw new FileNotFoundException();
 
@@ -500,7 +500,7 @@ namespace STR_ADDONPERU_INSTALADOR
             finally
             {
                 elemtsProcesar.Clear();
-                Cursor.Current = Cursors.Default;
+                //Cursor.Current = Cursors.Default;
             }
 
         }
