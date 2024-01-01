@@ -175,7 +175,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
                 // La carga ha terminado, restablece la bandera
                 isRunning = false;
-                btnInstalador.Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     btnInstalador.Text = "Instalar Complementos";
                 });
@@ -305,35 +305,43 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             try
             {
-                this.addon = addon;
-                CreateElementsNew(addon);
-
-                if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if (isRunning)
                 {
-                    fn_createProcedures(addon);
-
-                    if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
+                    this.Invoke((MethodInvoker)delegate
                     {
-                        if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+
+                        this.addon = addon;
+                        CreateElementsNew(addon);
+
+                        if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                         {
-                            fn_inicializacion(addon);
+                            fn_createProcedures(addon);
+
+                            if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
+                            {
+                                if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                                {
+                                    fn_inicializacion(addon);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
+                            MessageBox.Show("Se terminó con la creación de los campos y tablas", "Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
-                    }
+                    });
                 }
-                else
-                {
-                    MessageBox.Show("Se terminó con la creación de los campos y tablas", "Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+
             }
             catch (Exception)
             {
