@@ -350,7 +350,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     try
                     {
 
-                        elemtoMD = company.GetXMLelementCount(pathFile);
+                        elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                         bool exis = e == "UT" ? tableExis(elemtoMD.TableName) : e == "UF" ? columnExis(elemtoMD.Name, elemtoMD.TableName) : false;
                         if (exis) elemtsProcesar.Add(i);
 
