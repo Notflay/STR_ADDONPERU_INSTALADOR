@@ -16,7 +16,6 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             if (MessageBox.Show("¿Conectarse al SAP que se está ejecutando?", "Conexión SAP", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-
                 FuncionesUI funciones = new FuncionesUI();
                 if (funciones.conectionString())
                 {
@@ -26,7 +25,8 @@ namespace STR_ADDONPERU_INSTALADOR
                 }
                 else
                     MessageBox.Show("No se establecio conexión con SAP. Recuerde que tiene que tener el programa abierto", "Error SAP", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else 
+            }
+            else
                 Application.Run(new Login());
         }
     }

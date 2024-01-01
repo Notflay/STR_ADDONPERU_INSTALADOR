@@ -850,5 +850,25 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             MessageBox.Show($"Error al abrir el archivo: No se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AbrirInstalacion();
+        }
     }
 }

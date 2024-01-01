@@ -66,6 +66,7 @@
             this.materialMultiLineTextBox2 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblNameDB = new MaterialSkin.Controls.MaterialLabel();
             this.lblLocaDesc = new MaterialSkin.Controls.MaterialLabel();
             this.materialButton9 = new MaterialSkin.Controls.MaterialButton();
@@ -77,10 +78,9 @@
             this.materialMultiLineTextBox1 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
-            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.tabPage7.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -105,7 +105,7 @@
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.materialLabel10);
+            this.tabPage7.Controls.Add(this.linkLabel4);
             this.tabPage7.Controls.Add(this.lblnameLetr);
             this.tabPage7.Controls.Add(this.lblLetrasDesc);
             this.tabPage7.Controls.Add(this.materialButton8);
@@ -277,7 +277,7 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.materialLabel9);
+            this.tabPage6.Controls.Add(this.linkLabel3);
             this.tabPage6.Controls.Add(this.lblnameEar);
             this.tabPage6.Controls.Add(this.lblCcEDesc);
             this.tabPage6.Controls.Add(this.materialButton6);
@@ -451,7 +451,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.materialLabel6);
+            this.tabPage4.Controls.Add(this.linkLabel2);
             this.tabPage4.Controls.Add(this.lblnomSir);
             this.tabPage4.Controls.Add(this.materialLabel2);
             this.tabPage4.Controls.Add(this.lblSrDesc);
@@ -637,7 +637,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.materialLabel8);
+            this.tabPage3.Controls.Add(this.linkLabel1);
             this.tabPage3.Controls.Add(this.lblNameDB);
             this.tabPage3.Controls.Add(this.lblLocaDesc);
             this.tabPage3.Controls.Add(this.materialButton9);
@@ -654,6 +654,17 @@
             this.tabPage3.Text = "Localizacion";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(514, 291);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(197, 13);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Click aquí para la instalación del Add-on";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // lblNameDB
             // 
@@ -828,61 +839,38 @@
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
-            // materialLabel6
+            // linkLabel2
             // 
-            this.materialLabel6.AutoSize = true;
-            this.materialLabel6.Depth = 0;
-            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.materialLabel6.Location = new System.Drawing.Point(523, 287);
-            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(219, 14);
-            this.materialLabel6.TabIndex = 22;
-            this.materialLabel6.Text = "Click aquí para la instalación del Add-on";
-            this.materialLabel6.Click += new System.EventHandler(this.materialLabel6_Click);
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(514, 291);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(197, 13);
+            this.linkLabel2.TabIndex = 23;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Click aquí para la instalación del Add-on";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // materialLabel8
+            // linkLabel3
             // 
-            this.materialLabel8.AutoSize = true;
-            this.materialLabel8.Depth = 0;
-            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.materialLabel8.Location = new System.Drawing.Point(523, 287);
-            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(219, 14);
-            this.materialLabel8.TabIndex = 23;
-            this.materialLabel8.Text = "Click aquí para la instalación del Add-on";
-            this.materialLabel8.Click += new System.EventHandler(this.materialLabel8_Click);
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(514, 291);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(197, 13);
+            this.linkLabel3.TabIndex = 24;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "Click aquí para la instalación del Add-on";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
-            // materialLabel9
+            // linkLabel4
             // 
-            this.materialLabel9.AutoSize = true;
-            this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.materialLabel9.Location = new System.Drawing.Point(523, 287);
-            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Size = new System.Drawing.Size(219, 14);
-            this.materialLabel9.TabIndex = 23;
-            this.materialLabel9.Text = "Click aquí para la instalación del Add-on";
-            this.materialLabel9.Click += new System.EventHandler(this.materialLabel9_Click);
-            // 
-            // materialLabel10
-            // 
-            this.materialLabel10.AutoSize = true;
-            this.materialLabel10.Depth = 0;
-            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel10.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
-            this.materialLabel10.Location = new System.Drawing.Point(523, 287);
-            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel10.Name = "materialLabel10";
-            this.materialLabel10.Size = new System.Drawing.Size(219, 14);
-            this.materialLabel10.TabIndex = 25;
-            this.materialLabel10.Text = "Click aquí para la instalación del Add-on";
-            this.materialLabel10.Click += new System.EventHandler(this.materialLabel10_Click);
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(514, 291);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(197, 13);
+            this.linkLabel4.TabIndex = 26;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "Click aquí para la instalación del Add-on";
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
             // FrmInstalador
             // 
@@ -967,9 +955,9 @@
         private MaterialSkin.Controls.MaterialLabel lblnameEar;
         private MaterialSkin.Controls.MaterialLabel lblnomSir;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel6;
-        private MaterialSkin.Controls.MaterialLabel materialLabel10;
-        private MaterialSkin.Controls.MaterialLabel materialLabel9;
-        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel4;
+        private System.Windows.Forms.LinkLabel linkLabel3;
     }
 }
