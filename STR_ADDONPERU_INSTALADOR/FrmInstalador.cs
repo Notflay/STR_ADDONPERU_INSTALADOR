@@ -38,7 +38,6 @@ namespace STR_ADDONPERU_INSTALADOR
             materialSkinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Green500, MaterialSkin.Primary.Green700, MaterialSkin.Primary.LightGreen100, MaterialSkin.Accent.Green700, MaterialSkin.TextShade.WHITE);
 
             this.company = company;
-            companyRS = company;
             lblNameDB.Text = "Conectado a " + company.CompanyDB;
             lblnameEar.Text = "Conectado a " + company.CompanyDB;
             lblnameLetr.Text = "Conectado a " + company.CompanyDB;
@@ -241,14 +240,16 @@ namespace STR_ADDONPERU_INSTALADOR
             try
             {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
-
-                rs = null;
                 return true;
             }
             catch (Exception)
             {
-                rs = null;
+
                 return false;
+            }
+            finally
+            {
+                rs = null;
             }
         }
 
@@ -260,19 +261,21 @@ namespace STR_ADDONPERU_INSTALADOR
             {
 
                 rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
-
-                rs = null;
                 return true;
             }
             catch (Exception)
             {
-                rs = null;
                 return false;
+            }
+            finally
+            {
+                rs = null;
             }
         }
 
         public void instalaComplementos(string addon)
         {
+            this.addon = addon;
             CreateElementsNew(addon);
 
             if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -301,15 +304,16 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void CreateElementsNew(string addon)
         {
-            SAPbobsCOM.Company companyAux = null;
+
             string pathFile = string.Empty;
             int cntElementos = 0;
             int cntErrores = 0;
             int cntExistentes = 0;
+            List<int> elemtsProcesar = new List<int>();
 
             try
             {
-                companyAux = this.company;
+
                 string[] elements = { "UT", "UF", "UO" };
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
@@ -320,7 +324,9 @@ namespace STR_ADDONPERU_INSTALADOR
                     pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
                     if (!File.Exists(pathFile)) throw new FileNotFoundException();
 
-                    ProcessElementsOfType(pathFile, companyAux, e, ref cntElementos, ref cntErrores, ref cntExistentes);
+                    InsertElementosProcess(pathFile, e, ref elemtsProcesar);
+
+                    ProcessElementsOfType(pathFile, e, ref cntElementos, ref cntErrores, ref cntExistentes);
                 });
             }
             catch { throw; }
@@ -331,8 +337,46 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void ProcessElementsOfType(string pathFile, SAPbobsCOM.Company company, string element, ref int cntElementos, ref int cntErrores, ref int cntExistentes)
+        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar)
         {
+            SAPbobsCOM.Company companyAux = null;
+            companyAux = this.company;
+            try
+            {
+                int cntElementos = companyAux.GetXMLelementCount(pathFile);
+                for (int i = 0; i < cntElementos; i++)
+                {
+                    dynamic elemtoMD = null;
+                    try
+                    {
+
+                        elemtoMD = company.GetXMLelementCount(pathFile);
+                        bool exis = e == "UT" ? tableExis(elemtoMD.TableName) : e == "UF" ? columnExis(elemtoMD.Name, elemtoMD.TableName) : false;
+                        if (exis) elemtsProcesar.Add(i);
+
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        elemtoMD = null;
+                    }
+                }
+
+            }
+            finally
+            {
+                companyAux = null;
+            }
+        }
+
+        private void ProcessElementsOfType(string pathFile, string element, ref int cntElementos, ref int cntErrores, ref int cntExistentes)
+        {
+            SAPbobsCOM.Company companyAux = null;
+            companyAux = this.company;
+
             cntElementos = company.GetXMLelementCount(pathFile);
             for (int i = 0; i < cntElementos; i++)
             {
@@ -340,7 +384,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 try
                 {
                     string tipoElemento = GetElementTypeDescription(element);
-                    elementoMD = company.GetBusinessObjectFromXML(pathFile, i);
+                    elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                     string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                     lblDescription.Text = mensaje;
 
