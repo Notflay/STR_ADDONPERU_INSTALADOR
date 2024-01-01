@@ -732,5 +732,60 @@ namespace STR_ADDONPERU_INSTALADOR
                 }
             }
         }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialLabel8_Click(object sender, EventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void AbrirInstalacion()
+        {
+            string SLDServer = company.SLDServer;
+            string protocol = "https";
+
+            string link = $"{protocol}://{SLDServer}";
+
+            Process.Start(link);
+        }
+
+        private void materialLabel6_Click(object sender, EventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void materialLabel9_Click(object sender, EventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void materialLabel10_Click(object sender, EventArgs e)
+        {
+            AbrirInstalacion();
+        }
+
+        private void materialButton13_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Error al abrir el archivo: No se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void materialButton15_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Error al abrir el archivo: No se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void materialButton11_Click_2(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Error al abrir el archivo: No se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void materialButton2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Error al abrir el archivo: No se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

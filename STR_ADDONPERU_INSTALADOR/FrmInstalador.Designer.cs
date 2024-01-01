@@ -77,6 +77,10 @@
             this.materialMultiLineTextBox1 = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage7.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -101,6 +105,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.materialLabel10);
             this.tabPage7.Controls.Add(this.lblnameLetr);
             this.tabPage7.Controls.Add(this.lblLetrasDesc);
             this.tabPage7.Controls.Add(this.materialButton8);
@@ -194,6 +199,7 @@
             this.materialButton15.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton15.UseAccentColor = false;
             this.materialButton15.UseVisualStyleBackColor = true;
+            this.materialButton15.Click += new System.EventHandler(this.materialButton15_Click);
             // 
             // btnInstLetra
             // 
@@ -202,7 +208,7 @@
             this.btnInstLetra.Depth = 0;
             this.btnInstLetra.HighEmphasis = true;
             this.btnInstLetra.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstLetra.Location = new System.Drawing.Point(510, 259);
+            this.btnInstLetra.Location = new System.Drawing.Point(517, 249);
             this.btnInstLetra.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstLetra.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstLetra.Name = "btnInstLetra";
@@ -271,6 +277,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.materialLabel9);
             this.tabPage6.Controls.Add(this.lblnameEar);
             this.tabPage6.Controls.Add(this.lblCcEDesc);
             this.tabPage6.Controls.Add(this.materialButton6);
@@ -364,6 +371,7 @@
             this.materialButton13.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton13.UseAccentColor = false;
             this.materialButton13.UseVisualStyleBackColor = true;
+            this.materialButton13.Click += new System.EventHandler(this.materialButton13_Click);
             // 
             // btnInstEar
             // 
@@ -372,7 +380,7 @@
             this.btnInstEar.Depth = 0;
             this.btnInstEar.HighEmphasis = true;
             this.btnInstEar.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstEar.Location = new System.Drawing.Point(510, 259);
+            this.btnInstEar.Location = new System.Drawing.Point(517, 249);
             this.btnInstEar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstEar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstEar.Name = "btnInstEar";
@@ -443,6 +451,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.materialLabel6);
             this.tabPage4.Controls.Add(this.lblnomSir);
             this.tabPage4.Controls.Add(this.materialLabel2);
             this.tabPage4.Controls.Add(this.lblSrDesc);
@@ -459,6 +468,7 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "SIRE";
             this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // lblnomSir
             // 
@@ -549,6 +559,7 @@
             this.materialButton11.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton11.UseAccentColor = false;
             this.materialButton11.UseVisualStyleBackColor = true;
+            this.materialButton11.Click += new System.EventHandler(this.materialButton11_Click_2);
             // 
             // btnInstSire
             // 
@@ -557,7 +568,7 @@
             this.btnInstSire.Depth = 0;
             this.btnInstSire.HighEmphasis = true;
             this.btnInstSire.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstSire.Location = new System.Drawing.Point(510, 259);
+            this.btnInstSire.Location = new System.Drawing.Point(517, 249);
             this.btnInstSire.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstSire.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstSire.Name = "btnInstSire";
@@ -626,6 +637,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.materialLabel8);
             this.tabPage3.Controls.Add(this.lblNameDB);
             this.tabPage3.Controls.Add(this.lblLocaDesc);
             this.tabPage3.Controls.Add(this.materialButton9);
@@ -721,6 +733,7 @@
             this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton2.UseAccentColor = false;
             this.materialButton2.UseVisualStyleBackColor = true;
+            this.materialButton2.Click += new System.EventHandler(this.materialButton2_Click);
             // 
             // btnInstLoca
             // 
@@ -729,7 +742,7 @@
             this.btnInstLoca.Depth = 0;
             this.btnInstLoca.HighEmphasis = true;
             this.btnInstLoca.Icon = global::STR_ADDONPERU_INSTALADOR.Properties.Resources.ramologo;
-            this.btnInstLoca.Location = new System.Drawing.Point(510, 259);
+            this.btnInstLoca.Location = new System.Drawing.Point(517, 249);
             this.btnInstLoca.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnInstLoca.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnInstLoca.Name = "btnInstLoca";
@@ -815,6 +828,62 @@
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.materialLabel6.Location = new System.Drawing.Point(523, 287);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(219, 14);
+            this.materialLabel6.TabIndex = 22;
+            this.materialLabel6.Text = "Click aquí para la instalación del Add-on";
+            this.materialLabel6.Click += new System.EventHandler(this.materialLabel6_Click);
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.materialLabel8.Location = new System.Drawing.Point(523, 287);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(219, 14);
+            this.materialLabel8.TabIndex = 23;
+            this.materialLabel8.Text = "Click aquí para la instalación del Add-on";
+            this.materialLabel8.Click += new System.EventHandler(this.materialLabel8_Click);
+            // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.materialLabel9.Location = new System.Drawing.Point(523, 287);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(219, 14);
+            this.materialLabel9.TabIndex = 23;
+            this.materialLabel9.Text = "Click aquí para la instalación del Add-on";
+            this.materialLabel9.Click += new System.EventHandler(this.materialLabel9_Click);
+            // 
+            // materialLabel10
+            // 
+            this.materialLabel10.AutoSize = true;
+            this.materialLabel10.Depth = 0;
+            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel10.FontType = MaterialSkin.MaterialSkinManager.fontType.Caption;
+            this.materialLabel10.Location = new System.Drawing.Point(523, 287);
+            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel10.Name = "materialLabel10";
+            this.materialLabel10.Size = new System.Drawing.Size(219, 14);
+            this.materialLabel10.TabIndex = 25;
+            this.materialLabel10.Text = "Click aquí para la instalación del Add-on";
+            this.materialLabel10.Click += new System.EventHandler(this.materialLabel10_Click);
+            // 
             // FrmInstalador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -898,5 +967,9 @@
         private MaterialSkin.Controls.MaterialLabel lblnameEar;
         private MaterialSkin.Controls.MaterialLabel lblnomSir;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel10;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
     }
 }
