@@ -236,7 +236,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public bool tableExis(string tabla)
         {
-            SAPbobsCOM.Recordset rs = companyRS.GetBusinessObject(BoObjectTypes.BoRecordset);
+            SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
             try
             {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
@@ -255,7 +255,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public bool columnExis(string campo, string tabla)
         {
-            SAPbobsCOM.Recordset rs = companyRS.GetBusinessObject(BoObjectTypes.BoRecordset);
+            SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
 
             try
             {
