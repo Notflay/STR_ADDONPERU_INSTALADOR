@@ -1,4 +1,5 @@
-CREATE PROCEDURE "SP_BPP_CONSULTAR_DESTINOS"(
+CREATE PROCEDURE "SP_BPP_CONSULTAR_DESTINOS"
+(
 PERIODO INT
 )
 AS
@@ -6,17 +7,20 @@ BEGIN
 	
 	DECLARE FECHAINI DATE;
 	DECLARE FECHAFIN DATE;
-
+	DECLARE OCRCODE VARCHAR(20);
 	--SELECT  "F_RefDate" INTO  FECHAINI ,"T_RefDate" INTO FECHAFIN  FROM OFPR WHERE "AbsEntry" = PERIODO;
 
 SELECT  (SELECT TOP 1 "F_RefDate"  FROM OFPR WHERE "AbsEntry" = PERIODO) INTO  FECHAINI from dummy;
 SELECT  (SELECT TOP 1 "T_RefDate"  FROM OFPR WHERE "AbsEntry" = PERIODO) INTO  FECHAFIN from dummy;
+SELECT  (SELECT TOP 1 "U_STR_OcrCode" FROM "@BPP_PARAMS") INTO OCRCODE from dummy;
 
 	SELECT 
 
 		T0."TransId" "AsientoOrigen"
-		,T0."Line_ID" + 1 "linOrigen"
-		,T0."OcrCode5" "CuentaDestino"
+		,T0."Line_ID"  "linOrigen"
+		,CASE WHEN :OCRCODE = '2' THEN T0."OcrCode2" ELSE 
+			(CASE WHEN :OCRCODE = '3' THEN T0."OcrCode3" ELSE 
+				(CASE WHEN :OCRCODE = '4' THEN T0."OcrCode4" ELSE T0."OcrCode5" END )END) END  AS "CuentaDestino"
 		,T1."FormatCode" "CuentaNaturaleza"
 --,'792' "CuentaNaturaleza"
 		,CASE T0."DebCred" WHEN 'C' THEN -IFNULL(T0."Credit",0) ELSE IFNULL(T0."Debit",0) END "MontoLocal"
@@ -60,7 +64,9 @@ SELECT  (SELECT TOP 1 "T_RefDate"  FROM OFPR WHERE "AbsEntry" = PERIODO) INTO  F
 		AND cast(T2."TransId" as nvarchar(20)) NOT IN (SELECT R2."Ref1"  FROM OJDT R2 WHERE "Memo" LIKE '%ADD-ON BPP%' 
 		AND R2."TransId" NOT IN (SELECT A1."StornoToTr" FROM OJDT A1 WHERE  A1."StornoToTr" IS NOT NULL) AND R2."StornoToTr" IS NULL /*AND TransId  in (SELECT  cast(Ref1 as int) FROM OJDT WHERE  StornoToTr= 425)*/
 		 )
-		 AND IFNULL(T0."OcrCode5",'') !=''
+		 AND IFNULL(CASE WHEN :OCRCODE = '2' THEN T0."OcrCode2" ELSE 
+			(CASE WHEN :OCRCODE = '3' THEN T0."OcrCode3" ELSE 
+				(CASE WHEN :OCRCODE = '4' THEN T0."OcrCode4" ELSE T0."OcrCode5" END )END) END,'') !=''
 		 /*
 		 UNION ALL
 		 
