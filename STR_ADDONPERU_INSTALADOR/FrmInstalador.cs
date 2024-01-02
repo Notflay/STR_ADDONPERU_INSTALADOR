@@ -240,11 +240,14 @@ namespace STR_ADDONPERU_INSTALADOR
         }
         public void sbCargaConteo()
         {
-            int porcentaje = promedioPorcentaje();
-            lblInstalador.Text = $"Descarga ({porcentaje}%)";
+            this.Invoke((MethodInvoker)delegate
+            {
+                int porcentaje = promedioPorcentaje();
+                lblInstalador.Text = $"Descarga ({porcentaje}%)";
 
-            // Establecer el valor absoluto en lugar de incrementar
-            progressBar.Value = porcentaje;
+                // Establecer el valor absoluto en lugar de incrementar
+                progressBar.Value = porcentaje;
+            });
         }
 
         public int promedioPorcentaje()
@@ -307,27 +310,19 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 if (isRunning)
                 {
-                    this.Invoke((MethodInvoker)delegate
+
+                    this.addon = addon;
+                    CreateElementsNew(addon);
+
+                    if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
+                        fn_createProcedures(addon);
 
-                        this.addon = addon;
-                        CreateElementsNew(addon);
-
-                        if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
                         {
-                            fn_createProcedures(addon);
-
-                            if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
+                            if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                             {
-                                if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                                {
-                                    fn_inicializacion(addon);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
-                                }
+                                fn_inicializacion(addon);
                             }
                             else
                             {
@@ -337,9 +332,15 @@ namespace STR_ADDONPERU_INSTALADOR
                         }
                         else
                         {
-                            MessageBox.Show("Se terminó con la creación de los campos y tablas", "Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Se terminó con la creación de los scripts", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Global.WriteToFile($"{addon}: Se terminó con la creación de los scripts");
                         }
-                    });
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se terminó con la creación de los campos y tablas", "Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                 }
 
             }
@@ -391,8 +392,11 @@ namespace STR_ADDONPERU_INSTALADOR
             catch { throw; }
             finally
             {
-                DisplayFinalMessage(cntErrores, cntExistentes);
-                lblDescription.Text = "";
+                this.Invoke((MethodInvoker)delegate
+                {
+                    DisplayFinalMessage(cntErrores, cntExistentes);
+                    lblDescription.Text = "";
+                });
             }
         }
 
@@ -481,7 +485,10 @@ namespace STR_ADDONPERU_INSTALADOR
                         elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                         //elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
                         string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                        lblDescription.Text = mensaje;
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            lblDescription.Text = mensaje;
+                        });
 
                         ProcessNewElement(elementoMD, element, tipoElemento, ref cntErrores, ref cntExistentes);
 
@@ -541,14 +548,18 @@ namespace STR_ADDONPERU_INSTALADOR
 
         private void HandleAddSuccess(string element, string tipoElemento, dynamic elementoMD)
         {
-            string msj = $"{addon}: Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-            lblDescription.Text = msj;
-            Global.WriteToFile(msj);
-            validados++;
-            sbCargaConteo();
+            this.Invoke((MethodInvoker)delegate
+            {
+                string msj = $"{addon}: Se creo exitosamente en SAP {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+                lblDescription.Text = msj;
+                Global.WriteToFile(msj);
+                validados++;
+                sbCargaConteo();
+            });
         }
         private void HandleAddError(string element, string tipoElemento, dynamic elementMD, ref int cntErrores, ref int cntExistentes)
         {
+
             string nameElemento = element.Equals("UT") ? elementMD.TableName : element.Equals("UF") ? elementMD.Name : elementMD.Code;
             company.GetLastError(out int codigoErr, out string descripErr);
             if (codigoErr != -2035 && codigoErr != -5002)
@@ -560,13 +571,18 @@ namespace STR_ADDONPERU_INSTALADOR
             else
             {
                 string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
-                lblDescription.Text = msj;
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    lblDescription.Text = msj;
+                });
                 cntExistentes++;
                 Global.WriteToFile(msj);
 
             }
             validados++;
             sbCargaConteo();
+
         }
         public void fn_createProcedures(string ps_addn)
         {
