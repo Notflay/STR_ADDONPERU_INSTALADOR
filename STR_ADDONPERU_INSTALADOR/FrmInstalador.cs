@@ -269,8 +269,8 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
                 string tipoElement = GetElementTypeDescription(element);
-                HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
                 validados++;
+                HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
                 return true;
             }
             catch (Exception)
@@ -293,6 +293,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
                 rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
                 string tipoElement = GetElementTypeDescription(element);
+                validados++;
                 HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
                 return true;
             }
@@ -569,7 +570,7 @@ namespace STR_ADDONPERU_INSTALADOR
             });
             cntExistentes++;
             Global.WriteToFile(msj);
-
+            sbCargaConteo();
         }
         private void HandleAddError(string element, string tipoElemento, dynamic elementMD, ref int cntErrores, ref int cntExistentes)
         {
