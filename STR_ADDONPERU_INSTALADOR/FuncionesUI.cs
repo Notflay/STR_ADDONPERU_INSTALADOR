@@ -35,24 +35,6 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        public void sbCreacionTablas(string addon)
-        {
-            int validados = 0;
-            int faltantes = 0;
-
-            string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\UT.vte";
-
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load(path);
-
-
-            XmlNodeList tableNameNodes = xdoc.SelectNodes("//UserTablesMD/row");
-            foreach (XmlNode tableNameNode in tableNameNodes)
-            {
-                string tableName = tableNameNode.SelectSingleNode("TableName")?.InnerText;
-            }
-
-        }
         public void sbCreacionCampos(string addon)
         {
 

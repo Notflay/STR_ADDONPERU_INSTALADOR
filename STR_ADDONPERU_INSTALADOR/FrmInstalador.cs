@@ -148,8 +148,9 @@ namespace STR_ADDONPERU_INSTALADOR
                 StopLoading();
             else
             {
-                setControlTab();
                 materialTabControl1.SelectedIndex = posiAdd;
+                setControlTab();
+
                 StartLoading(addon);
             }
         }
@@ -474,16 +475,16 @@ namespace STR_ADDONPERU_INSTALADOR
 
             try
             {
-                cntElementos = company.GetXMLelementCount(pathFile);
-                for (int i = 0; i < cntElementos; i++)
-                //for (int i = 0; i < elemtsProcesar.Count; i++)
+                //cntElementos = company.GetXMLelementCount(pathFile);
+                //for (int i = 0; i < cntElementos; i++)
+                for (int i = 0; i < elemtsProcesar.Count; i++)
                 {
                     dynamic elementoMD = null;
                     try
                     {
                         string tipoElemento = GetElementTypeDescription(element);
-                        elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                        //elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
+                        //elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+                        elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
                         string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
                         this.Invoke((MethodInvoker)delegate
                         {
