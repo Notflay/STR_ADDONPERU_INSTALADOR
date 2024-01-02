@@ -666,7 +666,7 @@ namespace STR_ADDONPERU_INSTALADOR
                                     lo_RecSet.DoQuery(ls_Qry);
                                     lo_RecSet.DoQuery(ls_StrFile);
                                     string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
-                                    lblDescription.Text = mensaje;
+                                    ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
                                     validados++;
                                 }
@@ -674,7 +674,7 @@ namespace STR_ADDONPERU_INSTALADOR
                                 {
                                     validados--;
                                     string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
-                                    lblDescription.Text = mensaje;
+                                    ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
                                 }
                             }
@@ -685,14 +685,14 @@ namespace STR_ADDONPERU_INSTALADOR
                                     lo_RecSet.DoQuery(ls_StrFile);
                                     validados++;
                                     string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
-                                    lblDescription.Text = mensaje;
+                                    ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
                                 }
                                 catch (Exception ex)
                                 {
                                     validados--;
                                     string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
-                                    lblDescription.Text = mensaje;
+                                    ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
                                 }
                             }
@@ -706,14 +706,22 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 string mensaje = $"{ps_addn}: ERROR al crear Scripts - {e.Message}";
                 Global.WriteToFile(mensaje);
-                lblDescription.Text = mensaje;
+                ActualizaDescripcion(mensaje);
                 MessageBox.Show(mensaje, "Scripts", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                lblDescription.Text = "";
+                ActualizaDescripcion("");
                 //btnInstalador.Enabled = false;
             }
+        }
+
+        private void ActualizaDescripcion(string mensaje)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                lblDescription.Text = mensaje;
+            });
         }
 
         public void fn_inicializacion(string addon)
