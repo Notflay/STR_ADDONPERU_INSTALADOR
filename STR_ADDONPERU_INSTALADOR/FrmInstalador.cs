@@ -262,14 +262,15 @@ namespace STR_ADDONPERU_INSTALADOR
             return valorFinal;
         }
 
-        public bool tableExis(string tabla, string element, dynamic elementMD)
+        public bool tableExis(string tabla, string element, dynamic elementMD, ref int cntExistentes)
         {
             SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
             try
             {
                 rs.DoQuery($"SELECT TOP 1 * FROM \"@{tabla}\"");
                 string tipoElement = GetElementTypeDescription(element);
-                HandleAddSuccess(element, tipoElement, elementMD);
+                HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
+                validados++;
                 return true;
             }
             catch (Exception)
@@ -283,7 +284,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        public bool columnExis(string campo, string tabla, string element, dynamic elementMD)
+        public bool columnExis(string campo, string tabla, string element, dynamic elementMD, ref int cntExistentes)
         {
             SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
 
@@ -292,7 +293,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
                 rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
                 string tipoElement = GetElementTypeDescription(element);
-                HandleAddSuccess(element, tipoElement, elementMD);
+                HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
                 return true;
             }
             catch (Exception)
@@ -381,7 +382,7 @@ namespace STR_ADDONPERU_INSTALADOR
                         pathFile = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{addon}\\{e}.vte";
                         if (!File.Exists(pathFile)) throw new FileNotFoundException();
 
-                        InsertElementosProcess(pathFile, e, ref elemtsProcesar, e);
+                        InsertElementosProcess(pathFile, e, ref elemtsProcesar, e, ref cntExistentes);
 
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
@@ -401,7 +402,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar, string element)
+        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar, string element, ref int cntExistentes)
         {
             SAPbobsCOM.Company companyAux = null;
             companyAux = this.company;
@@ -416,8 +417,8 @@ namespace STR_ADDONPERU_INSTALADOR
                         try
                         {
                             elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                            bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD) : e == "UF" ?
-                                columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD) : false;
+                            bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD, ref cntExistentes) : e == "UF" ?
+                                columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD, ref cntExistentes) : false;
                             if (!exis) elemtsProcesar.Add(i);
 
                         }
@@ -558,6 +559,18 @@ namespace STR_ADDONPERU_INSTALADOR
                 sbCargaConteo();
             });
         }
+        private void HandleAddExist(string element, string tipoElemento, dynamic elementMD, ref int cntExistentes)
+        {
+            string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                lblDescription.Text = msj;
+            });
+            cntExistentes++;
+            Global.WriteToFile(msj);
+
+        }
         private void HandleAddError(string element, string tipoElemento, dynamic elementMD, ref int cntErrores, ref int cntExistentes)
         {
 
@@ -571,19 +584,10 @@ namespace STR_ADDONPERU_INSTALADOR
             }
             else
             {
-                string msj = $"{addon}: Ya existe en SAP complemento {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementMD.Name} de la tabla: ")} {elementMD.TableName}";
-
-                this.Invoke((MethodInvoker)delegate
-                {
-                    lblDescription.Text = msj;
-                });
-                cntExistentes++;
-                Global.WriteToFile(msj);
-
+                HandleAddExist(element, tipoElemento, elementMD, ref cntExistentes);
             }
             validados++;
             sbCargaConteo();
-
         }
         public void fn_createProcedures(string ps_addn)
         {
