@@ -47,6 +47,7 @@
             this.edtUsuarioS = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbxTipoDB = new System.Windows.Forms.ComboBox();
+            this.chkVerPass = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +89,7 @@
             this.edtPassDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.edtPassDB.Location = new System.Drawing.Point(336, 291);
             this.edtPassDB.Name = "edtPassDB";
+            this.edtPassDB.PasswordChar = '*';
             this.edtPassDB.Size = new System.Drawing.Size(169, 21);
             this.edtPassDB.TabIndex = 26;
             // 
@@ -249,11 +251,22 @@
             this.cbxTipoDB.Size = new System.Drawing.Size(169, 21);
             this.cbxTipoDB.TabIndex = 37;
             // 
+            // chkVerPass
+            // 
+            this.chkVerPass.AutoSize = true;
+            this.chkVerPass.Location = new System.Drawing.Point(511, 293);
+            this.chkVerPass.Name = "chkVerPass";
+            this.chkVerPass.Size = new System.Drawing.Size(15, 14);
+            this.chkVerPass.TabIndex = 38;
+            this.chkVerPass.UseVisualStyleBackColor = true;
+            this.chkVerPass.CheckedChanged += new System.EventHandler(this.chkVerPass_CheckedChanged);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chkVerPass);
             this.Controls.Add(this.cbxTipoDB);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.edtUsuarioS);
@@ -303,5 +316,6 @@
         private System.Windows.Forms.TextBox edtUsuarioS;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbxTipoDB;
+        private System.Windows.Forms.CheckBox chkVerPass;
     }
 }

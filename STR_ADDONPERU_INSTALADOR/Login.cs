@@ -127,5 +127,10 @@ namespace STR_ADDONPERU_INSTALADOR
         {
 
         }
+
+        private void chkVerPass_CheckedChanged(object sender, EventArgs e)
+        {
+            edtPassDB.PasswordChar = edtPassDB.PasswordChar == '\0' ? '*' : '\0';
+        }
     }
 }
