@@ -1,0 +1,19 @@
+CREATE PROCEDURE STR_BPP_ActualizarNumeroSUNAT
+(
+	NUMPAGO VARCHAR(20),
+	NUMSAP VARCHAR(20),
+	FECHAEJE VARCHAR(20),
+	OPERACION INT
+)
+AS 
+BEGIN
+	-- 0: Pago Detraccion
+	-- 1: Pago Proveedor
+	IF :OPERACION = '0' THEN
+		UPDATE OPCH SET "U_BPP_DPNM" =  :NUMPAGO,"U_BPP_DPFC" =  :FECHAEJE WHERE "DocEntry" = :NUMSAP;
+	ELSE IF :OPERACION = '1' THEN
+		-- Se migrará al campo "U_STR_NUMPAGO" a actualizar para pago de proveedor
+		UPDATE OPCH SET "U_BPP_DPNM" =  :NUMPAGO WHERE "DocEntry" = :NUMSAP;
+	END IF;
+	END IF;
+END;

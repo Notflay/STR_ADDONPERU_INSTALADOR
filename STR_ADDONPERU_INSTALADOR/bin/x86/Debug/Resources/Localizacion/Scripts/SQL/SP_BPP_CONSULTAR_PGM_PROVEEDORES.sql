@@ -38,7 +38,7 @@ BEGIN
         (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
          INNER JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
-         WHERE T2.U_BPP_ESTADO IN ('Cancelado', 'Procesado')
+         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') 
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
     WHERE 
         T3.TaxDate >= CASE WHEN @FECHAINI = '' THEN T3.TaxDate ELSE @FECHAINI END 
@@ -48,8 +48,9 @@ BEGIN
         AND T3.CardCode = CASE WHEN @CODPROVEEDOR = '' THEN T3.CardCode ELSE @CODPROVEEDOR END 
         AND T3.DocTotal - T3.PaidSum != 0
         AND T3.DocCur = @MONEDA
-        AND T3.CANCELED = 'N'
-        AND ISNULL(T6.U_BPP_NUMSAP, 0) = 0
+        AND T3.CANCELED = 'N' and t3.DocStatus != 'C'
+        AND ISNULL(T6.U_BPP_NUMSAP, 0) = 0 
+		--AND T3.DocEntry = 151516
     ORDER BY 
         T3.DocDate DESC;
 END
