@@ -1,0 +1,127 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\funcionesui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\funcionesui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FuncionesUI.cs",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FuncionesUI.cs",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FuncionesUI.cs",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FuncionesUI.cs",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FuncionesUI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T19:39:19.841Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmInstalador.cs",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "ViewState": "AQIAABkDAAAAAAAAAAAlwCgDAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T22:35:36.699Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmInstalador.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs [Design]",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T22:42:04.158Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\App.config",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\App.config",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\App.config",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\App.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-05-28T22:36:54.068Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 59,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

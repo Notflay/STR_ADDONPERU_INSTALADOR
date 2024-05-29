@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -10,8 +11,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using MaterialSkin.Controls;
+using Microsoft.Office.Interop.Excel;
 using SAPbobsCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
+using Global = STR_ADDONPERU_INSTALADOR.Util.Global;
+using ms = Microsoft.Office.Interop.Excel; 
 
 namespace STR_ADDONPERU_INSTALADOR
 {
@@ -313,7 +317,6 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 if (isRunning)
                 {
-
                     this.addon = addon;
                     CreateElementsNew(addon);
 
@@ -321,7 +324,7 @@ namespace STR_ADDONPERU_INSTALADOR
                     {
                         fn_createProcedures(addon);
 
-                        if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE")
+                        if (addon == "Letras" | addon == "CCHHE" | addon == "SIRE" | addon == "Localizacion")
                         {
                             if (MessageBox.Show("¿Deseas continuar con la inicialización de la configuración?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                             {
@@ -716,6 +719,134 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
+        public void fn_createTransacs(string ps_addn)
+        {
+            try
+            {
+                SAPbobsCOM.Recordset lo_RecSet = null;
+                SAPbobsCOM.Recordset lo_RevSetAux = null;
+                string[] lo_ArrFiles = null;
+                string ls_Qry = string.Empty;
+                string ls_Tipo = string.Empty;
+                string ls_TipoSQL = string.Empty;
+                string ls_NmbFile = string.Empty;
+                System.IO.StreamReader lo_StrmRdr = null;
+                string ls_StrFile = string.Empty;
+                string[] lo_ArrTpoScrpt = null;
+
+                lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+                lo_RevSetAux = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+                string carpeta = ps_addn;
+                string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{carpeta}";
+
+                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                {
+                    lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Transac\HANA\", "*.sql");
+                }
+                else
+                {
+                    lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Transac\SQL\", "*.sql");
+                }
+
+                Array.Sort(lo_ArrFiles);
+
+                for (int i = 0; i < lo_ArrFiles.GetUpperBound(0) + 1; i++)
+                {
+
+                    if (isRunning)
+                    {
+                        lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
+                        ls_StrFile = lo_StrmRdr.ReadToEnd();
+                        lo_ArrTpoScrpt = ls_StrFile.Substring(0, 50).Split(new char[] { ' ' });
+                        ls_NmbFile = System.IO.Path.GetFileName(lo_ArrFiles[i]);
+                        ls_NmbFile = ls_NmbFile.Substring(0, ls_NmbFile.Length - 4);
+
+                        if (lo_ArrTpoScrpt[1].Trim() == "PROCEDURE")
+                        {
+                            ls_Tipo = "el procedimiento ";
+                            ls_TipoSQL = "= 'P'";
+                        }
+                        else if (lo_ArrTpoScrpt[1].Trim() == "VIEW")
+                        {
+                            ls_Tipo = "la vista ";
+                            ls_TipoSQL = "= 'V'";
+                        }
+                        else if (lo_ArrTpoScrpt[1].Trim() == "FUNCTION")
+                        {
+                            ls_Tipo = "la funcion ";
+                            ls_TipoSQL = "in (N'FN', N'IF', N'TF', N'FS', N'FT')";
+                        }
+                        if (company.DbServerType == BoDataServerTypes.dst_HANADB)
+                        {
+                            ls_Qry = @"SELECT COUNT('A') FROM ""SYS"".""OBJECTS"" WHERE ""OBJECT_NAME"" ='" + ls_NmbFile.Split('.')[1].Trim().ToUpper() + @"' AND ""SCHEMA_NAME"" = '" + company.CompanyDB + "'";
+                        }
+                        else
+                        {
+                            ls_Qry = @"SELECT COUNT(*) FROM sys.all_objects WHERE type " + ls_TipoSQL + " and name = '" + ls_NmbFile.Trim().ToUpper() + "'";
+                        }
+
+                        lo_RecSet.DoQuery(ls_Qry);
+                        if (!lo_RecSet.EoF)
+                        {
+                            if (Convert.ToInt32(lo_RecSet.Fields.Item(0).Value) != 0)
+                            {
+                                try
+                                {
+                                   // ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
+                                   // lo_RecSet.DoQuery(ls_Qry);
+                                    //lo_RecSet.DoQuery(ls_StrFile);
+                                    string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                    ActualizaDescripcion(mensaje);
+                                    Global.WriteToFile(mensaje);
+                                    validados++;
+                                }
+                                catch (Exception ex)
+                                {
+                                    validados--;
+                                    string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                    ActualizaDescripcion(mensaje);
+                                    Global.WriteToFile(mensaje);
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    lo_RecSet.DoQuery(ls_StrFile);
+                                    validados++;
+                                    string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
+                                    ActualizaDescripcion(mensaje);
+                                    Global.WriteToFile(mensaje);
+                                }
+                                catch (Exception ex)
+                                {
+                                    validados--;
+                                    string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
+                                    ActualizaDescripcion(mensaje);
+                                    Global.WriteToFile(mensaje);
+                                }
+                            }
+                        }
+                    }
+                    sbCargaConteo();
+                }
+
+            }
+            catch (Exception e)
+            {
+                string mensaje = $"{ps_addn}: ERROR al crear Scripts - {e.Message}";
+                Global.WriteToFile(mensaje);
+                ActualizaDescripcion(mensaje);
+                MessageBox.Show(mensaje, "Scripts", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ActualizaDescripcion("");
+                //btnInstalador.Enabled = false;
+            }
+        }
+
         private void ActualizaDescripcion(string mensaje)
         {
             this.Invoke((MethodInvoker)delegate
@@ -726,22 +857,106 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public void fn_inicializacion(string addon)
         {
-
             SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
 
             if (addon == "Letras")
             {
-                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
-                {
-                    recordset.DoQuery("CALL STR_SP_LTR_InicializarConfiguracion");
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\Letras\\DataDefecto.xlsm";
 
-                    recordset.DoQuery("CALL STR_SP_LTR_InsercionConfCuentas");
+                // Obtiene EXCEL DATA
+                ms.Application excelApp = new ms.Application();
+                Workbook workbook = excelApp.Workbooks.Open(path);
+
+                foreach (Worksheet worksheet in workbook.Sheets)
+                {
+                    string tablaSAP = worksheet.Name; // TABLA A INSERTAR LA DATA
+                    if (!string.IsNullOrEmpty(tablaSAP) && tablaSAP != "Listas")
+                    {
+                        Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
+
+                        for (int row = 3; row < usedRange.Rows.Count; row++)
+                        {
+                            try
+                            {
+                                // Tiene que iniciar aqui
+                                SAPbobsCOM.UserTable userTable = null;
+                                userTable = company.UserTables.Item(tablaSAP);
+                                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
+                                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
+
+                                for (int col = 3; col <= usedRange.Columns.Count; col++)
+                                {
+                                    if (usedRange.Cells[1, col].Value2 != "Resultados")
+                                    {
+                                        string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
+                                        var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
+
+                                        userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
+                                    }
+                                }
+                                userTable.Add();
+
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
+                                userTable = null;
+                            }
+                            catch (Exception)
+                            {
+
+                                // throw;
+                            }
+                        }
+                    }
                 }
-                else
-                {
-                    recordset.DoQuery("EXEC STR_SP_LTR_InicializarConfiguracion");
+            }
+            else if (addon == "Localizacion")
+            {
+               // fn_iniciaTransacPorDefecto();
+                // select :error, :error_message FROM dummy;
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{"Localizacion"}\\DataDefecto6.xlsm";
 
-                    recordset.DoQuery("EXEC STR_SP_LTR_InsercionConfCuentas");
+                // Obtiene EXCEL DATA
+                ms.Application excelApp = new ms.Application();
+                Workbook workbook = excelApp.Workbooks.Open(path);
+
+                foreach (Worksheet worksheet in workbook.Sheets)
+                {
+                    string tablaSAP = worksheet.Name; // TABLA A INSERTAR LA DATA
+                    if (!string.IsNullOrEmpty(tablaSAP) && tablaSAP != "Listas")
+                    {
+                        Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
+
+                        for (int row = 3; row < usedRange.Rows.Count; row++)
+                        {
+                            try
+                            {
+                                // Tiene que iniciar aqui
+                                SAPbobsCOM.UserTable userTable = null;
+                                userTable = company.UserTables.Item(tablaSAP);
+                                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
+                                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
+
+                                for (int col = 3; col <= usedRange.Columns.Count; col++)
+                                {
+                                    if (usedRange.Cells[1, col].Value2 != "Resultados")
+                                    {
+                                        string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
+                                        var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
+
+                                        userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
+                                    }
+                                }
+                                userTable.Add();
+
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
+                                userTable = null;
+                            }
+                            catch (Exception)
+                            {
+
+                               // throw;
+                            }
+                        }
+                    } 
                 }
             }
             else if (addon == "CCHHE")
@@ -773,22 +988,149 @@ namespace STR_ADDONPERU_INSTALADOR
             }
             else if (addon == "SIRE")
             {
-                if (company.DbServerType == BoDataServerTypes.dst_HANADB)
-                    recordset.DoQuery("CALL STR_SIRE_InicializarConfiguracion");
-                else
-                    recordset.DoQuery("EXEC STR_SIRE_InicializarConfiguracion");
+                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\Sire\\DataDefecto.xlsm";
+
+                // Obtiene EXCEL DATA
+                ms.Application excelApp = new ms.Application();
+                Workbook workbook = excelApp.Workbooks.Open(path);
+
+                foreach (Worksheet worksheet in workbook.Sheets)
+                {
+                    string tablaSAP = worksheet.Name; // TABLA A INSERTAR LA DATA
+                    if (!string.IsNullOrEmpty(tablaSAP) && tablaSAP != "Listas")
+                    {
+                        Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
+
+                        for (int row = 3; row < usedRange.Rows.Count; row++)
+                        {
+                            try
+                            {
+                                // Tiene que iniciar aqui
+                                SAPbobsCOM.UserTable userTable = null;
+                                userTable = company.UserTables.Item(tablaSAP);
+                                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
+                                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
+
+                                for (int col = 3; col <= usedRange.Columns.Count; col++)
+                                {
+                                    if (usedRange.Cells[1, col].Value2 != "Resultados")
+                                    {
+                                        string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
+
+                                        if (!string.IsNullOrEmpty(campoSAP))
+                                        {
+                                            var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
+
+                                            userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
+                                        }
+                                    }
+                                }
+                                userTable.Add();
+
+                                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
+                                userTable = null;
+                            }
+                            catch (Exception)
+                            {
+
+                                // throw;
+                            }
+                        }
+                    }
+                }
             }
             MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
 
         }
 
+        public void fn_iniciaTransacPorDefecto()
+        {
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            try
+            {
+                // Valida si el procedimiento ya está creado 
+                /*if (fn_validaProcedimientoCreado("STR_TN_GENERAL"))
+                {
+                    // Inserta los necesarios y luego actualiza - SOLO HANA      
+                    string posicionTransac = ConfigurationManager.AppSettings["indexProcedimientoHana"].ToString();
+                    // Hacer Operaciones Obtener el procedimiento                                                                           // SBO_SP_TRANSACTIONNOTIFICATION
+                    string qry = $"SELECT \"DEFINITION\" FROM SYS.PROCEDURES where \"SCHEMA_NAME\" = '{company.CompanyDB}' AND \"PROCEDURE_NAME\" = 'SBO_SP_TRANSACTIONNOTIFICATION'";
+                    recordset.DoQuery(qry);
+                    string procPlano = "";
+
+                    if (recordset.Fields.Count > 0)
+                    {
+                        procPlano = recordset.Fields.Item(0).Value.ToString();
+                    }
+                    int posNuevoTrnsc = procPlano.LastIndexOf(posicionTransac); // 774
+
+                    if (posNuevoTrnsc != -1)
+                    {
+                        string newContent = "IF :error=0 \r\nTHEN\r\n\tCALL STR_TN_General(:object_type,:transaction_type,:list_of_cols_val_tab_del,:error, :error_message);\r\nEND IF;\n\n";
+                        procPlano = procPlano.Insert(posNuevoTrnsc, newContent);
+                    }
+                    // Actualiza el TRANSAC 
+                    procPlano = procPlano.Replace("CREATE PROCEDURE", "ALTER PROCEDURE");
+
+                    recordset.DoQuery(procPlano);
+                }
+                else {*/
+                    fn_createTransacs("Localizacion");
+
+                    // Inserta los necesarios y luego actualiza - SOLO HANA      
+                    string posicionTransac = ConfigurationManager.AppSettings["indexProcedimientoHana"].ToString();
+                    // Hacer Operaciones Obtener el procedimiento                                                                           // SBO_SP_TRANSACTIONNOTIFICATION
+                    string qry = $"SELECT \"DEFINITION\" FROM SYS.PROCEDURES where \"SCHEMA_NAME\" = '{company.CompanyDB}' AND \"PROCEDURE_NAME\" = 'SBO_SP_TRANSACTIONNOTIFICATION'";
+                    recordset.DoQuery(qry);
+                    string procPlano = "";
+
+                    if (recordset.Fields.Count > 0)
+                    {
+                        procPlano = recordset.Fields.Item(0).Value.ToString();
+                    }
+                    int posNuevoTrnsc = procPlano.LastIndexOf(posicionTransac); // 774
+
+                    if (posNuevoTrnsc != -1)
+                    {
+                        string newContent = "IF :error=0 \r\nTHEN\r\n\tCALL STR_TN_General(:object_type,:transaction_type,:list_of_cols_val_tab_del,:error, :error_message);\r\nEND IF;\n\n";
+                        procPlano = procPlano.Insert(posNuevoTrnsc, newContent);
+                    }
+                    // Actualiza el TRANSAC 
+                    procPlano = procPlano.Replace("CREATE PROCEDURE", "ALTER PROCEDURE");
+
+                    recordset.DoQuery(procPlano);
+               // }             
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally {
+                recordset = null;
+            }
+        }
         private void materialButton9_Click(object sender, EventArgs e)
         {
             abrirTxt();
 
         }
+        public bool fn_validaProcedimientoCreado(string procedimiento)
+        {
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            try
+            {
+               
+                string qry = $"SELECT \"DEFINITION\" FROM SYS.PROCEDURES where \"SCHEMA_NAME\" = 'SBO_CRL_210922' AND \"PROCEDURE_NAME\" = '{procedimiento}'";
+                recordset.DoQuery(qry);
 
+                return !string.IsNullOrEmpty(recordset.Fields.Item(0).Value);
+            }
+            finally
+            {
+                recordset = null;
+            }
+        }
         public void abrirTxt()
         {
             string filepath = $"{System.Windows.Forms.Application.StartupPath}\\Logs\\Service_Creation_Log_{DateTime.Now.Date.ToShortDateString().Replace('/', '_')}.txt";

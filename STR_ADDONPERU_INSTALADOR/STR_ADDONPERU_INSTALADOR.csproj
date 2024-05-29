@@ -56,6 +56,10 @@
     <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -152,6 +156,7 @@
     <None Include="Resources\Letras\UT.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Localizacion\DataDefecto.xlsm" />
     <None Include="Resources\Localizacion\UF.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -182,7 +187,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="%24this.Icon.ico" />
@@ -330,9 +337,6 @@
     <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_ActEstadoLetra.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_InicializarConfiguracion.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LTR_InsercionConfCuentas.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -397,9 +401,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_ActEstadoLetra.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_InicializarConfiguracion.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LTR_InsercionConfCuentas.sql">
@@ -708,11 +709,34 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_VerNumAnul.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ramologo.ico" />
-    <Content Include="Resources\ramologo.png">
+    <Content Include="Resources\Localizacion\Transac\HANA\1. STR_SP_BPP_LocAnulSUNAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Sire\Scripts\HANA\STR_AV_Inicializa_Configuracion.sql">
+    <Content Include="Resources\Localizacion\Transac\HANA\2. STR_SP_BPP_LOCDETRACCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\3. STR_SP_BPP_LocNumSUNAT.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\4. STR_SP_Valida_AppStrat.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\5. STR_SP_Valida_CCH_EAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\6. STR_SP_Valida_FactElect.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\7. STR_SP_Valida_Letras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\8. STR_TN_Localizacion.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Transac\HANA\9. STR_TN_General.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ramologo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroComprasND_Sire.sql">
@@ -722,9 +746,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sire\Scripts\HANA\STR_AV_RegistroVentas_Sire.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Sire\Scripts\SQL\STR_AV_Inicializa_Configuracion.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Sire\Scripts\SQL\STR_AV_RegistroComprasND_Sire.sql">
@@ -738,9 +759,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Util\STR_ADDONPERU_INSTALADOR.Util.csproj">
+      <Project>{ba0d7916-a0c7-4867-a36a-b192ddd8af90}</Project>
+      <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <COMReference Include="SAPbobsCOM">
-      <Guid>{FC8030BE-F5D2-4B8E-8F92-44228FE30090}</Guid>
-      <VersionMajor>9</VersionMajor>
+      <Guid>{FC8030BE-F5D2-4B8E-8F92-44228FE30100}</Guid>
+      <VersionMajor>10</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
@@ -749,7 +776,7 @@
     </COMReference>
     <COMReference Include="SAPbouiCOM">
       <Guid>{6048236A-956D-498D-A6F1-9C81C13AB6E8}</Guid>
-      <VersionMajor>9</VersionMajor>
+      <VersionMajor>10</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
@@ -758,10 +785,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\STR_ADDONPERU_INSTALADOR.Util\STR_ADDONPERU_INSTALADOR.Util.csproj">
-      <Project>{ba0d7916-a0c7-4867-a36a-b192ddd8af90}</Project>
-      <Name>STR_ADDONPERU_INSTALADOR.Util</Name>
-    </ProjectReference>
+    <Folder Include="Resources\Localizacion\Transac\SQL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

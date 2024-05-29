@@ -7,11 +7,13 @@ BEGIN
 	DECLARE @FECHAINI DATE
 	DECLARE @FECHAFIN DATE
 	DECLARE @OCRCODE VARCHAR(20);
+	DECLARE @CNTNATU CHAR(1);
 	--SELECT  "F_RefDate" INTO  FECHAINI ,"T_RefDate" INTO FECHAFIN  FROM OFPR WHERE "AbsEntry" = PERIODO;
 
     SET @FECHAINI = (SELECT TOP 1 "F_RefDate"  FROM OFPR WHERE "AbsEntry" = @PERIODO)
     SET @FECHAFIN = (SELECT TOP 1 "T_RefDate"  FROM OFPR WHERE "AbsEntry" = @PERIODO)
 	SET @OCRCODE =  (SELECT TOP 1 "U_STR_OcrCode" FROM "@BPP_PARAMS")
+	SET @CNTNATU =  (SELECT TOP 1 "U_BPP_CTANATU" FROM "@BPP_PARAMS")
 
 	SELECT 
 
@@ -56,7 +58,10 @@ BEGIN
 		
 	FROM 
 		JDT1 T0 
-		INNER JOIN OACT T1 ON T1."AcctCode" = T0."Account" AND LEFT(T1."FormatCode",2) IN ('62','63','64','65','66','67','68') 	
+		INNER JOIN OACT T1 ON T1."AcctCode" = T0."Account" AND	
+		(@CNTNATU = '6' AND LEFT(T1."FormatCode", 2) IN ('62', '63', '64', '65', '66', '67', '68'))
+			OR (@CNTNATU = '9' AND LEFT(T1."FormatCode", 2) IN ('96', '97', '98'))
+		--LEFT(T1."FormatCode",2) IN ('62','63','64','65','66','67','68') 	
 		INNER JOIN OJDT T2 ON T0."TransId" = T2."TransId"	
 	WHERE 
 		T0."RefDate">=@FECHAINI and T0."RefDate"<=@FECHAFIN --AND T0.U_BPP_DCPR='N'

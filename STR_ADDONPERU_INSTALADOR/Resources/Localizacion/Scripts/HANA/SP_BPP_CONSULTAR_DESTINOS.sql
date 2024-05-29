@@ -6,13 +6,17 @@ AS
 BEGIN
     DECLARE FECHAINI DATE;
     DECLARE FECHAFIN DATE;
+    DECLARE CNTNATU INT;
     DECLARE OCRCODE VARCHAR(20);
     
     -- Obtener fechas de inicio y fin del periodo desde la tabla OFPR
     SELECT "F_RefDate", "T_RefDate" INTO FECHAINI, FECHAFIN FROM OFPR WHERE "AbsEntry" = PERIODO;
     
-    -- Obtener el código de segmento de contabilidad desde la tabla "@BPP_PARAMS"
+    -- Obtener el c?digo de segmento de contabilidad desde la tabla "@BPP_PARAMS"
     SELECT "U_STR_OcrCode" INTO OCRCODE FROM "@BPP_PARAMS";
+    
+    -- Obtiene la CntNaturaleza 
+    SELECT "U_BPP_CTANATU" INTO CNTNATU FROM "@BPP_PARAMS";
     
     -- Consulta principal para seleccionar datos de cuentas contables
     SELECT 
@@ -64,7 +68,11 @@ BEGIN
         IFNULL(T0."OcrCode5", '') AS "CC5"
     FROM 
         JDT1 T0 
-        INNER JOIN OACT T1 ON T1."AcctCode" = T0."Account" AND LEFT(T1."FormatCode", 2) IN ('62', '63', '64', '65', '66', '67', '68','76')
+        INNER JOIN OACT T1 ON T1."AcctCode" = T0."Account" AND 
+        (
+        	(:CNTNATU = '6' AND LEFT(T1."FormatCode", 2) IN ('62', '63', '64', '65', '66', '67', '68')) OR
+        	(:CNTNATU = '9' AND LEFT(T1."FormatCode", 2) IN ('92', '93', '94', '95', '96', '97', '98'))
+        )
         INNER JOIN OJDT T2 ON T0."TransId" = T2."TransId"	
         LEFT JOIN OOCR T3 ON 
         (

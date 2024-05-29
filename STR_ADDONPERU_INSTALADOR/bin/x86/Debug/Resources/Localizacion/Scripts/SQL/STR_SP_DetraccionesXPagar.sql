@@ -182,9 +182,9 @@ BEGIN
 	  	    ELSE 
 	  		    '' 
 	  	    END <> 'ANL'
-			AND ISNULL(T1."BPLId", 99) = CAST(CASE WHEN @CodSuc = '' THEN '99' ELSE @CodSuc END AS INT)
+			AND ISNULL(T1."BPLId", 99) = CAST(CASE WHEN ISNULL(@CodSuc,'') = '' THEN '99' ELSE @CodSuc END AS INT)
 	  	    AND EXISTS(select 'E' FROM OCRD WHERE "CardCode" = T1."ShortName")  
-		 AND (T1."BalDueDeb" + T1."BalDueCred")> 0.0 AND T0."RefDate" >= CAST(CAST(@FcCntD AS DATE) AS nvarchar(10))
+		 AND (T1."BalDueDeb" + T1."BalDueCred")> 0.0 AND T0."RefDate" >= CAST(CAST(@FcCntD AS DATE) AS nvarchar(10)) --AND T0."RefDate" <= CAST(CAST(@FcCntH AS DATE) AS nvarchar(10))
 		 AND T0."TransId" NOT IN(SELECT "U_BPP_DEAs" FROM "@BPP_PAYDTRDET" TDet INNER JOIN "@BPP_PAYDTR" TCab ON TDet."DocEntry" = TCab."DocEntry" WHERE TDet.U_BPP_DEAs=T0.TransId AND TCab."Status" = 'O')
 		 ORDER BY T2."CardCode"; 
 	  	
