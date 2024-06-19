@@ -14,6 +14,7 @@ using MaterialSkin.Controls;
 using Microsoft.Office.Interop.Excel;
 using SAPbobsCOM;
 using STR_ADDONPERU_INSTALADOR.Util;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Global = STR_ADDONPERU_INSTALADOR.Util.Global;
 using ms = Microsoft.Office.Interop.Excel; 
 
@@ -317,9 +318,37 @@ namespace STR_ADDONPERU_INSTALADOR
             {
                 if (isRunning)
                 {
-                    this.addon = addon;
+
                     CreateElementsNew(addon);
 
+                    // Crear La tabla Type
+                    if (addon == "Localizacion" & company.DbServerType == BoDataServerTypes.dst_HANADB) {
+                        try
+                        {
+                            string[] lo_ArrFiles = null;
+                            string ls_Path = System.Windows.Forms.Application.StartupPath + $"\\Resources\\{addon}";
+                            System.IO.StreamReader lo_StrmRdr = null;
+                            // Ubicación de la tabla TYPE
+                            string ls_StrFile = string.Empty;
+                            lo_ArrFiles = System.IO.Directory.GetFiles(ls_Path + @"\Types\", "*.sql");
+
+                            SAPbobsCOM.Recordset lo_RecSet = null;
+                            lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+                            for (int i = 0; i < lo_ArrFiles.GetUpperBound(0) + 1; i++)
+                            {
+                                lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
+                                ls_StrFile = lo_StrmRdr.ReadToEnd();
+
+
+                                lo_RecSet.DoQuery(ls_StrFile);
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
                     if (MessageBox.Show("¿Deseas continuar con la creación de procedimientos?", "Scripts", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
                         fn_createProcedures(addon);
@@ -597,7 +626,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             try
             {
-                SAPbobsCOM.Recordset lo_RecSet = null;
+             
                 SAPbobsCOM.Recordset lo_RevSetAux = null;
                 string[] lo_ArrFiles = null;
                 string ls_Qry = string.Empty;
@@ -607,7 +636,7 @@ namespace STR_ADDONPERU_INSTALADOR
                 System.IO.StreamReader lo_StrmRdr = null;
                 string ls_StrFile = string.Empty;
                 string[] lo_ArrTpoScrpt = null;
-
+                SAPbobsCOM.Recordset lo_RecSet = null;
                 lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
                 lo_RevSetAux = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
 

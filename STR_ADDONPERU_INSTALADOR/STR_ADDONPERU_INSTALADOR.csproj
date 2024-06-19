@@ -156,7 +156,7 @@
     <None Include="Resources\Letras\UT.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Localizacion\DataDefecto.xlsm" />
+    <None Include="Resources\Localizacion\DataDefecto6.xlsm" />
     <None Include="Resources\Localizacion\UF.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -166,7 +166,6 @@
     <None Include="Resources\Localizacion\UT.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Manuales\Manual funcional - Addon Localizacion.pdf" />
     <None Include="Resources\Menu\UF.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -457,10 +456,16 @@
     <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_ObtenerLetras.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_BF_OP_GENERAL.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_DETRACCIONES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_DESTINOS.sql">
@@ -481,7 +486,13 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GENERAR_ASIENTO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_OBTENERBANKCODE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_PARAMETROS_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_BPP_ActualizarNumeroSUNAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql">
@@ -592,6 +603,9 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DESTINOS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -604,6 +618,9 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_OBTENERBANKCODE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_PARAMETROS_PGM.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -611,6 +628,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GENERAR_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_BPP_ActualizarNumeroSUNAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ActualizaPagoDetraccion.sql">
@@ -736,6 +756,9 @@
     <Content Include="Resources\Localizacion\Transac\HANA\9. STR_TN_General.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Types\TT_BPP_PAGOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ramologo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -786,6 +809,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Localizacion\Transac\SQL\" />
+    <Folder Include="Resources\Manuales\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

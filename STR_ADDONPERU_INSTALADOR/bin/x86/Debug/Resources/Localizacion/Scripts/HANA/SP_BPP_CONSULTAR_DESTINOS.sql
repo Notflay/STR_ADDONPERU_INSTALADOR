@@ -27,7 +27,7 @@ BEGIN
             WHEN :OCRCODE = '2' THEN (CASE WHEN LEFT(T0."OcrCode2",'1') NOT IN('9','6')  THEN T3."U_STR_LC_CDST"  ELSE T0."OcrCode2" END)
             WHEN :OCRCODE = '3' THEN (CASE WHEN LEFT(T0."OcrCode3",'1') NOT IN('9','6')   THEN T3."U_STR_LC_CDST"  ELSE T0."OcrCode3" END)
             WHEN :OCRCODE = '4' THEN (CASE WHEN LEFT(T0."OcrCode4",'1') NOT IN('9','6')  THEN T3."U_STR_LC_CDST"  ELSE T0."OcrCode4" END)
-            ELSE (CASE WHEN LEFT(T0."OcrCode5",'1') <> '9' THEN T3."U_STR_LC_CDST"  ELSE T0."OcrCode5" END)
+            ELSE (CASE WHEN LEFT(T0."OcrCode5",'1') NOT IN('9','6') THEN T3."U_STR_LC_CDST"  ELSE T0."OcrCode5" END)
         END AS "CuentaDestino",
         T1."FormatCode" AS "CuentaNaturaleza",
         CASE 
@@ -71,7 +71,7 @@ BEGIN
         INNER JOIN OACT T1 ON T1."AcctCode" = T0."Account" AND 
         (
         	(:CNTNATU = '6' AND LEFT(T1."FormatCode", 2) IN ('62', '63', '64', '65', '66', '67', '68')) OR
-        	(:CNTNATU = '9' AND LEFT(T1."FormatCode", 2) IN ('92', '93', '94', '95', '96', '97', '98'))
+        	(:CNTNATU = '9' AND LEFT(T1."FormatCode", 2) IN ('96', '97', '98'))
         )
         INNER JOIN OJDT T2 ON T0."TransId" = T2."TransId"	
         LEFT JOIN OOCR T3 ON 
@@ -80,6 +80,14 @@ BEGIN
             (:OCRCODE = '3' AND T3."OcrCode" = T0."OcrCode3") OR
             (:OCRCODE = '4' AND T3."OcrCode" = T0."OcrCode4") OR
             (:OCRCODE = '5' AND T3."OcrCode" = T0."OcrCode5") 
+        )
+        -- LA CONDICIÓN VALIDA Y PARA GENERA DESTINO
+        INNER JOIN OACT T4 ON 
+        (
+            (:OCRCODE = '2' AND T4."AcctCode" = T0."OcrCode2") OR
+            (:OCRCODE = '3' AND T4."AcctCode" = T0."OcrCode3") OR
+            (:OCRCODE = '4' AND T4."AcctCode" = T0."OcrCode4") OR
+            (:OCRCODE = '5' AND T4."AcctCode" = T0."OcrCode5") 
         )
     WHERE 
         T0."RefDate" >= FECHAINI AND T0."RefDate" <= FECHAFIN
@@ -96,5 +104,8 @@ BEGIN
                 ELSE T0."OcrCode5" 
             END, ''
         ) != ''
+        -- LA CONDICIÓN VALIDA Y PARA GENERA DESTINO
+		AND T4."U_STR_DESTINO" = 'Y'
+		AND T2."U_STR_ADP" = 'N'
     ORDER BY 1 DESC;
 END

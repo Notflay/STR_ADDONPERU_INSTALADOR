@@ -93,6 +93,8 @@ namespace STR_ADDONPERU_INSTALADOR
                         return BoDataServerTypes.dst_MSSQL2016;
                     case "MSSQL2017":
                         return BoDataServerTypes.dst_MSSQL2017;
+                    case "MSSQL2019":
+                        return BoDataServerTypes.dst_MSSQL2019;
                     default:
                         throw new Exception("Error al obtener el tipo de Base de datos");
                 }

@@ -869,3 +869,6 @@ C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONP
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDO.21B179BF.Up2Date
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x86\Debug\STR_ADDONPERU_INSTALADOR.pdb
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x86\Debug\Resources\Localizacion\Types\TT_BPP_PAGOS.sql
