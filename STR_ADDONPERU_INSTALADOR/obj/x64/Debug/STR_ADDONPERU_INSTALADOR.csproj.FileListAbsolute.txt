@@ -662,7 +662,6 @@ C:\Users\LENOVO\source\repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INST
 C:\Users\LENOVO\source\repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDONPERU_INSTALADOR.csproj.CopyComplete
 C:\Users\LENOVO\source\repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\LENOVO\source\repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDONPERU_INSTALADOR.pdb
-C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\DataDefecto6.xlsm
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Icons\hogar.png
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Icons\icons8-circular-peru-48.png
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Icons\icons8-cuota-50.png
@@ -888,3 +887,8 @@ C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONP
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\STR_ADDONPERU_INSTALADOR.exe.config
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\STR_ADDONPERU_INSTALADOR.pdb
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\RML_BF_OP_GENERAL.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\SP_BPP_OBTENERBANKCODE.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_BPP_ActualizarNumeroSUNAT.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\SQL\SP_BPP_OBTENERBANKCODE.sql
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\SQL\STR_BPP_ActualizarNumeroSUNAT.sql

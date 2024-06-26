@@ -67,13 +67,24 @@ BEGIN
 					(:OCRCODE = '5' AND T3."OcrCode" = T0."OcrCode5") 
 				)
 				-- LA CONDICIÓN VALIDA Y PARA GENERA DESTINO
-		        INNER JOIN OACT T4 ON 
-		        (
-		            (:OCRCODE = '2' AND T4."AcctCode" = T0."OcrCode2") OR
-		            (:OCRCODE = '3' AND T4."AcctCode" = T0."OcrCode3") OR
-		            (:OCRCODE = '4' AND T4."AcctCode" = T0."OcrCode4") OR
-		            (:OCRCODE = '5' AND T4."AcctCode" = T0."OcrCode5") 
-		        )
+		        INNER JOIN OACT T4 
+		       ON 
+				(
+					(:SEGMENTADO = 'N' AND (
+								(:OCRCODE = '2' AND T4."AcctCode" = T0."OcrCode2") OR 
+								(:OCRCODE = '3' AND T4."AcctCode" = T0."OcrCode3") OR 
+								(:OCRCODE = '4' AND T4."AcctCode" = T0."OcrCode4") OR 
+								(:OCRCODE = '5' AND T4."AcctCode" = T0."OcrCode5") 
+							)
+						) OR
+					(:SEGMENTADO = 'Y' AND (
+								(:OCRCODE = '2' AND T4."Segment_0" = T0."OcrCode2") OR 
+								(:OCRCODE = '3' AND T4."Segment_0" = T0."OcrCode3") OR 
+								(:OCRCODE = '4' AND T4."Segment_0" = T0."OcrCode4") OR 
+								(:OCRCODE = '5' AND T4."Segment_0" = T0."OcrCode5") 
+							)
+						) 
+				)
 		        /*
 					24/05/2024:
 					Se configura la condicional de generar Cuentas para el uso repititivo si en caso se equivoca 
@@ -136,13 +147,25 @@ BEGIN
 		INNER JOIN OJDT T2 on T0."TransId" = T2."TransId" -- AND IFNULL(T2."U_STR_ADP",'N') = 'N' 	
 		--inner join OPCH T3 on T2."CreatedBy" = T3."DocEntry" and t3."DocType" = 'S' and t3."U_STR_ADP" = 'N'
 		-- LA CONDICIÓN VALIDA Y PARA GENERA DESTINO
-		        INNER JOIN OACT T4 ON 
-		        (
-		            (:OCRCODE = '2' AND T4."AcctCode" = T0."OcrCode2") OR
-		            (:OCRCODE = '3' AND T4."AcctCode" = T0."OcrCode3") OR
-		            (:OCRCODE = '4' AND T4."AcctCode" = T0."OcrCode4") OR
-		            (:OCRCODE = '5' AND T4."AcctCode" = T0."OcrCode5") 
-		        )
+		        INNER JOIN OACT T4 
+		        ON 
+				(
+					(:SEGMENTADO = 'N' AND (
+								(:OCRCODE = '2' AND T4."AcctCode" = T0."OcrCode2") OR 
+								(:OCRCODE = '3' AND T4."AcctCode" = T0."OcrCode3") OR 
+								(:OCRCODE = '4' AND T4."AcctCode" = T0."OcrCode4") OR 
+								(:OCRCODE = '5' AND T4."AcctCode" = T0."OcrCode5") 
+							)
+						) OR
+					(:SEGMENTADO = 'Y' AND (
+								(:OCRCODE = '2' AND T4."Segment_0" = T0."OcrCode2") OR 
+								(:OCRCODE = '3' AND T4."Segment_0" = T0."OcrCode3") OR 
+								(:OCRCODE = '4' AND T4."Segment_0" = T0."OcrCode4") OR 
+								(:OCRCODE = '5' AND T4."Segment_0" = T0."OcrCode5") 
+							)
+						) 
+				)
+	
 		where 
 		IFNULL(
 				CASE 

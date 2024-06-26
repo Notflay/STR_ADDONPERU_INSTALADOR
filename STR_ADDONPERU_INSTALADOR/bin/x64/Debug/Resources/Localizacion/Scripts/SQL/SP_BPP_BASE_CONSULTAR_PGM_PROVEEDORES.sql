@@ -1,4 +1,4 @@
-CREATE PROCEDURE SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES
+CREATE PROCEDURE [dbo].[SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES]
     @FECHAINI DATE,
     @FECHAFIN DATE,
     @CODPROVEEDOR NVARCHAR(20),
@@ -8,6 +8,7 @@ CREATE PROCEDURE SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES
 AS
 	DECLARE @OPTIONS CHAR(3) = (SELECT TOP 1 "U_STR_MCTC" FROM "@STR_LC_CONF")
 BEGIN
+
     SELECT 
         T3.CardCode AS CodigoProveedor,
         T3.CardName AS NombreProveedor,
@@ -56,11 +57,12 @@ BEGIN
     LEFT JOIN 
         OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
     LEFT JOIN 
-        (SELECT DISTINCT T1.U_BPP_NUMSAP 
+       (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
         --INNER 
 		 LEFT JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
-         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') 
+		 LEFT JOIN "OPCH" T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
+         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
 	LEFT JOIN PCH6 T7 ON T3."DocEntry" = T7."DocEntry"
 	LEFT JOIN VPM2 T9 ON T9."DocEntry" = T3."U_BPP_AstDetrac"
@@ -123,11 +125,12 @@ BEGIN
     LEFT JOIN 
         OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
     LEFT JOIN 
-        (SELECT DISTINCT T1.U_BPP_NUMSAP 
+       (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
         --INNER 
 		 LEFT JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
-         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') 
+		 LEFT JOIN ODPO T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
+         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
 	LEFT JOIN PCH6 T7 ON T3."DocEntry" = T7."DocEntry"
 	LEFT JOIN VPM2 T9 ON T9."DocEntry" = T3."U_BPP_AstDetrac"
