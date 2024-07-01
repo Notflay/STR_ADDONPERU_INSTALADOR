@@ -19,8 +19,8 @@ BEGIN
         FechaVencimiento DATE,
         NumeroDocumento NVARCHAR(50),
         ImporteDoc DECIMAL(18, 2),
-        MontoPago DECIMAL(18, 2),
-        Saldo DECIMAL(18, 2),
+        MontoPago DECIMAL(29,6),
+        Saldo DECIMAL(29,6),
         TipoDocumento NVARCHAR(50),
         RUC NVARCHAR(20),
         NombreBanco NVARCHAR(100),
@@ -65,12 +65,14 @@ BEGIN
             WHEN ISNULL(@PARAM1,'') = '000' THEN '1'
             WHEN ISNULL(@PARAM1,'') = '001' THEN T2.GroupCode 
             WHEN ISNULL(@PARAM1,'') = '' THEN '1' 
+			WHEN ISNULL(@PARAM1,'') = '-' THEN '1'  
         END 
         = 
         CASE 
             WHEN ISNULL(@PARAM1,'') = '000' THEN  '1'
             WHEN ISNULL(@PARAM1,'') = '001' THEN @PARAM2
             WHEN ISNULL(@PARAM1,'') = '' THEN '1' 
+			WHEN ISNULL(@PARAM1,'') = '-' THEN '1' 
         END;
 
 END

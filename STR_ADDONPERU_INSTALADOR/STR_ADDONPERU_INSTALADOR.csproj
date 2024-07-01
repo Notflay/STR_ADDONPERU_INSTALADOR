@@ -213,6 +213,33 @@
     <Content Include="Resources\%24this.Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_PT_APP_CC_ER_171_EMPLEADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_002_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_1470000113_SOLICITUDIN.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\SP_RML_PT_APP_CC_ER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\SP_RML_TN_APP_CC_ER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SOLICITUD_DINERO_EAR_RP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_ActualizarDatosPorReaperturaCCH.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -265,6 +292,30 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Verificar_Documento_Existente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_PT_APP_CC_ER_171_EMPLEADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_002_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_1470000113_SOLICITUDIN.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\SP_RML_PT_APP_CC_ER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\SP_RML_TN_APP_CC_ER.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_ActualizarDatosPorReaperturaCCH.sql">
@@ -322,6 +373,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\HANA\sp_Num2Let.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\SP_RML_PT_APP_LTR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\HANA\SP_RML_TN_APP_LTR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\HANA\STR_LT_ESTADO_CUENTAS_CORRIENTES_SOCIO.sql">
@@ -388,6 +445,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\HANA\STR_SP_LT_ObtenerLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\SP_RML_PT_APP_LTR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Letras\Scripts\SQL\SP_RML_TN_APP_LTR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Letras\Scripts\SQL\STR_LT_ESTADO_CUENTAS_CORRIENTES_SOCIO.sql">
@@ -459,6 +522,255 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_BF_OP_GENERAL.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_APP_PMD_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_14_NOTACREDITOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_15_ENTREGA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_17_PEDIDOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_203_ANTICIPOVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_204_ANTICIPOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_20_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_22_PEDIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_23_OFERTAVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_2_SOCIOSNEGOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_4_MAESTROARTICULOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_CL_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_14_NOTACREDITOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_15_ENTREGA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_17_PEDIDOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_203_ANTICIPOVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_204_ANTICIPOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_20_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_22_PEDIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_23_OFERTAVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_2_SOCIOSNEGOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_4_MAESTROARTICULOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_APP_PGM_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_APP_PMD_30_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_14_NotaCreditoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_15_Entrega.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_17_PedidoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_203_AnticipoVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_204_AnticipoProveedor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_20_EntradaMercancia.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_22_Pedido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_23_OfertaVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_24_PagoRecibido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_2_SociosNegocio.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_4_MaestroArticulos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_CL_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_14_NotaCreditoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_15_Entrega.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_17_PedidoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_203_AnticipoVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_204_AnticipoProveedor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_20_EntradaMercancia.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_22_Pedido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_23_OfertaVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_24_PagoRecibido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_2_SociosNegocio.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_4_MaestroArticulos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_DETRACCIONES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -486,10 +798,52 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GENERAR_ASIENTO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BBVA_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BBVA_DET.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BCP_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BCP_DETV1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_OBTENERBANKCODE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_PARAMETROS_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_PT_APP_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_PT_APP_PMD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_PT_CLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_PT_DOCUMENTOS_ELECTRONICOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_PT_LOCALIZACION.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_PMD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_CLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_DOCUMENTOS_ELECTRONICOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_LOCALIZACION.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_BPP_ActualizarNumeroSUNAT.sql">
@@ -576,6 +930,12 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ObtTransferencias.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_PagoMasivoDetraccionesCabecera.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_PagoMasivoDetraccionesDetalle.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_RegistroPagoDetrac.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -595,6 +955,258 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\ST_LOC_GET_PENDIENTES_ASIENTO_PROV.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_APP_PMD_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_14_NOTACREDITOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_15_ENTREGA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_17_PEDIDOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_203_ANTICIPOVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_204_ANTICIPOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_20_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_22_PEDIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_23_OFERTAVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_2_SOCIOSNEGOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_4_MAESTROARTICULOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_CL_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_14_NOTACREDITOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_15_ENTREGA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_17_PEDIDOCLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_203_ANTICIPOVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_204_ANTICIPOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_20_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_22_PEDIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_23_OFERTAVENTAS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_24_PAGORECIBIDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_2_SOCIOSNEGOCIO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_4_MAESTROARTICULOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_APP_PGM_001_UDO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_APP_PGM_BPP_PAGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_APP_PMD_30_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_14_NotaCreditoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_15_Entrega.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_17_PedidoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_203_AnticipoVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_204_AnticipoProveedor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_20_EntradaMercancia.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_22_Pedido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_23_OfertaVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_24_PagoRecibido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_2_SociosNegocio.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_4_MaestroArticulos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_CL_67_TRANSFERENCIASTOCK.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_13_FacturaDeudores.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_14_NotaCreditoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_15_Entrega.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_16_DEVOLUCIONES.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_17_PedidoCliente.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_18_FACTURAPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_19_NOTACREDITOPROVEEDOR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_1_PlanDeCuentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_203_AnticipoVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_204_AnticipoProveedor.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_20_EntradaMercancia.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_22_Pedido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_23_OfertaVentas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_24_PagoRecibido.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_2_SociosNegocio.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_46_PAGOEFECTUADO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_4_MaestroArticulos.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_59_ENTRADAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_60_SALIDAMERCANCIA.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_DETRACCIONES.sql">
@@ -618,6 +1230,18 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GNRTXT_BBVA_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GNRTXT_BBVA_DET.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GNRTXT_BCP_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GNRTXT_BCP_DETV1.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_OBTENERBANKCODE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -628,6 +1252,36 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_GENERAR_ASIENTO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_PT_APP_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_PT_APP_PMD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_PT_CLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_PT_DOCUMENTOS_ELECTRONICOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_PT_LOCALIZACION.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_TN_APP_PGM.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_TN_APP_PMD.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_TN_CLIENTE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_TN_DOCUMENTOS_ELECTRONICOS.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\SP_RML_TN_LOCALIZACION.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_BPP_ActualizarNumeroSUNAT.sql">
@@ -712,6 +1366,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTransferencias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_PagoMasivoDetracciones_C.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_PagoMasivoDetracciones_D.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_RegistroPagoDetrac.sql">

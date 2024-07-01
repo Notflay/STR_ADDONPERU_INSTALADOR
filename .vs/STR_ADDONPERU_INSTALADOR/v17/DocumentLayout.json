@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -24,7 +24,7 @@
               "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
-              "ViewState": "AQIAALYBAAAAAAAAAAArwM0BAAAfAAAA",
+              "ViewState": "AQIAAI0CAAAAAAAAAAAcwJsCAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-20T17:23:09.884Z",
               "IsPinned": true,
@@ -37,6 +37,14 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",

@@ -996,4 +996,12 @@ BEGIN
 			LEFT JOIN "@STR_EARAPR" T5 ON T5."DocEntry" = T3."DocEntry";
 			--LEFT JOIN OVPM T4 ON T4."DocEntry" = T3."U_ER_NroPago";
 		END IF; 
+		-- Razon Social CONCATENADO
+		-- CALL RML_BF_OP_GENERAL('01','99','0',$["OCRD"."U_BPP_BPNO"],'$["OCRD"."U_BPP_BPN2"]','$["OCRD"."U_BPP_BPAP"]','$["OCRD"."U_BPP_BPAM"]','')	
+		IF :Objeto = '01' AND :NumeroBF = '99' 
+		THEN
+			SELECT 	
+				:Param02||' '||:Param03||' '||:Param04||' '||:Param05
+			FROM DUMMY;
+		END IF; 
 END

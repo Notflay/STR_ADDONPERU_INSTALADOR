@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES]
+CREATE PROCEDURE SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES
     @FECHAINI DATE,
     @FECHAFIN DATE,
     @CODPROVEEDOR NVARCHAR(20),
@@ -19,8 +19,25 @@ BEGIN
         T3.DocDueDate AS FechaVencimiento,
         CONCAT(T3.U_BPP_MDTD, '-', T3.U_BPP_MDSD, '-', T3.U_BPP_MDCD) AS NumeroDocumento,
         CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal ELSE T3.DocTotalFC END AS ImporteDoc,
-        CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal - T3.PaidSum ELSE T3.DocTotalFC - T3.PaidSumFc END AS MontoPago,
-        CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal - T3.PaidSum ELSE T3.DocTotalFC - T3.PaidSumFc END AS Saldo,
+		CASE WHEN T3."Installmnt" > 1 THEN
+			CASE WHEN T3."DocCur" = 'SOL' THEN  T7."InsTotal" -   T7."PaidToDate" -  ISNULL(T7."WTSum",0) ELSE T7."InsTotalFC" - T7."PaidFC" -  ISNULL(T7."WTSumFC",0) END 
+		ELSE
+			( CASE WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum" -  ISNULL(T3."WTSum",0) 
+				 WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'USD' THEN  T3."DocTotalFC" - T3."PaidSumFc" -  ISNULL(T3."WTSumFC",0) 
+				 ELSE (CASE WHEN T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum"  ELSE T3."DocTotalFC" - T3."PaidSumFc" END)
+				 END ) - COALESCE((SELECT SUM(N1."GTotal") FROM RPC1 N1 WHERE N1."BaseEntry" = T3."DocEntry"), 0) 
+		END
+		AS MontoPago,
+
+		CASE WHEN T3."Installmnt" > 1 THEN
+			CASE WHEN T3."DocCur" = 'SOL' THEN  T7."InsTotal" -   T7."PaidToDate" -  ISNULL(T7."WTSum",0) ELSE T7."InsTotalFC" - T7."PaidFC" -  ISNULL(T7."WTSumFC",0) END 
+		ELSE
+			( CASE WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum" -  ISNULL(T3."WTSum",0) 
+				 WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'USD' THEN  T3."DocTotalFC" - T3."PaidSumFc" -  ISNULL(T3."WTSumFC",0) 
+				 ELSE (CASE WHEN T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum"  ELSE T3."DocTotalFC" - T3."PaidSumFc" END)
+				 END ) - COALESCE((SELECT SUM(N1."GTotal") FROM RPC1 N1 WHERE N1."BaseEntry" = T3."DocEntry"), 0) 
+		END
+		AS Saldo,
         'Factura' AS TipoDocumento,
 		T4.LicTradNum AS RUC,
 		 T5.AcctName AS NombreBanco,  
@@ -65,8 +82,10 @@ BEGIN
          WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
 	LEFT JOIN PCH6 T7 ON T3."DocEntry" = T7."DocEntry"
+	LEFT JOIN PCH5 T8 ON T3."DocEntry" = T8."AbsEntry"
 	LEFT JOIN VPM2 T9 ON T9."DocEntry" = T3."U_BPP_AstDetrac"
 	LEFT JOIN OJDT T10 ON T10."TransId" = T3."U_BPP_AstDetrac" AND T10."TransCode" = 'DTR'
+	LEFT JOIN OWHT T11 ON T8."WTCode" = T11."WTCode" 
    WHERE 
         T3.TaxDate >= CASE WHEN @FECHAINI = '' THEN T3.TaxDate ELSE @FECHAINI END 
         AND T3.TaxDate <= CASE WHEN @FECHAFIN = '' THEN T3.TaxDate ELSE @FECHAFIN END 
@@ -88,8 +107,25 @@ BEGIN
         T3.DocDueDate AS FechaVencimiento,
         CONCAT(T3.U_BPP_MDTD, '-', T3.U_BPP_MDSD, '-', T3.U_BPP_MDCD) AS NumeroDocumento,
         CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal ELSE T3.DocTotalFC END AS ImporteDoc,
-        CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal - T3.PaidSum ELSE T3.DocTotalFC - T3.PaidSumFc END AS MontoPago,
-        CASE WHEN T3.DocCur = 'SOL' THEN T3.DocTotal - T3.PaidSum ELSE T3.DocTotalFC - T3.PaidSumFc END AS Saldo,
+       CASE WHEN T3."Installmnt" > 1 THEN
+			CASE WHEN T3."DocCur" = 'SOL' THEN  T7."InsTotal" -   T7."PaidToDate" -  ISNULL(T7."WTSum",0) ELSE T7."InsTotalFC" - T7."PaidFC" -  ISNULL(T7."WTSumFC",0) END 
+		ELSE
+			( CASE WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum" -  ISNULL(T3."WTSum",0) 
+				 WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'USD' THEN  T3."DocTotalFC" - T3."PaidSumFc" -  ISNULL(T3."WTSumFC",0) 
+				 ELSE (CASE WHEN T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum"  ELSE T3."DocTotalFC" - T3."PaidSumFc" END)
+				 END ) - COALESCE((SELECT SUM(N1."GTotal") FROM RPC1 N1 WHERE N1."BaseEntry" = T3."DocEntry"), 0) 
+		END
+		AS MontoPago,
+
+		CASE WHEN T3."Installmnt" > 1 THEN
+			CASE WHEN T3."DocCur" = 'SOL' THEN  T7."InsTotal" -   T7."PaidToDate" -  ISNULL(T7."WTSum",0) ELSE T7."InsTotalFC" - T7."PaidFC" -  ISNULL(T7."WTSumFC",0) END 
+		ELSE
+			( CASE WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum" -  ISNULL(T3."WTSum",0) 
+				 WHEN T8."WTCode" like 'R%'  AND T11."Category" = 'P'  AND T3."DocCur" = 'USD' THEN  T3."DocTotalFC" - T3."PaidSumFc" -  ISNULL(T3."WTSumFC",0) 
+				 ELSE (CASE WHEN T3."DocCur" = 'SOL' THEN  T3."DocTotal" - T3."PaidSum"  ELSE T3."DocTotalFC" - T3."PaidSumFc" END)
+				 END ) - COALESCE((SELECT SUM(N1."GTotal") FROM RPC1 N1 WHERE N1."BaseEntry" = T3."DocEntry"), 0) 
+		END
+		AS Saldo,
         'Factura' AS TipoDocumento,
 		T4.LicTradNum AS RUC,
 		 T5.AcctName AS NombreBanco,  
@@ -132,9 +168,11 @@ BEGIN
 		 LEFT JOIN ODPO T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
          WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
-	LEFT JOIN PCH6 T7 ON T3."DocEntry" = T7."DocEntry"
+	LEFT JOIN DPO6 T7 ON T3."DocEntry" = T7."DocEntry"
+	LEFT JOIN DPO5 T8 ON T3."DocEntry" = T8."AbsEntry"
 	LEFT JOIN VPM2 T9 ON T9."DocEntry" = T3."U_BPP_AstDetrac"
 	LEFT JOIN OJDT T10 ON T10."TransId" = T3."U_BPP_AstDetrac" AND T10."TransCode" = 'DTR'
+	LEFT JOIN OWHT T11 ON T8."WTCode" = T11."WTCode" 
    WHERE 
         T3.TaxDate >= CASE WHEN @FECHAINI = '' THEN T3.TaxDate ELSE @FECHAINI END 
         AND T3.TaxDate <= CASE WHEN @FECHAFIN = '' THEN T3.TaxDate ELSE @FECHAFIN END 
