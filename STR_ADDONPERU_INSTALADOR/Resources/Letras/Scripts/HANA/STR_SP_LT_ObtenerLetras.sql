@@ -19,11 +19,11 @@ SELECT (CASE WHEN :pv_Moneda <> '' THEN ' AND T1."U_LET_MON" = ''' || :pv_Moneda
 INTO vv_condicion FROM DUMMY;
 
 vv_sql := '
-		SELECT "uCheck", "NumInt",  "NumLetra", "CodigoSN", "NombreSN", "Moneda", "Importe", "FecEmi", "FecVen",
+		SELECT  "uCheck", "NumInt",  "NumLetra", "CodigoSN", "NombreSN", "Moneda", "Importe", "FecEmi", "FecVen",
 		  		"LineaID", "Percepcion",  "FecAce", "FcTotal", "LocTotal", "BalDueDeb", "BalDueCred", "NumUnico","Glosa"
 		  	FROM 
 		 		(    
-					 SELECT 
+					 SELECT DISTINCT
 					 		''N''		 AS "uCheck"
 					 		,T0."TransId" AS "NumInt"
 					  		,T1."Ref2" AS "NumLetra"
@@ -44,7 +44,7 @@ vv_sql := '
 					 		,T1."U_LET_GLS" AS "Glosa"
 					 		FROM  JDT1 T0 INNER JOIN OJDT T1 ON T0."TransId" = T1."TransId" 
 					 					  INNER JOIN OCRD T2 ON T0."ShortName" = T2."CardCode"
-					 					  LEFT JOIN "@ST_LT_ELLETRAS" T3 ON T3."U_codLet" = T1."Ref2"
+					 					  LEFT JOIN "@ST_LT_ELLETRAS" T3 ON T3."U_codLet" = T1."Ref2" AND T3."U_glosa" = T1."U_LET_GLS"
 					 					  LEFT JOIN "@ST_LT_RENEMI" T4 ON T4."U_nroLet" = T1."Ref2"
 					 WHERE (T0."DebCred" = ''D'' AND T0."TransType" = 30  OR T0."BatchNum" > 0 ) 
 					 		AND T0."Closed" = ''N''  
@@ -57,4 +57,3 @@ vv_sql := '
 
 EXECUTE IMMEDIATE (:vv_sql);
 END;
-

@@ -5,6 +5,8 @@ CREATE PROCEDURE STR_SP_PagoMasivoDetraccionesCabecera
 )
 AS
 BEGIN
+	Temp=(
+
 	SELECT 
 		T0."DocEntry",
 		T1."TaxIdNum",
@@ -20,6 +22,13 @@ BEGIN
 		
 	FROM "@BPP_PAYDTR" T0 , "OADM" T1 
 	WHERE T0."DocNum" = :NroLote AND T0."CreateDate" = :Fecha
-	GROUP BY T0."DocEntry",T0."U_BPP_TtPg", T0."CreateDate",T1."TaxIdNum",T1."CompnyName",T0."DocNum";
+	GROUP BY T0."DocEntry",T0."U_BPP_TtPg", T0."CreateDate",T1."TaxIdNum",T1."CompnyName",T0."DocNum"
+	);
+	
+	SELECT IFNULL("DocEntry",0)|| -- 1 
+		   IFNULL("TaxIdNum",'')|| -- 2
+		   IFNULL("CompnyName",'')||	
+		   IFNULL("U_Nrolote",'')||
+		  IFNULL("ImportCargar",'')
+	AS "DATA" FROM :Temp;
 END;
-

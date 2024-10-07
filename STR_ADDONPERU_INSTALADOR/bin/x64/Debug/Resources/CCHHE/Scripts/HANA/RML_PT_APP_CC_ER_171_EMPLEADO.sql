@@ -9,7 +9,7 @@ AS
 BEGIN
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * CCH * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 	/* SOLICITUD DE DINERO */
-	IF 	:transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 		 SELECT COUNT('E') INTO cnt FROM OHEM WHERE "U_CE_PVAS" IS NOT NULL AND "U_CE_CEAR" IS NULL AND "empID" = id;		
 	 	 IF :cnt > 0
 	  	 THEN

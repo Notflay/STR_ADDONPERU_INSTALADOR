@@ -14,7 +14,7 @@ cancelado CHAR(1);
 BEGIN
 	-- Variable de retorno para POSTRANSAC
 	
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 		
 		-- Al anular la factura con una NC debe mostrar anulado
 		

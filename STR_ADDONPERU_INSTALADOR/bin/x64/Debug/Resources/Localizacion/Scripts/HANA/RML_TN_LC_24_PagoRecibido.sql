@@ -25,7 +25,7 @@ DcOP int;
 
 
 BEGIN
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 		select (SELECT count(*) FROM ORCT T0 
 	            WHERE T0."U_BPP_MPPG" ='000'  and t0."DataSource"<> 'O'
 	             AND T0."DocEntry" = :id) into R1 from dummy;

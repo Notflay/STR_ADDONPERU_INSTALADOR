@@ -27,7 +27,19 @@ BEGIN
 
 	error :=0;
 	error_message := N'Ok';
+	
+	
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * CCH * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	/*VALIDACION DE CAJA CHICA APERTURA*/
+	IF object_type = 'STR_CCHAPR' 
+	THEN 
+		SELECT RML_TN_APP_CC_APR_001_UDO(:list_of_cols_val_tab_del, :transaction_type) INTO error_message FROM DUMMY;
+		IF IFNULL(:error_message,'') <> '' 
+		THEN
+			SELECT 1 INTO error FROM DUMMY;
+		END IF;
+	END IF;
+	
 	/*VALIDACION DE CAJA CHICA*/
 	IF object_type = 'STR_CCHCRG' 
 	THEN 
@@ -37,7 +49,19 @@ BEGIN
 			SELECT 1 INTO error FROM DUMMY;
 		END IF;
 	END IF;
+	
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * EAR * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+	/*VALIDACION DE ENTREGA A RENDIR APERTURA*/	
+	IF object_type = 'STR_EARAPR' 
+	THEN 
+		SELECT RML_TN_APP_CC_APR_002_UDO(:list_of_cols_val_tab_del, :transaction_type) INTO error_message FROM DUMMY;
+		IF IFNULL(:error_message,'') <> '' 
+		THEN
+			SELECT 1 INTO error FROM DUMMY;
+		END IF;
+	END IF;
+
 	/*VALIDACION DE ENTREGA A RENDIR STR_EARCRG*/
 	IF object_type = 'STR_EARCRG' 
 	THEN 
@@ -68,6 +92,8 @@ BEGIN
 			SELECT 1 INTO error FROM DUMMY;
 		END IF;
 	END IF;
+
+	
 
 	--Pagos recibidos
 	IF object_type = '24' 
@@ -105,9 +131,9 @@ BEGIN
 		IF cnt > 0 
 		THEN
 			CREATE LOCAL TEMPORARY TABLE "#tbloc"(cmp1 varchar(50),cmp2 varchar(100),cmp3 int);
-			INSERT INTO "#tbloc" SELECT T0."U_ER_EARN", T0."U_ER_NMER", (SELECT COUNT ('E') FROM OVPM WHERE "U_BPP_TIPR" = 'EAR' AND "U_BPP_CCHI" = T0."U_ER_EARN" AND "U_BPP_NUMC" = T0."U_ER_NMER" 
-			AND "Canceled" != 'Y') AS "CNT"	FROM "@STR_EARAPR" T0 INNER JOIN "@STR_EARAPRDET" T1 ON T0."DocEntry" =  T1."DocEntry" WHERE T1."U_ER_STDO" = 'A' AND T0."U_ER_DEPE" = list_of_cols_val_tab_del;	
-			SELECT COUNT('E') INTO cnt FROM "#tbloc" where cmp3 > 0;						
+			INSERT INTO "#tbloc" SELECT T1."U_ER_EARN", T1."U_ER_NMER", (SELECT COUNT ('E') FROM OVPM WHERE "U_BPP_TIPR" = 'EAR' AND "U_BPP_CCHI" = T1."U_ER_EARN" AND "U_BPP_NUMC" = T1."U_ER_NMER" 
+			AND "Canceled" != 'Y') AS "CNT"	FROM "@STR_EARAPR" T0 INNER JOIN "@STR_EARAPRDET" T1 ON T0."DocEntry" =  T1."DocEntry" WHERE T1."U_ER_STDO" = 'A' AND "U_ER_DEPE" = list_of_cols_val_tab_del;	
+			SELECT COUNT('E') INTO cnt FROM "#tbloc" where cmp3 > 0;
 			IF cnt > 0
 			THEN
 				SELECT TOP 1 cmp2 INTO nmrcchear FROM "#tbloc";
@@ -119,7 +145,11 @@ BEGIN
 			DROP TABLE "#tbloc";
 		END IF;
 	END IF;
-
+/*
+	IF :object_type = 'BPP_PAGM' AND IFNULL(:error,0) = 0 THEN
+		SELECT 1,'ERROR' INTO error,error_message FROM DUMMY;
+	END IF;
+*/
 -- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 select :error, :error_message FROM DUMMY;
 

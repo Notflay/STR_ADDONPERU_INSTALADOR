@@ -72,14 +72,25 @@ BEGIN
 	 LEFT JOIN 
         OCRD T4 ON T3.CardCode = T4.CardCode
     LEFT JOIN 
-        OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
-    LEFT JOIN 
+        OCRB T5 ON T4.BankCode = T5.BankCode and T4."DflBankKey" = T5."BankKey" AND T4."DflAccount" = T5."Account"
+		AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
+    /*
+	LEFT JOIN 
        (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
         --INNER 
 		 LEFT JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
 		 LEFT JOIN "OPCH" T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
          WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
+        ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
+	*/
+	LEFT JOIN 
+       (SELECT DISTINCT T1.U_BPP_NUMSAP 
+         FROM [@BPP_PAGM_DET1] T1
+        --INNER 
+		 LEFT JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
+		 LEFT JOIN "OPCH" T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
+         WHERE T2.U_BPP_ESTADO = 'Creado' 
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
 	LEFT JOIN PCH6 T7 ON T3."DocEntry" = T7."DocEntry"
 	LEFT JOIN PCH5 T8 ON T3."DocEntry" = T8."AbsEntry"
@@ -159,14 +170,15 @@ BEGIN
 	 LEFT JOIN 
         OCRD T4 ON T3.CardCode = T4.CardCode
     LEFT JOIN 
-        OCRB T5 ON T4.BankCode = T5.BankCode AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
+        OCRB T5 ON T4.BankCode = T5.BankCode and T4."DflBankKey" = T5."BankKey" AND T4."DflAccount" = T5."Account"
+		AND T4.CardCode = T5.CardCode AND T5.U_BPP_MONEDA = @MONEDA
     LEFT JOIN 
        (SELECT DISTINCT T1.U_BPP_NUMSAP 
          FROM [@BPP_PAGM_DET1] T1
         --INNER 
 		 LEFT JOIN [@BPP_PAGM_CAB] T2 ON T1.DocEntry = T2.DocEntry 
 		 LEFT JOIN ODPO T3 ON T1."U_BPP_NUMSAP" = T3."DocEntry"
-         WHERE T2.U_BPP_ESTADO IN ('Procesado','Creado') and T3."DocStatus" ='C'
+         WHERE T2.U_BPP_ESTADO = 'Creado' 
         ) T6 ON T3.DocEntry = T6.U_BPP_NUMSAP
 	LEFT JOIN DPO6 T7 ON T3."DocEntry" = T7."DocEntry"
 	LEFT JOIN DPO5 T8 ON T3."DocEntry" = T8."AbsEntry"

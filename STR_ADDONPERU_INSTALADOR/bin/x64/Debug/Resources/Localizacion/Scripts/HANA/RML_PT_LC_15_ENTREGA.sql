@@ -14,7 +14,7 @@ iNumero integer;
 cancelado char(1);
 BEGIN
 	-- Variable de retorno para POSTRANSAC
-	IF :transaction_type IN ('A','U') THEN 
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN 
 		UPDATE ODLN SET "NumAtCard" = IFNULL("U_BPP_MDTD",'') || '-' || IFNULL("U_BPP_MDSD",'') || '-' || IFNULL("U_BPP_MDCD",''), "FolioNum" = 0
 		WHERE "DocEntry" = :id;
   

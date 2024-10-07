@@ -10,10 +10,10 @@ BEGIN
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
 	
-	IF :transaction_type IN ('A','U') THEN	
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN	
 		DECLARE rsl int;
 		SELECT COUNT('a') into rsl from OJDT T0  inner join OJDT T1 ON T0."TransId" != T1."TransId" AND T0."U_BPP_DocKeyDest" = T1."U_BPP_DocKeyDest"
-		AND T0."U_BPP_CtaTdoc" = '18'  AND T1."TransCode" = 'DTR' and T1."StornoToTr" is null AND T1."TransId" = :id;
+		AND T0."U_BPP_CtaTdoc" = T1."U_BPP_CtaTdoc"  AND T1."TransCode" = 'DTR' and T1."StornoToTr" is null AND T1."TransId" = :id;
 		IF :rsl > 0 
 		THEN 
 			error_message :='STR: Existe un asiento de detracción con la misma referencia';

@@ -14,7 +14,7 @@ BEGIN
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
 	
-	IF :transaction_type IN('A','U')
+	IF :transaction_type = 'A' OR :transaction_type = 'U'
 	THEN	
 		-- Validaciones de CREACIÓN para EAR
 		SELECT COUNT(*) INTO cnt FROM "@STR_EARCRGDET" WHERE "DocEntry" = id AND (IFNULL("U_ER_DIM1",'')='' OR IFNULL("U_ER_DIM2",'')='' 

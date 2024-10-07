@@ -7,7 +7,7 @@ RETURNS error_message NVARCHAR(200)
 AS
 
 BEGIN
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 
 	 END IF;
 END

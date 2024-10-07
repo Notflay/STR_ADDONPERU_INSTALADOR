@@ -34,16 +34,37 @@ sTipoExist nvarchar(15);
 Numero nvarchar(15);
 ValCorr integer;
 
-cancelado CHAR(1);
+crdCode nvarchar(50);
+ctaDetrac nvarchar(50);
+v_LocManTran nvarchar(10);
+Detrac integer;
 
+cancelado CHAR(1);
 BEGIN
 	-- Variable de retorno de mensaje de error
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
 	
-	IF :transaction_type IN('A','U')
+	IF :transaction_type = 'A' OR :transaction_type = 'U'
 	THEN
-		 --Indicador de la Nota de Credito
+			select top 1 "CardCode" INTO crdCode  from ORPC where "DocEntry"=:id;	
+			select top 1 Count("WTCode") INTO Detrac FROM RPC5 where "WTCode" like 'DT%' and "AbsEntry"=:id;
+		
+			IF :Detrac > 0 THEN
+				 SELECT(select top 1 COALESCE("U_BPP_CtaDetrac", '') from OCRD where "CardCode"=:crdCode)INTO ctaDetrac FROM DUMMY;
+				IF IFNULL(:ctaDetrac, '')='' THEN
+							error_message := 'No se ha definido la cuenta asociada de Detracciones para el socio de negocio.';
+				END IF;	
+			END IF;
+			
+			SELECT (select top 1 "LocManTran" from OACT where "FormatCode"=:ctaDetrac) INTO v_LocManTran FROM DUMMY;
+			
+			IF :v_LocManTran = 'N' THEN
+					error_message := 'La cuenta del socio de negocio definida para el asiento de detracción no es una cuenta asociada.';
+			END IF;
+	
+	
+		 	--Indicador de la Nota de Credito
             select  (SELECT count(*) FROM ORPC T0 
             WHERE ifnull(T0."U_BPP_MDTD",'') ='' 
             AND T0."DocEntry" = :id) INTO R1 from dummy;
@@ -57,10 +78,10 @@ BEGIN
             AND T0."DocEntry" = :id) into R4 from dummy;
             
               IF :R1 > 0
-               then  error_message := 'STR_A: Debe seleccionar el tipo de documento SUNAT';
+               then  error_message := 'Debe seleccionar el tipo de documento SUNAT';
                 END if;
               IF :R4 > 0 
-              then error_message := 'STR_A: Ingrese el Tipo de Operacion en el detalle del documento';
+              then error_message := 'Ingrese el Tipo de Operacion en el detalle del documento';
                END if;
            end if;
            
@@ -71,30 +92,39 @@ BEGIN
 				   SELECT "CardCode","U_BPP_MDTD","U_BPP_MDSD","U_BPP_MDCD","CANCELED" INTO cc,tp,sr,sNumero,cancelado from ORPC where "DocEntry"= TO_INTEGER(:id);
 				   
 				   IF :cancelado <> 'C' THEN 
+				   
+				   		-- Validar que se haya colocado TIPO - SERIE Y CORRELATIVO
+				   		IF IFNULL(sr,'') = '' THEN
+				  			error_message := 'Ingrese la serie del documento'; 
+				  			RETURN;		
+				   		END IF;
+				   		
+				   		IF IFNULL(sNumero,'') = '' THEN
+				  			error_message := 'Ingrese el correlativo del documento'; 
+				  			RETURN;		
+				   		END IF;
+				   
 				   		SELECT  TO_INTEGER(:sNumero) INTO iNumero FROM DUMMY;
-					iNumero := :iNumero + 1;
-			
-					SELECT (CASE WHEN LENGTH(:sNumero)>= LENGTH(TO_VARCHAR(:iNumero)) THEN LPAD (TO_VARCHAR(:iNumero), 
-					(length(:sNumero)-LENGTH(TO_VARCHAR(:iNumero))) + LENGTH(TO_VARCHAR(:iNumero)), '0') ELSE TO_VARCHAR(:iNumero)END) INTO Numero FROM DUMMY; 
+						iNumero := :iNumero + 1;
 				
-					 SELECT (select top 1 "DocNum" from (
-							select "DocNum" as "DocNum" from OPCH where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
-							UNION ALL
-							select "DocNum" as "DocNum" from ORPC where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
-							UNION ALL					
-							select "DocNum" as "DocNum" from ODPO where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999') DE) INTO sNumExist FROM DUMMY; --)					
-		
-			 SELECT (select top 1 "Tipo" from (					
-							select "ObjType" as "Tipo" from OPCH where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
-							UNION ALL
-							select "ObjType" as "Tipo" from ORPC where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
-							UNION ALL					
-							select "ObjType" as "Tipo" from ODPO where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999') TP) INTO sTipoExist FROM DUMMY; --)
-					 
-					 IF IFNULL(:sNumExist, '') <> '' or IFNULL(:sTipoExist, '') <> ''
-					 THEN 
-					 	error_message := 'Ya existe un registro con el mismo número de la serie elegida para este tipo de documento (DocEntry: ' || :sNumExist || ' ObjType: ' || :sTipoExist || ')';	
-					 END IF;
+						SELECT (CASE WHEN LENGTH(:sNumero)>= LENGTH(TO_VARCHAR(:iNumero)) THEN LPAD (TO_VARCHAR(:iNumero), 
+						(length(:sNumero)-LENGTH(TO_VARCHAR(:iNumero))) + LENGTH(TO_VARCHAR(:iNumero)), '0') ELSE TO_VARCHAR(:iNumero)END) INTO Numero FROM DUMMY; 
+					
+						 SELECT (select top 1 "DocNum" from (
+								select "DocNum" as "DocNum" from ORPC where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
+								) DE) INTO sNumExist FROM DUMMY; --)					
+			
+						 SELECT (select top 1 "Tipo" from (					
+										select "ObjType" as "Tipo" from ORPC where "CardCode"= :cc and "U_BPP_MDCD"= :sNumero and COALESCE("U_BPP_MDCD", '')<>'' and "U_BPP_MDSD"= :sr and COALESCE("U_BPP_MDSD", '')<>'' and "U_BPP_MDTD"= :tp and COALESCE("U_BPP_MDTD", '')<>'' and "DocEntry"<> TO_INTEGER(:id) and COALESCE("U_BPP_MDSD", '')<>'999'
+										) TP) INTO sTipoExist FROM DUMMY; --)
+								 
+						 IF IFNULL(:sNumExist, '') <> '' or IFNULL(:sTipoExist, '') <> ''
+						 THEN 
+						 	error_message := 'Ya existe un registro con el mismo número de la serie elegida para este tipo de documento (DocEntry: ' || :sNumExist || ' ObjType: ' || :sTipoExist || ')';	
+						 END IF;
+						 
+						 
+						 
 				   END IF;
 			END IF;
 	END IF;

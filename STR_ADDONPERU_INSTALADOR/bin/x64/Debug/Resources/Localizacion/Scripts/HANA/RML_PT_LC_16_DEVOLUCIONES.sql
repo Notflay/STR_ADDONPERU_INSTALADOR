@@ -15,7 +15,7 @@ cancelado CHAR(1);
 BEGIN
 	
 -- Al anular la factura con una NC debe mostrar anulado
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 		
 		UPDATE ODLN 
 			SET "NumAtCard" = '***ANULADO***'

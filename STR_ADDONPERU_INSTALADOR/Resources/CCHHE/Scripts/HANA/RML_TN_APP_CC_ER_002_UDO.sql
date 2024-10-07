@@ -15,47 +15,42 @@ BEGIN
 	error_message := ''; 
 	
 	IF :transaction_type IN('A','U')
-	THEN	
-		-- Validaciones de CREACIÓN para EAR
-		SELECT COUNT(*) INTO cnt FROM "@STR_EARCRGDET" WHERE "DocEntry" = id AND (IFNULL("U_ER_DIM1",'')='' OR IFNULL("U_ER_DIM2",'')='' 
-		OR IFNULL("U_ER_DIM3",'')=''  OR IFNULL("U_ER_DIM4",'')='');
-		IF :cnt > 0
-		THEN
-			error_message := 'Las dimensiones de Centro de Costos es obligatorio a nivel detalle';
-		END IF;
+	THEN		
+		DECLARE cursor CURSOR_EAR_DET FOR
+       	SELECT  ROW_NUMBER() OVER () AS "Orden",*
+       	FROM "@STR_EARCRGDET"  
+       	WHERE IFNULL("U_ER_CDPV",'') <> '' 
+        AND "DocEntry" = :id AND "U_ER_ESTD" <> 'OK';
 		
-		--------------------------------------------------------
-		-- Validación de Socio de Negocio Inactivo
-		--------------------------------------------------------
-		
-		SELECT COUNT(*) INTO inct FROM "@STR_EARCRGDET" T0 INNER JOIN OCRD T1 ON T1."CardCode" = T0."U_ER_CDPV" WHERE T0."DocEntry" = id AND T1."frozenFor" = 'Y'; 
-		IF :inct > 0
-		THEN
-			 SELECT T1."LineId" INTO inct -- Almacena el número de línea
-			 FROM "@STR_EARCRGDET" T1
-			 INNER JOIN OCRD T0 ON T0."CardCode" = T1."U_ER_CDPV"
-			 WHERE T1."DocEntry" = id AND T0."frozenFor" = 'Y'
-			 LIMIT 1; -- Selecciona solo un registro
-		
-			 error_message := CONCAT(CONCAT('El Socio de Negocio de la línea ',:inct),' se encuentra inactivo');
-		END IF;
-		
+		FOR DATA AS CURSOR_EAR_DET
+			DO
+			
+				IF IFNULL(DATA."U_ER_DIM1",'') = '' THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | La dimensión 1 es obligatoria';
+					break;
+				END IF;
+				
+				IF IFNULL(DATA."U_ER_DIM3",'') = '' THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | La dimensión 3 es obligatoria';
+					break;
+				END IF;
+				/*
+				IF IFNULL(DATA."U_CC_DIM1",'') = '' THEN
+					error_message := 'Linea: '|| DATA."LineId"  || ' | La dimensión 5 es obligatoria';
+				END IF;
+				*/
+				
+				SELECT COUNT(*) INTO inct FROM OCRD WHERE "CardCode" = DATA."U_ER_CDPV" AND "frozenFor" = 'Y'; 
+				IF :inct > 0
+				THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | El Socio de Negocio se encuentra inactivo';
+					break;
+				END IF;
+				
+		END FOR;
 		--------------------------------------------------------
 		-- Validación de Partida presupuestal en base al CC - CRP
 		--------------------------------------------------------
-		/*
-		SELECT COUNT(*) INTO part FROM "@STR_CCHCRGDET" where "DocEntry" = id AND "U_CC_DIM1" <> SUBSTRING("U_CC_CMP1", 7, 3);
-		IF :part > 0
-		THEN
-		 SELECT T1."LineId" INTO part -- Almacena el número de línea
-		 FROM "@STR_CCHCRGDET" T1 where T1."DocEntry" = id 
-		 AND T1."U_CC_DIM1" <> SUBSTRING(T1."U_CC_CMP1", 7, 3) 
-		 LIMIT 1; -- Selecciona solo un registro
-	
-		 error := 1;
-		 error_message := CONCAT('La partida ingresada no corresponde al CC seleccionado en la línea ',:part);
-		END IF;
-		*/
 			
 	END IF;	
 END

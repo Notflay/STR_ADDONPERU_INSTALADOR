@@ -11,7 +11,7 @@ BEGIN
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
 	
-	IF :transaction_type IN('A','U')
+	IF :transaction_type = 'A' OR :transaction_type = 'U'
 	THEN
 					
 	END IF;

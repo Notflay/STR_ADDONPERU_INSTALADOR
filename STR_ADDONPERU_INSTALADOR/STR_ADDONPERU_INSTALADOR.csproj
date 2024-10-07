@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>STR_ADDONPERU_INSTALADOR</RootNamespace>
     <AssemblyName>STR_ADDONPERU_INSTALADOR</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -56,11 +56,17 @@
     <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.7.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
@@ -68,8 +74,17 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -81,7 +96,19 @@
       <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -96,6 +123,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidad\CodigoBancario.cs" />
+    <Compile Include="Entidad\ConsultationResponse.cs" />
+    <Compile Include="Entidad\Impuesto.cs" />
     <Compile Include="FrmInstalador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,7 +186,9 @@
     <None Include="Resources\Letras\UT.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Localizacion\DataDefecto6.xlsm" />
+    <None Include="Resources\Localizacion\DataDefecto6.xlsm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Localizacion\UF.vte">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -288,9 +320,6 @@
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_SaldoNumerosCajaChica.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Valida_CCH_EAR.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_Verificar_Documento_Existente.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -364,9 +393,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_SaldoNumerosCajaChica.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_Valida_CCH_EAR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_Verificar_Documento_Existente.sql">
@@ -519,6 +545,7 @@
     <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_ObtenerLetras.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\REPLICATE.sql" />
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_BF_OP_GENERAL.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -645,6 +672,7 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_SP_NOMBREARCHIVO.sql" />
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_APP_PGM_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -771,22 +799,10 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_DETRACCIONES.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_DESTINOS.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_DETRACCIONES.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_APROBACIONES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
@@ -810,6 +826,10 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BCP_DETV1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_CAB.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_DET.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_CAB.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_DET.sql" />
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_OBTENERBANKCODE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -837,6 +857,7 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_PMD.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_RAMO.sql" />
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_CLIENTE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -849,6 +870,7 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_BPP_ActualizarNumeroSUNAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_FN_FE_ObtMontoLetras.sql" />
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -957,6 +979,7 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\ST_LOC_GET_PENDIENTES_ASIENTO_PROV.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_BF_OP_GENERAL.sql" />
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_APP_PMD_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1080,6 +1103,7 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_SP_NOMBREARCHIVO.sql" />
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_APP_PGM_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1209,22 +1233,10 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_DETRACCIONES.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_ARCHIVO_PAGOS_MASIVOS.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DESTINOS.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_DETRACCIONES.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_APROBACIONES.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\SP_BPP_CONSULTAR_PGM_FACTURAS.sql">
@@ -1288,9 +1300,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ActualizaPagoDetraccion.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_BPP_LocalizacionSTRAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_DetraccionesPagadas.sql">
@@ -1366,6 +1375,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_ObtTransferencias.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_PagoMasivoDetraccionesCabecera.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_PagoMasivoDetraccionesDetalle.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_PagoMasivoDetracciones_C.sql">

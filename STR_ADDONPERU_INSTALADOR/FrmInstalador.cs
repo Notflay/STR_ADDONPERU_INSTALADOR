@@ -6,14 +6,18 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using MaterialSkin.Controls;
 using Microsoft.Office.Interop.Excel;
 using SAPbobsCOM;
+using STR_ADDONPERU_INSTALADOR.Entidad;
 using STR_ADDONPERU_INSTALADOR.Util;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using Global = STR_ADDONPERU_INSTALADOR.Util.Global;
 using ms = Microsoft.Office.Interop.Excel; 
@@ -289,26 +293,53 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        public bool columnExis(string campo, string tabla, string element, dynamic elementMD, ref int cntExistentes)
+        public bool columnExis(string campo, string tabla, string element, dynamic elementMD, ref int cntExistentes, bool valorValidoEnSap, ref bool update)
         {
-            SAPbobsCOM.Recordset rs = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            SAPbobsCOM.Recordset rs = (SAPbobsCOM.Recordset)company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
 
             try
             {
+                string query = $"SELECT CASE WHEN COUNT(T1.\"FieldID\") > 0 THEN 1 ELSE 0 END AS \"ExisteCol\", " +
+                               $"CASE WHEN COUNT(T0.\"FieldID\") > 0 THEN 1 ELSE 0 END AS \"ExisteValidos\" " +
+                               $"FROM CUFD T1 LEFT JOIN UFD1 T0 ON T0.\"FieldID\" = T1.\"FieldID\" AND T0.\"TableID\" = T1.\"TableID\" " +
+                               $"WHERE T1.\"AliasID\" = '{campo}' AND T1.\"TableID\" = '{tabla}' " +
+                               $"GROUP BY T1.\"FieldID\", T0.\"FieldID\"";
 
-                rs.DoQuery($"SELECT TOP 1 \"U_{campo}\" FROM \"{tabla}\"");
-                string tipoElement = GetElementTypeDescription(element);
-                validados++;
-                HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
-                return true;
+                rs.DoQuery(query);
+
+                bool existeCol = rs.Fields.Item("ExisteCol").Value == 1;
+                bool existeValidos = rs.Fields.Item("ExisteValidos").Value == 1;
+
+                if (existeCol)
+                {
+                    string tipoElement = GetElementTypeDescription(element);
+                    validados++;
+                    HandleAddExist(element, tipoElement, elementMD, ref cntExistentes);
+                    if (valorValidoEnSap != existeValidos) // Asigna el valor de `existeValidos` a `update` para usarlo fuera de la función
+                    {
+                        update = true;
+                        return false;
+                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Global.WriteToFile($"{addon}: ERROR al verificar columna " + ex.Message);
                 return false;
             }
             finally
             {
-                rs = null;
+                if (rs != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(rs);
+                    rs = null;
+                }
+                GC.Collect();
             }
         }
 
@@ -337,11 +368,18 @@ namespace STR_ADDONPERU_INSTALADOR
 
                             for (int i = 0; i < lo_ArrFiles.GetUpperBound(0) + 1; i++)
                             {
-                                lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
-                                ls_StrFile = lo_StrmRdr.ReadToEnd();
+                                try
+                                {
+                                    lo_StrmRdr = new System.IO.StreamReader(lo_ArrFiles[i]);
+                                    ls_StrFile = lo_StrmRdr.ReadToEnd();
 
 
-                                lo_RecSet.DoQuery(ls_StrFile);
+                                    lo_RecSet.DoQuery(ls_StrFile);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Global.WriteToFile($"instalaComplementos - {ex.Message}");
+                                }
                             }
                         }
                         catch (Exception)
@@ -379,10 +417,9 @@ namespace STR_ADDONPERU_INSTALADOR
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Global.WriteToFile($"instalaComplementos - {ex.Message}");
             }
             finally
             {
@@ -399,7 +436,7 @@ namespace STR_ADDONPERU_INSTALADOR
 
             int cntErrores = 0;
             int cntExistentes = 0;
-            List<int> elemtsProcesar = new List<int>();
+            List<Dictionary<string, object>> elemtsProcesar = new List<Dictionary<string, object>>();
 
             try
             {
@@ -435,7 +472,7 @@ namespace STR_ADDONPERU_INSTALADOR
             }
         }
 
-        private void InsertElementosProcess(string pathFile, string e, ref List<int> elemtsProcesar, string element, ref int cntExistentes)
+        private void InsertElementosProcess(string pathFile, string e, ref List<Dictionary<string, object>> elemtsProcesar, string element, ref int cntExistentes)
         {
             SAPbobsCOM.Company companyAux = null;
             companyAux = this.company;
@@ -449,11 +486,21 @@ namespace STR_ADDONPERU_INSTALADOR
                         dynamic elemtoMD = null;
                         try
                         {
+                            // elemtsProcesar["index"]
+                            // elemtsProcesar["update"]
+                            bool update = false;
                             elemtoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
                             bool exis = e == "UT" ? tableExis(elemtoMD.TableName, element, elemtoMD, ref cntExistentes) : e == "UF" ?
-                                columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD, ref cntExistentes) : false;
-                            if (!exis) elemtsProcesar.Add(i);
-
+                                columnExis(elemtoMD.Name, elemtoMD.TableName, element, elemtoMD, ref cntExistentes, elemtoMD.ValidValues.Count > 1, ref update) : false;
+                            if (!exis)
+                            {
+                                var keyValuePairs = new Dictionary<string, object>
+                                {
+                                    { "index", i },
+                                    { "update", update } // Asumiendo que se trata de un nuevo elemento por defecto
+                                };
+                                elemtsProcesar.Add(keyValuePairs);
+                            }
                         }
                         catch (Exception)
                         {
@@ -500,34 +547,55 @@ namespace STR_ADDONPERU_INSTALADOR
 
             totales += lo_ArrFiles.Count();
         }
-
-        private void ProcessElementsOfType(string pathFile, string element, ref int cntErrores, ref int cntExistentes, ref List<int> elemtsProcesar)
+        private void ProcessElementsOfType(string pathFile, string element, ref int cntErrores, ref int cntExistentes, ref List<Dictionary<string, object>> elemtsProcesar)
         {
-            SAPbobsCOM.Company companyAux = null;
-            int cntElementos = 0;
-            companyAux = this.company;
-
+            SAPbobsCOM.Company companyAux = this.company;
             try
             {
-                //cntElementos = company.GetXMLelementCount(pathFile);
-                //for (int i = 0; i < cntElementos; i++)
-                for (int i = 0; i < elemtsProcesar.Count; i++)
+                foreach (var elemInfo in elemtsProcesar)
                 {
+                    int elementIndex = (int)elemInfo["index"];
+                    bool update = (bool)elemInfo["update"];
                     dynamic elementoMD = null;
+                    dynamic existingField = null;
+
+                    SAPbobsCOM.ValidValues validValue = null;
+
                     try
                     {
                         string tipoElemento = GetElementTypeDescription(element);
-                        //elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
-                        elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
+                        elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elementIndex);
                         string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
-                        this.Invoke((MethodInvoker)delegate
+
+                        if (update)
                         {
-                            lblDescription.Text = mensaje;
-                        });
+                            existingField = GetCurrentFieldData(elementoMD.TableName, elementoMD.Name);
 
-                        ProcessNewElement(elementoMD, element, tipoElemento, ref cntErrores, ref cntExistentes);
+                            // Eliminar los valores existentes si es necesario
+                            for (int i = existingField.ValidValues.Count - 1; i >= 0; i--)
+                            {
+                                existingField.ValidValues.SetCurrentLine(i);
+                                existingField.ValidValues.Delete();
+                            }
 
+                            // Agregar nuevos ValidValues
+                            for (int i = 0; i < elementoMD.ValidValues.Count; i++)
+                            {
+                                elementoMD.ValidValues.SetCurrentLine(i);
 
+                                existingField.ValidValues.Value = elementoMD.ValidValues.Value;
+                                existingField.ValidValues.Description = elementoMD.ValidValues.Description;
+                                existingField.ValidValues.Add();
+                            }
+
+                            if (!string.IsNullOrEmpty(elementoMD.DefaultValue)) existingField.DefaultValue = elementoMD.DefaultValue;
+
+                            UpdateElement(existingField, element, tipoElemento, ref cntErrores, ref cntExistentes);
+                        }
+                        else
+                        {
+                            ProcessNewElement(elementoMD, element, tipoElemento, ref cntErrores, ref cntExistentes);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -535,17 +603,120 @@ namespace STR_ADDONPERU_INSTALADOR
                     }
                     finally
                     {
-                        elementoMD = null;
+
+                        //if (elementoMD != null)
+                        //{
+                        //    System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
+                        //    elementoMD = null;
+                        //}
+
+                        if (validValue != null)
+                        {
+                            System.Runtime.InteropServices.Marshal.ReleaseComObject(validValue);
+                            validValue = null;
+                        }
                     }
                 }
             }
+            catch { }
             finally
             {
                 elemtsProcesar.Clear();
-                //Cursor.Current = Cursors.Default;
             }
-
         }
+
+        private dynamic GetCurrentFieldData(string tableName, string fieldName)
+        {
+            SAPbobsCOM.UserFieldsMD userField = null;
+            SAPbobsCOM.Recordset rs = (SAPbobsCOM.Recordset)company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+            try
+            {
+                // Consulta para obtener el FieldID y TableID actuales
+                string query = $"SELECT \"FieldID\", \"TableID\" FROM \"CUFD\" WHERE \"TableID\" = '{tableName}' AND \"AliasID\" = '{fieldName}'";
+                rs.DoQuery(query);
+
+                if (rs.RecordCount > 0)
+                {
+                    int fieldID = rs.Fields.Item("FieldID").Value;
+                    string tableID = rs.Fields.Item("TableID").Value.ToString();
+
+                    // Obtiene el objeto UserFieldsMD para el campo
+                    userField = (SAPbobsCOM.UserFieldsMD)company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserFields);
+                    if (userField.GetByKey(tableID, fieldID))
+                    {
+                        return userField; // Devuelve el objeto UserFieldsMD existente
+                    }
+                }
+
+                return null; // No se encontró el campo
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile($"{addon}: ERROR al obtener datos del campo " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                //if (userField != null)
+                //{
+                //    System.Runtime.InteropServices.Marshal.ReleaseComObject(userField);
+                //    userField = null;
+                //}
+                if (rs != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(rs);
+                    rs = null;
+                }
+                // GC.Collect();
+            }
+        }
+
+        //private void ProcessElementsOfType(string pathFile, string element, ref int cntErrores, ref int cntExistentes, ref List<Dictionary<string, object>> elemtsProcesar)
+        //{
+        //    SAPbobsCOM.Company companyAux = null;
+        //    int cntElementos = 0;
+        //    companyAux = this.company;
+
+        //    try
+        //    {
+        //        //cntElementos = company.GetXMLelementCount(pathFile);
+        //        //for (int i = 0; i < cntElementos; i++)
+        //        for (int i = 0; i < elemtsProcesar.Count; i++)
+        //        {
+        //            dynamic elementoMD = null;
+        //            try
+        //            {
+        //                string tipoElemento = GetElementTypeDescription(element);
+        //                //elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, i);
+        //                elementoMD = companyAux.GetBusinessObjectFromXML(pathFile, elemtsProcesar[i]);
+        //                string mensaje = $"Creando {tipoElemento.Replace('s', ' ')} {(element.Equals("UT") | element.Equals("UO") ? "" : $"{elementoMD.Name} de la tabla: ")} {elementoMD.TableName}";
+        //                this.Invoke((MethodInvoker)delegate
+        //                {
+        //                    lblDescription.Text = mensaje;
+        //                });
+
+        //                //if (element.Equals("UT"))
+
+        //                ProcessNewElement(elementoMD, element, tipoElemento, ref cntErrores, ref cntExistentes);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Global.WriteToFile($"{addon}: ERROR al instalar complementos " + ex.Message);
+        //            }
+        //            finally
+        //            {
+        //                elementoMD = null;
+        //            }
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        elemtsProcesar.Clear();
+        //        //Cursor.Current = Cursors.Default;
+        //    }
+
+        //}
 
         private string GetElementTypeDescription(string elementType)
         {
@@ -578,7 +749,30 @@ namespace STR_ADDONPERU_INSTALADOR
                 HandleAddError(element, tipoElemento, elementoMD, ref cntErrores, ref cntExistentes);
             }
             System.Runtime.InteropServices.Marshal.ReleaseComObject(elementoMD);
-            GC.Collect();
+            //GC.Collect();
+        }
+
+        private void UpdateElement(dynamic existingField, string element, string tipoElemento, ref int cntErrores, ref int cntExistentes)
+        {
+            Global.WriteToFile(existingField.GetAsXML().ToString());
+
+            if (existingField.Update() == 0)
+            {
+                HandleAddSuccess(element, tipoElemento, existingField);
+            }
+            else
+            {
+                HandleAddError(element, tipoElemento, existingField, ref cntErrores, ref cntExistentes);
+            }
+
+            // Asegúrate de liberar 'existingField' aquí si es necesario
+            if (existingField != null)
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(existingField);
+                existingField = null;
+            }
+
+            //GC.Collect();
         }
 
         private void HandleAddSuccess(string element, string tipoElemento, dynamic elementoMD)
@@ -626,7 +820,7 @@ namespace STR_ADDONPERU_INSTALADOR
         {
             try
             {
-             
+
                 SAPbobsCOM.Recordset lo_RevSetAux = null;
                 string[] lo_ArrFiles = null;
                 string ls_Qry = string.Empty;
@@ -822,8 +1016,8 @@ namespace STR_ADDONPERU_INSTALADOR
                             {
                                 try
                                 {
-                                   // ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
-                                   // lo_RecSet.DoQuery(ls_Qry);
+                                    // ls_Qry = @"DROP " + lo_ArrTpoScrpt[1].Trim() + " " + ls_NmbFile;
+                                    // lo_RecSet.DoQuery(ls_Qry);
                                     //lo_RecSet.DoQuery(ls_StrFile);
                                     string mensaje = $"{ps_addn}: Se creo/actualizo {ls_Tipo} - {ls_NmbFile}";
                                     ActualizaDescripcion(mensaje);
@@ -886,60 +1080,345 @@ namespace STR_ADDONPERU_INSTALADOR
 
         public void fn_inicializacion(string addon)
         {
-            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-
-            if (addon == "Letras")
+            try
             {
-                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\Letras\\DataDefecto.xlsm";
+                switch (addon)
+                {
+                    case "Letras":
+                        ProcesarExcel($"{System.Windows.Forms.Application.StartupPath}\\Resources\\Letras\\DataDefecto.xlsm");
+                        break;
 
-                // Obtiene EXCEL DATA
-                ms.Application excelApp = new ms.Application();
-                Workbook workbook = excelApp.Workbooks.Open(path);
+                    case "Localizacion":
+                        InicializarLocalizacion();
+                        break;
 
+                    case "CCHHE":
+                        InicializarCCHHE();
+                        break;
+
+                    case "SIRE":
+                        ProcesarExcel($"{System.Windows.Forms.Application.StartupPath}\\Resources\\Sire\\DataDefecto.xlsm");
+                        break;
+
+                    default:
+                        MessageBox.Show("Addon no reconocido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+
+                MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error durante la inicialización del addon {addon}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Global.WriteToFile($"Error en fn_inicializacion: {ex.Message}");
+            }
+        }
+
+        private void ProcesarExcel(string path)
+        {
+            ms.Application excelApp = new ms.Application();
+            Workbook workbook = excelApp.Workbooks.Open(path);
+
+            try
+            {
                 foreach (Worksheet worksheet in workbook.Sheets)
                 {
-                    string tablaSAP = worksheet.Name; // TABLA A INSERTAR LA DATA
+                    string tablaSAP = worksheet.Name;
                     if (!string.IsNullOrEmpty(tablaSAP) && tablaSAP != "Listas")
                     {
                         Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
 
                         for (int row = 3; row < usedRange.Rows.Count; row++)
                         {
-                            try
-                            {
-                                // Tiene que iniciar aqui
-                                SAPbobsCOM.UserTable userTable = null;
-                                userTable = company.UserTables.Item(tablaSAP);
-                                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
-                                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
-
-                                for (int col = 3; col <= usedRange.Columns.Count; col++)
-                                {
-                                    if (usedRange.Cells[1, col].Value2 != "Resultados")
-                                    {
-                                        string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
-                                        var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
-
-                                        userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
-                                    }
-                                }
-                                userTable.Add();
-
-                                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
-                                userTable = null;
-                            }
-                            catch (Exception)
-                            {
-
-                                // throw;
-                            }
+                            ProcesarFilaExcel(tablaSAP, usedRange, row);
                         }
                     }
                 }
             }
-            else if (addon == "Localizacion")
+            finally
             {
-               // fn_iniciaTransacPorDefecto();
+                workbook.Close(false);
+                excelApp.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+                GC.Collect();
+            }
+        }
+
+        private void ProcesarFilaExcel(string tablaSAP, Microsoft.Office.Interop.Excel.Range usedRange, int row)
+        {
+            try
+            {
+                SAPbobsCOM.UserTable userTable = company.UserTables.Item(tablaSAP);
+                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
+                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
+
+                for (int col = 3; col <= usedRange.Columns.Count; col++)
+                {
+                    string campoSAP = usedRange.Cells[1, col].Value2;
+                    if (!string.IsNullOrEmpty(campoSAP) && campoSAP != "Resultados")
+                    {
+                        var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
+                        userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
+
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            string msj = $"Insert Data | Table: {tablaSAP} - Campo: {campoSAP} - Valor: {valor}";
+                            lblDescription.Text = msj;
+                            Global.WriteToFile(msj);
+                        });
+                    }
+                }
+
+                if (userTable.Add() != 0)
+                {
+                    company.GetLastError(out int errorCode, out string errorMessage);
+                    MessageBox.Show($"Error al agregar el registro en {tablaSAP}: {errorMessage}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
+                userTable = null;
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile($"Error al procesar la fila {row} de la tabla {tablaSAP}: {ex.Message}");
+            }
+        }
+
+        private void InicializarLocalizacion()
+        {
+            Sb_InsertarDataPorDefectoLocalizacion();
+
+            if (MessageBox.Show("¿Deseas implementar el Maestro de las definiciones de Bancos?", "Maestros", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                ImplementarDefinicionesDeBancos();
+            }
+
+            if (MessageBox.Show("¿Deseas implementar el Maestro de los Impuestos?", "Maestros", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                ImplementarImpuestos();
+            }
+        }
+
+        private void ImplementarDefinicionesDeBancos()
+        {
+            try
+            {
+                string baseUrl = ConfigurationManager.AppSettings["link_api"];
+                string endpoint = "/bankCodes";
+                string apiUrl = $"{baseUrl}{endpoint}";
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = httpClient.GetAsync(apiUrl).Result;
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                ConsultationResponse<List<CodigoBancario>> apiResponse = JsonSerializer.Deserialize<ConsultationResponse<List<CodigoBancario>>>(jsonResponse);
+
+                if (apiResponse.CodRespuesta == "00" && apiResponse.Result != null)
+                {
+                    foreach (var bank in apiResponse.Result)
+                    {
+                        if (!BancoExiste(bank.BankCode, bank.CountryCod))
+                        {
+                            CrearBancoEnSAP(bank);
+                        }
+                        else
+                        {
+                            LogBancoExistente(bank);
+                        }
+                    }
+
+                    MessageBox.Show("Definiciones de Bancos implementadas correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Error en la respuesta del API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al implementar las definiciones de Bancos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ImplementarImpuestos()
+        {
+            try
+            {
+                string baseUrl = ConfigurationManager.AppSettings["link_api"];
+                string endpoint = "/impuestos";
+                string apiUrl = $"{baseUrl}{endpoint}";
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = httpClient.GetAsync(apiUrl).Result;
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = response.Content.ReadAsStringAsync().Result;
+                ConsultationResponse<List<Impuesto>> apiResponse = JsonSerializer.Deserialize<ConsultationResponse<List<Impuesto>>>(jsonResponse);
+
+                if (apiResponse.CodRespuesta == "00" && apiResponse.Result != null)
+                {
+                    foreach (var impuesto in apiResponse.Result)
+                    {
+                        if (!ImpuestoExiste(impuesto.WTCode))
+                        {
+                            CrearImpuestoEnSAP(impuesto);
+                        }
+                        else
+                        {
+                            LogImpuestoExistente(impuesto);
+                        }
+                    }
+
+                    MessageBox.Show("Impuestos implementados correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Error en la respuesta del API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al implementar los Impuestos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CrearImpuestoEnSAP(Impuesto impuesto)
+        {
+            try
+            {
+                SAPbobsCOM.WithholdingTaxCodes oImpuesto = (SAPbobsCOM.WithholdingTaxCodes)company.GetBusinessObject(BoObjectTypes.oWithholdingTaxCodes);
+                oImpuesto.WTCode = impuesto.WTCode;
+                oImpuesto.WTName = impuesto.WTName;
+                oImpuesto.Category = impuesto.Category == "P" ? WithholdingTaxCodeCategoryEnum.wtcc_Payment : WithholdingTaxCodeCategoryEnum.wtcc_Invoice;
+                oImpuesto.BaseType = impuesto.BaseType == "N" ? WithholdingTaxCodeBaseTypeEnum.wtcbt_Net : WithholdingTaxCodeBaseTypeEnum.wtcbt_VAT;
+                // oImpuesto.Rate = impuesto.Rate;
+                oImpuesto.OfficialCode = impuesto.OffclCode;
+                oImpuesto.Account = impuesto.Account;
+                // oImpuesto.EffectiveDate = DateTime.Parse(impuesto.EffecDate);
+                oImpuesto.Inactive = impuesto.Inactive == "Y" ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
+                oImpuesto.UserFields.Fields.Item("U_RetImp").Value = impuesto.U_RetImp == "Y" ? "Y" : "N";
+
+                if (oImpuesto.Add() != 0)
+                {
+                    company.GetLastError(out int errorCode, out string errorMessage);
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        string msj = $"Error al agregar el impuesto {impuesto.WTName}: {errorMessage}";
+                        lblDescription.Text = msj;
+                        Global.WriteToFile(msj);
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.WriteToFile($"Error al agregar el impuesto {impuesto.WTName}: {ex.Message}");
+            }
+        }
+        private void LogImpuestoExistente(Impuesto impuesto)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                string msj = $"El impuesto {impuesto.WTName} ya existe en SAP.";
+                lblDescription.Text = msj;
+                Global.WriteToFile(msj);
+            });
+        }
+        private bool ImpuestoExiste(string wtCode)
+        {
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            recordset.DoQuery($"SELECT 1 FROM OWHT WHERE WTCode = '{wtCode}'");
+
+            bool exists = !recordset.EoF;
+
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(recordset);
+            GC.Collect();
+
+            return exists;
+        }
+
+
+        private void CrearBancoEnSAP(CodigoBancario bank)
+        {
+            Banks oBank = (Banks)company.GetBusinessObject(BoObjectTypes.oBanks);
+            oBank.CountryCode = bank.CountryCod;
+            oBank.BankCode = bank.BankCode;
+            oBank.BankName = bank.BankName;
+
+            if (oBank.Add() != 0)
+            {
+                company.GetLastError(out int errorCode, out string errorMessage);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    string msj = $"Error al agregar el banco {bank.BankName}: {errorMessage}";
+                    lblDescription.Text = msj;
+                    Global.WriteToFile(msj);
+                });
+            }
+        }
+
+        private void LogBancoExistente(CodigoBancario bank)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                string msj = $"El banco {bank.BankName} ya existe en SAP.";
+                lblDescription.Text = msj;
+                Global.WriteToFile(msj);
+            });
+        }
+
+        private void InicializarCCHHE()
+        {
+            SAPbobsCOM.Recordset lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            SAPbobsCOM.UserTablesMD lo_UsrTblMD = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserTables);
+
+            if (lo_UsrTblMD.GetByKey("STR_CCHEAR_SYS"))
+            {
+                SAPbobsCOM.UserTable lo_UsrTbl = company.UserTables.Item("STR_CCHEAR_SYS");
+                string ls_Qry = @"SELECT ""U_CE_ID"" FROM ""@STR_CCHEAR_SYS""";
+                lo_RecSet.DoQuery(ls_Qry);
+
+                if (lo_RecSet.EoF)
+                {
+                    lo_UsrTbl.Code = "001";
+                    lo_UsrTbl.Name = "001";
+                    lo_UsrTbl.UserFields.Fields.Item("U_CE_ID").Value = "1";
+                    lo_UsrTbl.Add();
+                }
+            }
+
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(lo_RecSet);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(lo_UsrTblMD);
+            GC.Collect();
+        }
+
+        // Método para validar si un banco ya existe en la tabla ODSC
+        public bool BancoExiste(string bankCode, string countryCod)
+        {
+            bool exists = false;
+            Recordset oRecordset = (Recordset)company.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+            string query = $"SELECT COUNT(*) FROM ODSC WHERE \"BankCode\" = '{bankCode}' AND \"CountryCod\" = '{countryCod}'";
+            oRecordset.DoQuery(query);
+
+            if (oRecordset != null && !oRecordset.EoF)
+            {
+                int count = oRecordset.Fields.Item(0).Value;
+                exists = count > 0;
+            }
+
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(oRecordset);
+            oRecordset = null;
+            GC.Collect();
+
+            return exists;
+        }
+        public void Sb_InsertarDataPorDefectoLocalizacion()
+        {
+            try
+            {
+                // fn_iniciaTransacPorDefecto();
                 // select :error, :error_message FROM dummy;
                 string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\{"Localizacion"}\\DataDefecto6.xlsm";
 
@@ -969,86 +1448,16 @@ namespace STR_ADDONPERU_INSTALADOR
                                     if (usedRange.Cells[1, col].Value2 != "Resultados")
                                     {
                                         string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
-                                        var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
-
-                                        userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
-                                    }
-                                }
-                                userTable.Add();
-
-                                System.Runtime.InteropServices.Marshal.ReleaseComObject(userTable);
-                                userTable = null;
-                            }
-                            catch (Exception)
-                            {
-
-                               // throw;
-                            }
-                        }
-                    } 
-                }
-            }
-            else if (addon == "CCHHE")
-            {
-
-                SAPbobsCOM.Recordset lo_RecSet = null;
-                string ls_Qry = string.Empty;
-                SAPbobsCOM.UserTablesMD lo_UsrTblMD = null;
-                SAPbobsCOM.UserTable lo_UsrTbl = null;
-
-                lo_RecSet = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-                lo_UsrTblMD = company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oUserTables);
-                if (lo_UsrTblMD.GetByKey("STR_CCHEAR_SYS"))
-                {
-                    lo_UsrTbl = company.UserTables.Item("STR_CCHEAR_SYS");
-                    ls_Qry = @"SELECT ""U_CE_ID"" FROM ""@STR_CCHEAR_SYS""";
-                    lo_RecSet.DoQuery(ls_Qry);
-                    if (lo_RecSet.EoF)
-                    {
-                        lo_UsrTbl.Code = "001";
-                        lo_UsrTbl.Name = "001";
-                        lo_UsrTbl.UserFields.Fields.Item("U_CE_ID").Value = "1";
-                        lo_UsrTbl.Add();
-
-                    }
-
-                }
-
-            }
-            else if (addon == "SIRE")
-            {
-                string path = $"{System.Windows.Forms.Application.StartupPath}\\Resources\\Sire\\DataDefecto.xlsm";
-
-                // Obtiene EXCEL DATA
-                ms.Application excelApp = new ms.Application();
-                Workbook workbook = excelApp.Workbooks.Open(path);
-
-                foreach (Worksheet worksheet in workbook.Sheets)
-                {
-                    string tablaSAP = worksheet.Name; // TABLA A INSERTAR LA DATA
-                    if (!string.IsNullOrEmpty(tablaSAP) && tablaSAP != "Listas")
-                    {
-                        Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
-
-                        for (int row = 3; row < usedRange.Rows.Count; row++)
-                        {
-                            try
-                            {
-                                // Tiene que iniciar aqui
-                                SAPbobsCOM.UserTable userTable = null;
-                                userTable = company.UserTables.Item(tablaSAP);
-                                userTable.Code = $"{usedRange.Cells[row, 1].Value2}";
-                                userTable.Name = $"{usedRange.Cells[row, 2].Value2}";
-
-                                for (int col = 3; col <= usedRange.Columns.Count; col++)
-                                {
-                                    if (usedRange.Cells[1, col].Value2 != "Resultados")
-                                    {
-                                        string campoSAP = usedRange.Cells[1, col].Value2;  // CAMPOS SAP
-
-                                        if (!string.IsNullOrEmpty(campoSAP))
+                                        if (!string.IsNullOrWhiteSpace(campoSAP))
                                         {
                                             var valor = (usedRange.Cells[row, col] as Microsoft.Office.Interop.Excel.Range).Value2;
+
+                                            this.Invoke((MethodInvoker)delegate
+                                            {
+                                                string msj = $"Insert Data | Table: {tablaSAP} - Campo: {campoSAP} - Valor: {valor}";
+                                                lblDescription.Text = msj;
+                                                Global.WriteToFile(msj);
+                                            });
 
                                             userTable.UserFields.Fields.Item(campoSAP).Value = $"{valor}";
                                         }
@@ -1067,12 +1476,28 @@ namespace STR_ADDONPERU_INSTALADOR
                         }
                     }
                 }
+                excelApp.Workbooks.Close();
             }
-            MessageBox.Show("Se terminó con la inicialización de la configuración", "Exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Global.WriteToFile($"{addon}: Se termino con la inicialización de la configuración");
-
+            catch (Exception)
+            {
+                throw;
+            }
         }
+        public void Sb_InsertarBancosDefiniciones()
+        {
+            try
+            {
+                SAPbobsCOM.Banks ds = (SAPbobsCOM.Banks)company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oBanks);
+                ds.CountryCode = "";
+                ds.BankCode = "";
+                ds.BankName = "";
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void fn_iniciaTransacPorDefecto()
         {
             SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);

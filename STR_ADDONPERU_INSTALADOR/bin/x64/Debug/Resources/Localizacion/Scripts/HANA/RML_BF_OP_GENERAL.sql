@@ -1,5 +1,4 @@
-CREATE PROCEDURE RML_BF_OP_GENERAL
-(
+CREATE PROCEDURE RML_BF_OP_GENERAL(
 	Objeto		nvarchar(30),
 	NumeroBF	nVarchar(6),/* Elige la busqueda formateada que se desea ejecutar. 
 						       Para futuras implementaciones se debe agregar las nuevas condiciones en un numerál distinto.
@@ -889,38 +888,95 @@ BEGIN
 		/************************************   CCHHE  **************************************************************/	
 		-- Ver los aperturados 
 		-- CALL RML_BF_OP_GENERAL ('01','95','0','','','','','')	
-		/*
+		
 		IF :Objeto = '01' AND :NumeroBF = '95' 
 		THEN
-			SELECT T1."DocNum", T0."LineId", 
-			T3."DocNum" AS "Solicitud",
-			T3."DocDate" AS "Fecha Inicio",
-			T3."TaxDate" AS "Fecha Fin",
-			T3."DocDueDate" AS "Valido hasta",
-			T0."U_ER_EARN", T0."U_ER_DSCP", T0."U_ER_NMER", 
-			T3."DocTotal" AS "Monto de solicitud" ,
-			T2."DocNum" AS "Pago",
-			T3."Comments" AS "Comentario Sol"
-			FROM "@STR_EARAPRDET"  T0
-			INNER JOIN "@STR_EARAPR" T1 ON T1."DocEntry" = T0."DocEntry" 
-			LEFT JOIN OVPM T2 ON T2. "DocEntry" = T0."U_ER_NroPago"
-			INNER JOIN OPRQ T3 ON T3."DocEntry"=  T0."U_ER_DESL"
-			WHERE T1."DocEntry" <> 6;
+			 SELECT DISTINCT 
+		        T1."DocNum", 
+		        T0."LineId", 
+		        T3."DocNum" AS "Solicitud",
+		        T3."DocDate" AS "Fecha Inicio",
+		        T3."TaxDate" AS "Fecha Fin",
+		        T3."DocDueDate" AS "Valido hasta",
+		        T0."U_ER_EARN", 
+		        T0."U_ER_DSCP", 
+		        T0."U_ER_NMER", 
+		
+		        -- Usamos CASE para determinar el valor de "Monto de solicitud"
+		        CASE 
+		            WHEN T3."U_CE_TTSL" = 0 THEN SUM(IFNULL(T4."U_CE_IMSL", 0)) 
+		            ELSE T3."U_CE_TTSL" 
+			        END AS "Monto de solicitud",
+			
+			        T2."DocNum" AS "Pago",
+			        T3."Comments" AS "Comentario Sol"
+			
+			    FROM 
+			        "@STR_EARAPRDET" T0
+			        INNER JOIN "@STR_EARAPR" T1 ON T1."DocEntry" = T0."DocEntry" 
+			        LEFT JOIN OVPM T2 ON T2."U_BPP_CCHI" = T0."U_ER_EARN" AND T0."U_ER_NMER" = T2."U_BPP_NUMC"
+			        INNER JOIN OPRQ T3 ON T3."DocEntry" = T0."U_ER_DESL"
+			        LEFT JOIN PRQ1 T4 ON T4."DocEntry" = T3."DocEntry"  -- Agregamos la tabla PRQ1 para la suma
+			
+			    WHERE 
+			        T1."DocEntry" <> 6
+			
+			    GROUP BY 
+			        T1."DocNum", 
+			        T0."LineId", 
+			        T3."DocNum", 
+			        T3."DocDate", 
+			        T3."TaxDate", 
+			        T3."DocDueDate", 
+			        T0."U_ER_EARN", 
+			        T0."U_ER_DSCP", 
+			        T0."U_ER_NMER", 
+			        T2."DocNum", 
+			        T3."Comments", 
+			        T3."U_CE_TTSL";
 		END IF;
-		*/ 	
+		
 		-- Diferencias entre Solicitado y Pagado
 		-- CALL RML_BF_OP_GENERAL ('01','96','0','Param2','Param3','Param4','Param5','')	
 		IF :Objeto = '01' AND :NumeroBF = '96' 
 		THEN
-			SELECT  T0."U_ER_EARN", T0."U_ER_DSCP", T0."U_ER_NMER" ,T2."DocDate" AS "Fecha Solicitado",
-			T1."DocDate" AS "Fecha pagado",
-			T2."DocTotal" AS "Total Solicitado" ,T1."DocTotal" AS "Total Pagado" , 
-			T2."DocTotal" -  T1."DocTotal" AS "Diferencia"
-			
-			FROM "@STR_EARAPRDET"  T0
-			INNER JOIN OVPM T1 ON T1."DocEntry" = T0."U_ER_NroPago" 
-			INNER JOIN OPRQ T2 ON T2."DocEntry" = T0."U_ER_DESL"			
-			WHERE T2."DocTotal" -  T1."DocTotal" <> 0;
+			SELECT 
+		    T2."DocNum",  
+		    T0."U_ER_EARN", 
+		    T0."U_ER_DSCP", 
+		    T0."U_ER_NMER", 
+		    T2."DocDate" AS "Fecha Solicitado",
+		    T1."DocDate" AS "Fecha pagado",
+		    CASE 
+		        WHEN T2."U_CE_TTSL" = 0 THEN SUM(IFNULL(T3."U_CE_IMSL", 0)) 
+		        ELSE T2."U_CE_TTSL" 
+		    END AS "Total Solicitado",
+		    T1."DocTotal" AS "Total Pagado",
+		    CASE 
+		        WHEN T2."U_CE_TTSL" = 0 THEN SUM(IFNULL(T3."U_CE_IMSL", 0)) 
+		        ELSE T2."U_CE_TTSL" 
+		    END - IFNULL(T1."DocTotal", 0) AS "Diferencia"
+		    --,SUM(IFNULL(T3."U_CE_IMSL", 0)) AS "Suma U_CE_IMSL"
+		FROM 
+		    "@STR_EARAPRDET" T0
+		    LEFT JOIN OVPM T1 
+		        ON T1."U_BPP_CCHI" = T0."U_ER_EARN" 
+		        AND T0."U_ER_NMER" = T1."U_BPP_NUMC"
+		    INNER JOIN OPRQ T2 
+		        ON T2."DocEntry" = T0."U_ER_DESL"		
+		    LEFT JOIN PRQ1 T3 
+		        ON T3."DocEntry"  = T2."DocEntry"
+		WHERE
+			T1."DocTotal" > 0
+		GROUP BY 
+		    T2."DocNum", 
+		    T0."U_ER_EARN", 
+		    T0."U_ER_DSCP", 
+		    T0."U_ER_NMER", 
+		    T2."DocDate", 
+		    T1."DocDate", 
+		    T2."U_CE_TTSL", 
+		    T1."DocTotal";
 		END IF; 
 		-- Estado de Cuenta de Clientes y Proveedores
 		-- CALL RML_BF_OP_GENERAL ('01','97','0','[%0]','[%1]',[%3],[%4],'')	
@@ -971,37 +1027,94 @@ BEGIN
 		-- CALL RML_BF_OP_GENERAL ('01','98','0','','','','','')	
 		IF :Objeto = '01' AND :NumeroBF = '98' 
 		THEN
-			SELECT 	
-			T0."DocNum", 
-			T0."CANCELED" ,
-			--T2."SEDE" || '-' || T2."TIPO" || '-' || LPAD(T2."NUMEROEAR",8,0) AS "NRO VIATICO",
-			T0."ReqName",
-			T6."Remarks" AS "Area",
-			'VIA', --T0."U_STR_TIPOEAR",
-			--T0."U_DEPARTAMENTO",
-			--T0."U_PROVINCIA",
-			--T0."U_DISTRITO",
-			--T0."U_STR_TIPORUTA",
-			T0."ReqDate",
-			T0."DocDueDate",
-			T0."DocTotal" AS "Total",
-			T5."DocNum" AS "Apertura"
-			--T4."DocEntry" AS "Pago"	
-			
-			FROM OPRQ T0  
-			INNER JOIN OHEM T1 ON T0."Requester" = T1."empID" AND T0."ReqType" = 171 
-			LEFT JOIN OUBR T6 ON T6."Code" = T0."Branch"
-			--LEFT JOIN OPRQ_NUMEAR T2 ON T2."DOCENTRY" = T0."DocEntry"
-			LEFT JOIN "@STR_EARAPRDET" T3 ON T3."U_ER_DESL" = T0."DocEntry"
-			LEFT JOIN "@STR_EARAPR" T5 ON T5."DocEntry" = T3."DocEntry";
-			--LEFT JOIN OVPM T4 ON T4."DocEntry" = T3."U_ER_NroPago";
+				SELECT 	
+				    T0."DocNum", 
+				    T0."CANCELED",	
+				    T3."U_ER_NMER" AS "NRO VIATICO",
+				    T0."ReqName" AS "Solicitante",
+				    T6."Remarks" AS "Area",
+				    T4."U_BPP_TIPR" AS "Tipo de Rendición", --T0."U_STR_TIPOEAR",
+				    T0."ReqDate" AS "Fecha de Solicitud",
+				    T0."DocDueDate" AS "Fecha de Vencimiento",
+				    
+				    -- Usamos CASE para determinar el valor de "Total"
+				    CASE 
+				        WHEN T0."U_CE_TTSL" = 0 THEN SUM(IFNULL(T7."U_CE_IMSL", 0)) 
+				        ELSE T0."U_CE_TTSL" 
+				    END AS "Total",
+				    
+				    T5."DocNum" AS "Apertura",
+				    T4."DocEntry" AS "Pago"	
+				FROM 
+				    OPRQ T0  
+				    INNER JOIN PRQ1 T7 ON T7."DocEntry" = T0."DocEntry"
+				    INNER JOIN OHEM T1 ON T0."Requester" = T1."empID" AND T0."ReqType" = 171 
+				    LEFT JOIN OUBR T6 ON T6."Code" = T0."Branch"
+				    LEFT JOIN "@STR_EARAPRDET" T3 ON T3."U_ER_DESL" = T0."DocEntry"
+				    LEFT JOIN "@STR_EARAPR" T5 ON T5."DocEntry" = T3."DocEntry"
+				    LEFT JOIN OVPM T4 ON T4."U_BPP_CCHI" = T3."U_ER_EARN" AND T3."U_ER_NMER" = T4."U_BPP_NUMC"
+				GROUP BY 
+				    T0."DocNum", 
+				    T0."CANCELED",	
+				    T3."U_ER_NMER",
+				    T0."ReqName",
+				    T6."Remarks",
+				    T4."U_BPP_TIPR", 
+				    T0."ReqDate",
+				    T0."DocDueDate",
+				    T5."DocNum",
+				    T4."DocEntry",
+				    T0."U_CE_TTSL";
 		END IF; 
 		-- Razon Social CONCATENADO
-		-- CALL RML_BF_OP_GENERAL('01','99','0',$["OCRD"."U_BPP_BPNO"],'$["OCRD"."U_BPP_BPN2"]','$["OCRD"."U_BPP_BPAP"]','$["OCRD"."U_BPP_BPAM"]','')	
+		-- CALL RML_BF_OP_GENERAL('01','99','0',$["OCRD"."U_BPP_BPNO"],'$["OCRD"."U_BPP_BPN2"]','$["OCRD"."U_BPP_BPAP"]','$["OCRD"."U_BPP_BPAM"]','$["OCRD"."U_BPP_BPTP"]')	
 		IF :Objeto = '01' AND :NumeroBF = '99' 
 		THEN
-			SELECT 	
-				:Param02||' '||:Param03||' '||:Param04||' '||:Param05
-			FROM DUMMY;
-		END IF; 
+			IF :Param06 = 'TPN' THEN
+				SELECT 	
+					:Param02||' '||:Param03||' '||:Param04||' '||:Param05
+				FROM DUMMY;
+			END IF;
+		END IF;
+		-- Obtiene Correlativos Cancelados
+		-- CALL RML_BF_OP_GENERAL ('01','100','0',$["@BPP_ANULCORR"."U_BPP_DocSnt"],$["@BPP_ANULCORR"."U_BPP_Serie"],'','','')
+		IF :Objeto = '01' AND :NumeroBF = '100' 
+		THEN
+			SELECT * FROM (
+				SELECT T0."U_BPP_MDCD"
+				FROM "OINV"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "ORIN"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "ODLN"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "ORDN"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "ODPI"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "OIGE"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+				UNION ALL 
+				SELECT T0."U_BPP_MDCD"
+				FROM "OWTR"  T0
+				LEFT JOIN "@BPP_ANULCORR" T1 ON T0."U_BPP_MDTD" = T1."U_BPP_DocSnt" AND T0."U_BPP_MDSD" = T1."U_BPP_Serie" AND (T0."U_BPP_MDCD" = T1."U_BPP_NmCorD" OR T0."U_BPP_MDCD" = T1."U_BPP_NmCorH") 
+				WHERE T0."DocStatus" = 'C' AND T0."U_BPP_MDTD" = :Param02 AND T0."U_BPP_MDSD" = :Param03 AND IFNULL(T1."U_BPP_DocSnt",'')=''
+			);
+		END IF;		
 END

@@ -1,4 +1,4 @@
-CREATE FUNCTION RML_TN_CL_46_PAGOEFECTUADO
+CREATE FUNCTION RML_TN_CL_46_PAGOEFECTUADO 
 (
 	IN id NVARCHAR(50),
 	IN transaction_type NVARCHAR(1)
@@ -11,7 +11,7 @@ BEGIN
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
 	
-	IF :transaction_type IN('A','U')
+	IF :transaction_type = 'A' OR :transaction_type = 'U'
 	THEN
 
 	END IF;

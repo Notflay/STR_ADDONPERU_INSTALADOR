@@ -9,7 +9,7 @@ AS
 BEGIN
 	error_message := ''; 
 	
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 
 	END IF;
 END

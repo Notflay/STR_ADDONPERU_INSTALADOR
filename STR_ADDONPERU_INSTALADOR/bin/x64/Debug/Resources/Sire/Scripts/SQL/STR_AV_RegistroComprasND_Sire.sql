@@ -14,7 +14,7 @@ BEGIN
 	DECLARE @R_Fecha_MS date
 	
 
-	SET @R_Fecha_MS = [dbo].[STR_FN_FECHA_PRIMER_DIA_DEL_MES_SIGUIENTE](@FF)
+	SET @R_Fecha_MS = [dbo].[STR_FECHA_PRIMER_DIA_DEL_MES_SIGUIENTE](@FF)
 	SET @MES_MS = RIGHT('0' + RIGHT(MONTH(@R_Fecha_MS),2),2)
 	SET @ANIO_MS = YEAR(@R_Fecha_MS)
 	SET @MES = CONVERT(CHAR(2), MONTH(@FF))
@@ -166,7 +166,7 @@ BEGIN
 			(
 				CASE
 					WHEN ISNULL("Razon Social",'') = '' THEN '-'
-				ELSE REPLACE(REPLACE(CONVERT(VARCHAR(100),"Razon Social"),'ü','u'),'ñ','n')
+				ELSE REPLACE(REPLACE(CONVERT(VARCHAR(100),"Razon Social"),'ï¿½','u'),'ï¿½','n')
 				END
 			),
 			"BASE IMPONIBLE A" = CONVERT(DECIMAL(16,2), ROUND("BASE IMPONIBLE A",2)),
@@ -484,7 +484,7 @@ BEGIN
 								END
 							 )
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -607,7 +607,7 @@ BEGIN
 								END
 							 )
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -726,7 +726,7 @@ BEGIN
 								END
 							 )
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -884,7 +884,7 @@ BEGIN
 								END
 							)
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -956,7 +956,7 @@ BEGIN
 								END
 							)
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -1059,7 +1059,7 @@ BEGIN
 								END
 							)
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura" 
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura" 
 							+
 							(
 								CASE
@@ -1181,7 +1181,7 @@ BEGIN
 							+ 
 							(SELECT ISNULL(SUM(A.WtAmnt),0) FROM DPO5 A WHERE A.AbsEntry=T0.DocEntry AND (UPPER(A.Category)='I'))
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura"
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura"
 							+
 							(
 								CASE
@@ -1249,7 +1249,7 @@ BEGIN
 							+ 
 							(SELECT ISNULL(SUM(A.WtAmnt),0) FROM DPO5 A WHERE A.AbsEntry=T0.DocEntry AND (UPPER(A.Category)='I'))
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura"
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura"
 							+
 							(
 								CASE
@@ -1324,7 +1324,7 @@ BEGIN
 							+ 
 							(SELECT ISNULL(SUM(A.WtAmnt),0) FROM DPO5 A WHERE A.AbsEntry=T0.DocEntry AND (UPPER(A.Category)='I'))
 			
-							--/// Strat: Añadir el importe de las lineas que se marcaron como "Solo Factura"
+							--/// Strat: Aï¿½adir el importe de las lineas que se marcaron como "Solo Factura"
 							+
 							(
 								CASE

@@ -12,7 +12,7 @@ BEGIN
 	-- Variable de retorno de mensaje de error
 	--DECLARE error_message NVARCHAR(200);
 	error_message := ''; 
-	IF :transaction_type IN ('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 		
 		SELECT "U_BPP_CBALC","U_BPP_CLASCTAFIN","U_BPP_CTABALANCE" INTO clsBlncCom,clsFinanciera,clsBlncGen FROM OACT WHERE "AcctCode" = :id;
 		

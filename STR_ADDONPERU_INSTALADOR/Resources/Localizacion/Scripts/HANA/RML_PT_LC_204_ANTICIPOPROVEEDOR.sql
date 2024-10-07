@@ -6,7 +6,7 @@ CREATE PROCEDURE RML_PT_LC_204_ANTICIPOPROVEEDOR
 AS
 BEGIN
 	-- Variable de retorno para POSTRANSAC
-	IF :transaction_type in('A','U') THEN
+	IF :transaction_type = 'A' OR :transaction_type = 'U' THEN
 
 		UPDATE ODPO SET "NumAtCard" = IFNULL("U_BPP_MDTD",'') || '-' || IFNULL("U_BPP_MDSD",'') || '-' || IFNULL("U_BPP_MDCD",''), "FolioNum" = 0
 		WHERE "DocEntry" = :id;

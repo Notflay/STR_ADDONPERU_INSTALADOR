@@ -19,7 +19,13 @@ BEGIN
 	
 	IF :transaction_type IN('A','U')
 	THEN
-	
+			-- VALIDA CAJA CHICA CARGA DETALLE
+			DECLARE cursor CURSOR_CCH_DET FOR
+       	 	SELECT  ROW_NUMBER() OVER () AS "Orden",*
+       	 	FROM "@STR_CCHCRGDET"  
+        	WHERE IFNULL("U_CC_CDPV",'') <> '' 
+        	AND "DocEntry" = :id AND "U_CC_ESTD" <> 'OK';
+			-- 
 			SELECT SUM("IMT") INTO ttcch FROM(
 			SELECT 
 				CASE T0."U_CC_MNDA" WHEN 'SOL' THEN
@@ -43,20 +49,49 @@ BEGIN
 			IF :sldcch < 0 AND IFNULL(:flgsld,'N')<> 'Y'
 			THEN
 				error_message := 'El monto total de los documentos registrados (' || ttcch || '), es mayor al saldo de esta caja chica';
+				RETURN;
 			END IF;
 	
+			FOR DATA AS CURSOR_CCH_DET
+			DO
+			
+				IF IFNULL(DATA."U_CC_DIM1",'') = '' THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | La dimensión 1 es obligatoria';
+					break;
+				END IF;
+				
+				IF IFNULL(DATA."U_CC_DIM3",'') = '' THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | La dimensión 3 es obligatoria';
+					break;
+				END IF;
+				/*
+				IF IFNULL(DATA."U_CC_DIM1",'') = '' THEN
+					error_message := 'Linea: '|| DATA."LineId"  || ' | La dimensión 5 es obligatoria';
+				END IF;
+				*/
+				
+				SELECT COUNT(*) INTO inct FROM OCRD WHERE "CardCode" = DATA."U_CC_CDPV" AND "frozenFor" = 'Y'; 
+				IF :inct > 0
+				THEN
+					error_message := 'Linea: '|| DATA."Orden"  || ' | El Socio de Negocio se encuentra inactivo';
+					break;
+				END IF;
+				
+			END FOR;
 			-- Validaciones de CREACIÓN para CAJA CHICA
+/*
 			SELECT COUNT(*) INTO cnt FROM "@STR_CCHCRGDET" WHERE "DocEntry" = :id AND (IFNULL("U_CC_DIM1",'')='' OR IFNULL("U_CC_DIM2",'')='' 
 			OR IFNULL("U_CC_DIM3",'')=''  OR IFNULL("U_CC_DIM4",'')='');
 			IF :cnt > 0
 			THEN
 				error_message := 'Las dimensiones de Centro de Costos es obligatorio a nivel detalle';
+				RETURN;
 			END IF;
-			
+*/			
 			--------------------------------------------------------
 			-- Validación de Socio de Negocio Inactivo
 			--------------------------------------------------------
-			
+			/*
 			SELECT COUNT(*) INTO inct FROM "@STR_CCHCRGDET" T0 INNER JOIN OCRD T1 ON T1."CardCode" = T0."U_CC_CDPV" WHERE T0."DocEntry" = :id AND T1."frozenFor" = 'Y'; 
 			IF :inct > 0
 			THEN
@@ -67,24 +102,25 @@ BEGIN
 				 LIMIT 1; -- Selecciona solo un registro
 			
 				error_message := CONCAT(CONCAT('El Socio de Negocio de la línea ',:inct),' se encuentra inactivo');
+				RETURN;
 			END IF;
-			
+			*/
 			--------------------------------------------------------
 			-- Validación de Partida presupuestal en base al CC - CRP
 			--------------------------------------------------------
 			/*
-	SELECT COUNT(*) INTO part FROM "@STR_CCHCRGDET" where "DocEntry" = :id AND "U_CC_DIM1" <> SUBSTRING("U_CC_CMP1", 7, 3);
-	IF :part > 0
-	THEN
-		 SELECT T1."LineId" INTO part -- Almacena el número de línea
-		 FROM "@STR_CCHCRGDET" T1 where T1."DocEntry" = :id 
-		 AND T1."U_CC_DIM1" <> SUBSTRING(T1."U_CC_CMP1", 7, 3) 
-		 LIMIT 1; -- Selecciona solo un registro
-	
-		 error := 1;
-		 error_message := CONCAT('La partida ingresada no corresponde al CC seleccionado en la línea ',:part);
-	END IF;
-	*/
+			SELECT COUNT(*) INTO part FROM "@STR_CCHCRGDET" where "DocEntry" = :id AND "U_CC_DIM1" <> SUBSTRING("U_CC_CMP1", 7, 3);
+			IF :part > 0
+			THEN
+		 		SELECT T1."LineId" INTO part -- Almacena el número de línea
+				FROM "@STR_CCHCRGDET" T1 where T1."DocEntry" = :id 
+		 		AND T1."U_CC_DIM1" <> SUBSTRING(T1."U_CC_CMP1", 7, 3) 
+		 		LIMIT 1; -- Selecciona solo un registro
+		
+		   error := 1;
+		   error_message := CONCAT('La partida ingresada no corresponde al CC seleccionado en la línea ',:part);
+		   END IF;
+		*/
 			
 	END IF;	
 END
