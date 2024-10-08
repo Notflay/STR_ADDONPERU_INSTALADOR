@@ -1,0 +1,4 @@
+1/08/2024 13:18:18 - : Ya existe en SAP complemento Tabla  STR_CF_SIRE
+1/08/2024 13:18:18 - : Ya existe en SAP complemento Campo STR_Clave de la tabla:  @STR_CF_SIRE
+1/08/2024 13:18:18 - : Ya existe en SAP complemento Campo STR_Valor de la tabla:  @STR_CF_SIRE
+1/08/2024 13:18:25 - : Se creo exitosamente en SAP Campo BPP_BPTP2 de la tabla:  OCRD
