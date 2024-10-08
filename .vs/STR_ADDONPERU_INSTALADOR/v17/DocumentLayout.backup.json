@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\resources\\localizacion\\uf.vte||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\resources\\localizacion\\uf.vte||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,23 +24,10 @@
               "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
-              "ViewState": "AgIAAM4BAAAAAAAAAAAEwOgBAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAALMEAAAAAAAAAAAYwMkEAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T20:53:32.155Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UF.vte",
-              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
-              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
-              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
-              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
-              "ViewState": "AgIAAAsWAAAAAAAAAAAtwBgWAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-07T07:05:42.208Z",
               "EditorCaption": ""
             },
             {

@@ -245,9 +245,11 @@
     <Content Include="Resources\%24this.Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_APR_001_UDO.sql" />
     <Content Include="Resources\CCHHE\Scripts\HANA\RML_PT_APP_CC_ER_171_EMPLEADO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_APR_002_UDO.sql" />
     <Content Include="Resources\CCHHE\Scripts\HANA\RML_TN_APP_CC_ER_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -299,6 +301,7 @@
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_InfoTotalesPorCargaDocumentosEAR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_InfoTotalesPorParametroEAR.sql" />
     <Content Include="Resources\CCHHE\Scripts\HANA\STR_SP_LOC_ListarSolicitudesEntregaRendir.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -326,6 +329,8 @@
     <Content Include="Resources\CCHHE\Scripts\SQL\RML_PT_APP_CC_ER_171_EMPLEADO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_APR_001_UDO.sql" />
+    <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_APR_002_UDO.sql" />
     <Content Include="Resources\CCHHE\Scripts\SQL\RML_TN_APP_CC_ER_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -374,6 +379,7 @@
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorCargaDocumentosEAR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorParametroEAR.sql" />
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_ListarSolicitudesEntregaRendir.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -545,7 +551,9 @@
     <Content Include="Resources\Letras\Scripts\SQL\STR_SP_LT_ObtenerLetras.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\REPLICATE.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\REPLICATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_BF_OP_GENERAL.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -672,7 +680,9 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\RML_SP_NOMBREARCHIVO.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\RML_SP_NOMBREARCHIVO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\RML_TN_APP_PGM_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -826,10 +836,18 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_BCP_DETV1.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_CAB.sql" />
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_DET.sql" />
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_CAB.sql" />
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_DET.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_INTBK_DET.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_CAB.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_GNRTXT_SCTBK_DET.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_BPP_OBTENERBANKCODE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -857,7 +875,9 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_PMD.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_RAMO.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_APP_RAMO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\SP_RML_TN_CLIENTE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -870,7 +890,9 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_BPP_ActualizarNumeroSUNAT.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\STR_FN_FE_ObtMontoLetras.sql" />
+    <Content Include="Resources\Localizacion\Scripts\HANA\STR_FN_FE_ObtMontoLetras.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ActualizaPagoDetraccion.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -979,7 +1001,9 @@
     <Content Include="Resources\Localizacion\Scripts\HANA\ST_LOC_GET_PENDIENTES_ASIENTO_PROV.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\RML_BF_OP_GENERAL.sql" />
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_BF_OP_GENERAL.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_APP_PMD_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1103,7 +1127,9 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_PT_LC_67_TRANSFERENCIASTOCK.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Scripts\SQL\RML_SP_NOMBREARCHIVO.sql" />
+    <Content Include="Resources\Localizacion\Scripts\SQL\RML_SP_NOMBREARCHIVO.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Localizacion\Scripts\SQL\RML_TN_APP_PGM_001_UDO.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1404,33 +1430,6 @@
     <Content Include="Resources\Localizacion\Scripts\SQL\STR_SP_VerNumAnul.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\1. STR_SP_BPP_LocAnulSUNAT.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\2. STR_SP_BPP_LOCDETRACCIONES.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\3. STR_SP_BPP_LocNumSUNAT.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\4. STR_SP_Valida_AppStrat.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\5. STR_SP_Valida_CCH_EAR.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\6. STR_SP_Valida_FactElect.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\7. STR_SP_Valida_Letras.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\8. STR_TN_Localizacion.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Transac\HANA\9. STR_TN_General.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Localizacion\Types\TT_BPP_PAGOS.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1483,7 +1482,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Localizacion\Transac\SQL\" />
     <Folder Include="Resources\Manuales\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

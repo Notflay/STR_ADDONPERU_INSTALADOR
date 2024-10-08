@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection.Emit;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -902,6 +903,12 @@ namespace STR_ADDONPERU_INSTALADOR
                                     string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
                                     ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
+
+                                    if (ex.Message.Contains("Not recommended feature: using cursors in Scalar UDF"))
+                                    {
+                                         mensaje = $"{ps_addn}: Crear manualmente la función: {ls_NmbFile}";
+                                        Global.WriteToFile(mensaje);
+                                    }
                                 }
                             }
                             else
@@ -920,6 +927,12 @@ namespace STR_ADDONPERU_INSTALADOR
                                     string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
                                     ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
+
+                                    if (ex.Message.Contains("Not recommended feature: using cursors in Scalar UDF"))
+                                    {
+                                        mensaje = $"{ps_addn}: Crear manualmente la función: {ls_NmbFile}";
+                                        Global.WriteToFile(mensaje);
+                                    }
                                 }
                             }
                         }
@@ -1048,6 +1061,16 @@ namespace STR_ADDONPERU_INSTALADOR
                                     string mensaje = $"{ps_addn}: ERROR al crear {ls_Tipo} - {ls_NmbFile} - {ex.Message}";
                                     ActualizaDescripcion(mensaje);
                                     Global.WriteToFile(mensaje);
+
+                                    if (ex.Message.Contains("Not recommended feature: using cursors in Scalar UDF"))
+                                    {
+                                        MessageBox.Show("No se obtuvo permiso de l a base de datos para" +
+                                            "crear este procedimiento, ejecutar el siguiente query y reprocesar: \n" +
+                                            "'alter system alter configuration ('indexserver.ini', 'system') set ('sqlscript', 'enable_select_into_scalar_udf') = 'true' with reconfigure;" +
+                                            "\nalter system alter configuration ('indexserver.ini', 'system') set ('sqlscript', 'sudf_support_level_select_into') = 'silent' with reconfigure;" +
+                                            "\nalter system alter configuration ('indexserver.ini', 'system') set ('sqlscript', 'dynamic_sql_ddl_error_level') = 'silent' with reconfigure;'", "Scripts", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        throw;
+                                    }
                                 }
                             }
                         }
@@ -1195,10 +1218,10 @@ namespace STR_ADDONPERU_INSTALADOR
                 ImplementarDefinicionesDeBancos();
             }
 
-            if (MessageBox.Show("¿Deseas implementar el Maestro de los Impuestos?", "Maestros", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            {
-                ImplementarImpuestos();
-            }
+            //if (MessageBox.Show("¿Deseas implementar el Maestro de los Impuestos?", "Maestros", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            //{
+            //    ImplementarImpuestos();
+            //}
         }
 
         private void ImplementarDefinicionesDeBancos()
@@ -1295,9 +1318,9 @@ namespace STR_ADDONPERU_INSTALADOR
                 oImpuesto.BaseType = impuesto.BaseType == "N" ? WithholdingTaxCodeBaseTypeEnum.wtcbt_Net : WithholdingTaxCodeBaseTypeEnum.wtcbt_VAT;
                 // oImpuesto.Rate = impuesto.Rate;
                 oImpuesto.OfficialCode = impuesto.OffclCode;
-                oImpuesto.Account = impuesto.Account;
-                // oImpuesto.EffectiveDate = DateTime.Parse(impuesto.EffecDate);
-                oImpuesto.Inactive = impuesto.Inactive == "Y" ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
+                oImpuesto.Account = EsSegmentado() ? DefectCuentaSegmentada() : DefectCuentaNoSegmentada();
+                ///oImpuesto. = DateTime.Now;
+                //oImpuesto.Inactive = impuesto.Inactive == "Y" ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
                 oImpuesto.UserFields.Fields.Item("U_RetImp").Value = impuesto.U_RetImp == "Y" ? "Y" : "N";
 
                 if (oImpuesto.Add() != 0)
@@ -1328,7 +1351,7 @@ namespace STR_ADDONPERU_INSTALADOR
         private bool ImpuestoExiste(string wtCode)
         {
             SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
-            recordset.DoQuery($"SELECT 1 FROM OWHT WHERE WTCode = '{wtCode}'");
+            recordset.DoQuery($"SELECT 1 FROM OWHT WHERE \"WTCode\" = '{wtCode}'");
 
             bool exists = !recordset.EoF;
 
@@ -1338,7 +1361,50 @@ namespace STR_ADDONPERU_INSTALADOR
             return exists;
         }
 
+        private bool EsSegmentado()
+        {
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            recordset.DoQuery($"SELECT  1 FROM CINF WHERE \"EnbSgmnAct\" = 'Y'");
 
+            bool exists = !recordset.EoF;
+
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(recordset);
+            GC.Collect();
+
+            return exists;
+        }
+        private string DefectCuentaSegmentada()
+        {
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            try
+            { 
+                recordset.DoQuery($"SELECT TOP 1 \"AcctCode\" as \"Cuenta\" FROM \"OACT\" WHERE \"Segment_0\" LIKE '4%' and \"AcctName\" LIKE '%IGV%'");
+                return recordset.Fields.Item(0).Value;
+            }
+            catch (Exception)
+            {
+                throw;
+            } finally
+            {
+              
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(recordset);
+                GC.Collect();
+            }
+
+          
+        }
+        private string DefectCuentaNoSegmentada()
+        {
+            try { 
+            SAPbobsCOM.Recordset recordset = company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            recordset.DoQuery($"SELECT TOP 1 \"AcctCode\" FROM \"OACT\" WHERE \"AcctCode\" LIKE '4%' and \"AcctName\" LIKE '%IGV%'");
+
+            return recordset.Fields.Item(0).Value;
+             } finally
+            {
+                GC.Collect();
+            }
+        }
         private void CrearBancoEnSAP(CodigoBancario bank)
         {
             Banks oBank = (Banks)company.GetBusinessObject(BoObjectTypes.oBanks);
