@@ -161,4 +161,3 @@ BEGIN
         ORDER BY T0.CardCode;
     END
 END;
-GO

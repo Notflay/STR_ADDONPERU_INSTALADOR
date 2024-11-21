@@ -379,7 +379,9 @@
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorCargaDocumentosEAR.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorParametroEAR.sql" />
+    <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorParametroEAR.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\CCHHE\Scripts\SQL\STR_SP_LOC_ListarSolicitudesEntregaRendir.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -990,9 +992,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_ValidarRegistroSAP.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_Valida_AppStrat.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Localizacion\Scripts\HANA\STR_SP_VerNumAnul.sql">

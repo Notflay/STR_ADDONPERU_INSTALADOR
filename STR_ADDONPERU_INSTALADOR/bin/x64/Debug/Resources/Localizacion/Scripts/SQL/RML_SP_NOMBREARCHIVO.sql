@@ -14,6 +14,6 @@ BEGIN
         CAST(DocNum AS NVARCHAR(10)) + '_' + 
         @RUC + '_' + 
         CONVERT(VARCHAR(8), CreateDate, 112) AS Data
-    FROM @BPP_PAYDTR
+    FROM "@BPP_PAYDTR"
     WHERE DocEntry = @DocKey;
 END;

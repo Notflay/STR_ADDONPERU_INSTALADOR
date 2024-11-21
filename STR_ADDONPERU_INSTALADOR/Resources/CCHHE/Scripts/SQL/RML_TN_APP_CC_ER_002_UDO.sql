@@ -15,7 +15,7 @@ BEGIN
     BEGIN
         -- Crear un cursor para recorrer las filas de "@STR_EARCRGDET"
         DECLARE CURSOR_EAR_DET CURSOR FOR
-        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden", *
+         SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden","U_ER_DIM1","U_ER_DIM3","U_ER_CDPV"
         FROM "@STR_EARCRGDET"
         WHERE ISNULL("U_ER_CDPV", '') <> ''
         AND "DocEntry" = @id

@@ -39,7 +39,7 @@ BEGIN
 
         -- Crear un cursor para recorrer las filas de "@STR_EARAPRDET"
         DECLARE CURSOR_EAR_DET CURSOR FOR
-        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden", *
+        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden", U_ER_CDCT, U_ER_NMER
         FROM "@STR_EARAPRDET"
         WHERE "DocEntry" = @id;
 

@@ -916,7 +916,6 @@ C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONP
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_UpdEstadoAnulado.sql
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ValidaAnulSUNAT.sql
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_ValidarRegistroSAP.sql
-C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_Valida_AppStrat.sql
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\STR_SP_VerNumAnul.sql
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\HANA\ST_LOC_GET_PENDIENTES_ASIENTO_PROV.sql
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\Localizacion\Scripts\SQL\RML_BF_OP_GENERAL.sql
@@ -1131,3 +1130,4 @@ C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONP
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDO.21B179BF.Up2Date
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDONPERU_INSTALADOR.exe
 C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\obj\x64\Debug\STR_ADDONPERU_INSTALADOR.pdb
+C:\Users\sebastian.poma\Source\Repos\Notflay\STR_ADDONPERU_INSTALADOR\STR_ADDONPERU_INSTALADOR\bin\x64\Debug\Resources\CCHHE\Scripts\SQL\STR_SP_LOC_InfoTotalesPorParametroEAR.sql

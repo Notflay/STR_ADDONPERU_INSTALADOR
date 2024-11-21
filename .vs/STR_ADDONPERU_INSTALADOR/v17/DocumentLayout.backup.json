@@ -5,6 +5,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\frminstalador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\resources\\localizacion\\uf.vte||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\resources\\localizacion\\uf.vte||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\str_addonperu_instalador\\resources\\localizacion\\scripts\\hana\\sp_bpp_base_consultar_pgm_proveedores.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\resources\\localizacion\\scripts\\hana\\sp_bpp_base_consultar_pgm_proveedores.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|c:\\users\\sebastian.poma\\source\\repos\\notflay\\str_addonperu_instalador\\str_addonperu_instalador\\resources\\localizacion\\scripts\\hana\\sp_bpp_base_consultar_pgm_proveedores.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{5AC852BD-FE4C-4A60-8F60-EE79D8B88B2C}|STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR.csproj|solutionrelative:str_addonperu_instalador\\resources\\localizacion\\scripts\\hana\\sp_bpp_base_consultar_pgm_proveedores.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,10 +36,23 @@
               "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
               "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\FrmInstalador.cs",
-              "ViewState": "AgIAALMEAAAAAAAAAAAYwMkEAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHoBAAAAAAAAAAAswJEBAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-19T20:53:32.155Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UF.vte",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\UF.vte",
+              "ViewState": "AgIAAEonAAAAAAAAAAAAAFAnAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-07T17:30:24.347Z",
               "EditorCaption": ""
             },
             {
@@ -57,6 +82,18 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql ",
+              "DocumentMoniker": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\Scripts\\HANA\\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql",
+              "RelativeDocumentMoniker": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\Scripts\\HANA\\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql",
+              "ToolTip": "C:\\Users\\sebastian.poma\\Source\\Repos\\Notflay\\STR_ADDONPERU_INSTALADOR\\STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\Scripts\\HANA\\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql",
+              "RelativeToolTip": "STR_ADDONPERU_INSTALADOR\\Resources\\Localizacion\\Scripts\\HANA\\SP_BPP_BASE_CONSULTAR_PGM_PROVEEDORES.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-11-05T21:21:54.338Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -78,11 +115,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }

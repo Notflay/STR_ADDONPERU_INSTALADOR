@@ -1212,7 +1212,7 @@ namespace STR_ADDONPERU_INSTALADOR
         private void InicializarLocalizacion()
         {
             Sb_InsertarDataPorDefectoLocalizacion();
-
+                
             if (MessageBox.Show("¿Deseas implementar el Maestro de las definiciones de Bancos?", "Maestros", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 ImplementarDefinicionesDeBancos();

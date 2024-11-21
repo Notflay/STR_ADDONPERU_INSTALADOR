@@ -39,7 +39,7 @@ BEGIN
 
         -- Crear un cursor para recorrer las filas de @STR_CCHAPRDET
         DECLARE CURSOR_CCH_DET CURSOR FOR
-        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS Orden, *
+        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS Orden, U_CC_NMCT, U_CC_NMCC, U_CC_CJCH
         FROM "@STR_CCHAPRDET"  
         WHERE DocEntry = @id;
 
@@ -92,4 +92,3 @@ BEGIN
     -- Devolver el mensaje de error vacío si no hubo errores
     RETURN @error_message;
 END;
-GO

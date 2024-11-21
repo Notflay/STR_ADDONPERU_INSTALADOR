@@ -72,14 +72,14 @@ BEGIN
 				FROM #TEMPDOC T0, #TEMPCAB T1
 			);
 			
-			UPDATE #FINAL
+			UPDATE #FINAL T0
 			SET
-				"L_Asiento" = T1."L_Asiento",
-				"L_Dias"    = T1."L_Dias",
-				"L_Letra"   = T1."L_Letra",
-				"L_Moneda"  = T1."L_Moneda",
-				"L_Monto"   = T1."L_Monto",
-				"L_VencLet" = T1."L_VencLetra"
+				T0."L_Asiento" = T1."L_Asiento",
+				T0."L_Dias"    = T1."L_Dias",
+				T0."L_Letra"   = T1."L_Letra",
+				T0."L_Moneda"  = T1."L_Moneda",
+				T0."L_Monto"   = T1."L_Monto",
+				T0."L_VencLet" = T1."L_VencLetra"
 			FROM #FINAL T0
 			INNER JOIN #TEMPLET T1 ON T0."L_LineaLetra" = T1."L_LineaLetra";
 	ELSE
@@ -89,15 +89,15 @@ BEGIN
 				FROM #TEMPLET T0 , #TEMPCAB T1
 			);
 			
-			UPDATE #FINAL
-			SET "D_DocEntry" = T1."D_DocEntry",
-				"D_Legal" = T1."D_Legal",
-				"D_Moneda" = T1."D_Moneda",
-				"D_Monto" = T1."D_Monto",
-				"D_TipoDoc" = T1."D_TipoDoc",
-				"D_MontoDoc" = T1."D_MontoDoc",
-				"D_PorcCanje" = T1."D_Porcentaje",
-				"D_Fecha" = T1."D_Fecha" 
+			UPDATE #FINAL T0
+			SET T0."D_DocEntry" = T1."D_DocEntry",
+				T0."D_Legal" = T1."D_Legal",
+				T0."D_Moneda" = T1."D_Moneda",
+				T0."D_Monto" = T1."D_Monto",
+				T0."D_TipoDoc" = T1."D_TipoDoc",
+				T0."D_MontoDoc" = T1."D_MontoDoc",
+				T0."D_PorcCanje" = T1."D_Porcentaje",
+				T0."D_Fecha" = T1."D_Fecha" 
 			FROM #FINAL T0 INNER JOIN #TEMPDOC T1 on T0."D_LineaDoc" = T1."D_LineaDoc";
 	END IF;
 	

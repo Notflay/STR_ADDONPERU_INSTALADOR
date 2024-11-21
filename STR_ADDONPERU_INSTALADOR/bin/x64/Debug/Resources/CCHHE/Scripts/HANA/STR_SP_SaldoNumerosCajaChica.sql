@@ -26,7 +26,7 @@ BEGIN
 						  FROM ORCT TX0 INNER JOIN RCT2 TX1 ON TX0."DocEntry" = TX1."DocNum" 
 						  INNER JOIN OINV TX2 ON TX1."DocEntry" = TX2."DocEntry"
 						  WHERE TX0."Canceled" != 'Y' AND "U_BPP_NUMC" = T0."U_CC_NMCC") AS "SALDO"
-		,T0."U_CC_MNDA" AS MONEDA 
+		,T1."U_CC_MNDA" AS MONEDA 
 	FROM "@STR_CCHAPRDET" T0 INNER JOIN "@STR_CCHAPR" T1 
 	ON T0."DocEntry" = T1."DocEntry"  
 	WHERE T0."U_CC_NMCC" = :NMROCCH AND "U_CC_STDO" = 'A';

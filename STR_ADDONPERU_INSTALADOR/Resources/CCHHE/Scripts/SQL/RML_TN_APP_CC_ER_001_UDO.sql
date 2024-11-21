@@ -18,7 +18,7 @@ BEGIN
     BEGIN
         -- Cursor para recorrer los detalles de la caja chica
         DECLARE CURSOR_CCH_DET CURSOR FOR
-        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden", *
+        SELECT ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS "Orden","U_CC_DIM1","U_CC_DIM3","U_CC_CDPV"
         FROM "@STR_CCHCRGDET"
         WHERE ISNULL("U_CC_CDPV", '') <> ''
         AND "DocEntry" = @id
