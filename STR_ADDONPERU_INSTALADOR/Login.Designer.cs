@@ -245,7 +245,8 @@
             "MSSQL2012",
             "MSSQL2014",
             "MSSQL2016",
-            "MSSQL2017"});
+            "MSSQL2017",
+            "MSSQL2019"});
             this.cbxTipoDB.Location = new System.Drawing.Point(336, 319);
             this.cbxTipoDB.Name = "cbxTipoDB";
             this.cbxTipoDB.Size = new System.Drawing.Size(169, 21);
